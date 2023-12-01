@@ -2,70 +2,44 @@
 
 import { useState, useEffect, useRef } from "react";
 import VariantSelector from "./components/variant-selector";
+import { useUrlState } from './utils/use-url-state'
+import type { Skus } from './types'
+import { getColorConfig, getSaddleOptions, getOptions } from './utils/get-data-from-model'
+
 const priceFormatter = ({ currency, price }) => {
   return price.toLocaleString("en-US", { style: "currency", currency });
 };
 
 export default function Configurator({ product }) {
-  const [current, setCurrent] = useState({
-    variant: null,
-    frameAttribute: "Light-Green",
-    saddles: [],
-    grips: [],
-  });
   const modelViewer = useRef(null);
-  const { variants, components } = product;
-  const options = components.find((c) => c.id === "options")?.content?.items;
-
-  const changeFrame = (variant, attribute) => {
-    const saddles =
-      variant.components.find((c) => c.id === "saddle-options")?.content
-        ?.productVariants ?? [];
-    const grips =
-      variant.components.find((c) => c.id === "grip-options")?.content
-        ?.productVariants ?? [];
-
-    setCurrent({
-      ...current,
-      variant,
-      frameAttribute: attribute,
-      saddles,
-      grips,
-    });
-    modelViewer.current.setFrameColor(attribute);
-  };
+  const [skus, setSkus] = useUrlState<Skus>()
+  const { variants, components } = product
+  const variant = variants.find(variant => variant.sku === skus.v)
+  const { saddles, grips } = getOptions(variant) 
 
   useEffect(() => {
-    const saddles =
-      product.variants?.[0].components.find((c) => c.id === "saddle-options")
-        ?.content?.productVariants ?? [];
-    const grips =
-      product.variants?.[0].components.find((c) => c.id === "grip-options")
-        ?.content?.productVariants ?? [];
-    setCurrent({
-      ...current,
-      grips,
-      saddles,
-      selectedSaddle: saddles[0],
-      selectedGrip: grips[0],
-      variant: product.variants[0],
-    });
-  }, [product]);
+    // auto select the first variant when the param is not present in the URL
+    !skus.v && !!variants?.[0].sku && setSkus({ v: variants[0].sku })
+  }, [setSkus, skus.v, variants])
 
-  // const [value, setValue] = useState(0);
-  // const hideAll = () => {
-  //   const materials = modelViewer.current.model.materials;
-  //   materials[value].setAlphaMode("MASK");
-  //   materials[value].pbrMetallicRoughness.setBaseColorFactor([0, 0, 0, 0]);
-  // };
+  useEffect(() => {
+    if(!Object.keys(skus).length) {
+      return
+    }
 
-  const genericToggler = {
-    // viewer.toggleLuggageRackFront(true)
-    // viewer.toggleLuggageRackBack(condition)
-    // viewer.toggleLeatherBag(condition)
-  };
+    if(!!skus.v) {
+      const { variantAttribute} = getColorConfig(variant)
+      modelViewer.current?.setFrameColor(variantAttribute);
+    }
+  }, [skus, variant])
+
+
+  const options = []
+
+  console.log(saddles);
+
   return (
-    <div className="flex min-h-[100vh] bg-[#F7F6F9] relative  items-center justify-between min-w-full ">
+    <div className="flex min-h-screen bg-[#F7F6F9] relative  items-center justify-between min-w-full ">
       <div className="h-screen w-screen relative">
         <model-viewer
           ref={modelViewer}
@@ -97,12 +71,7 @@ export default function Configurator({ product }) {
           <div className="grid grid-cols-5 gap-1">
             {variants.map((v) => {
               return (
-                <VariantSelector
-                  variant={v}
-                  key={v.sku}
-                  current={current}
-                  changeFrame={changeFrame}
-                />
+                <VariantSelector key={v.sku} variant={v} />
               );
             })}
           </div>
@@ -110,10 +79,12 @@ export default function Configurator({ product }) {
         <div className="py-4">
           <h2 className="font-medium text-sm pb-2">Saddles options</h2>
           <div className="flex flex-col gap-1">
-            {current.saddles.map((saddle) => (
+            {saddles?.map((saddle) => (
               <div
-                className="bg-white overflow-hidden cursor-pointer shadow rounded flex items-center"
+                role="button"
                 key={saddle.sku}
+                onClick={() => setSkus({ ...skus, saddle: saddle.sku })}
+                className={`bg-white overflow-hidden border border-solid cursor-pointer shadow rounded flex items-center ${skus.saddle === saddle.sku ? "border-green-500 " : "border-transparent"}`}
               >
                 <div className="w-16 ">
                   <img src={saddle.firstImage.url} alt={saddle.name} />
@@ -126,7 +97,7 @@ export default function Configurator({ product }) {
         <div className="py-4">
           <h2 className="font-medium text-sm pb-2">Grip options</h2>
           <div className="flex flex-col gap-1">
-            {current.grips.map((grip) => (
+            {grips?.map((grip) => (
               <div
                 className="bg-white overflow-hidden cursor-pointer shadow rounded flex items-center"
                 key={grip.sku}
@@ -146,7 +117,7 @@ export default function Configurator({ product }) {
         <div className="py-4">
           <h2 className="font-medium text-sm pb-2">Accessories</h2>
           <div className="flex flex-col gap-1">
-            {options.map((option) => (
+            {options?.map((option) => (
               <div
                 className="bg-white overflow-hidden cursor-pointer shadow rounded flex items-center"
                 key={option.name}

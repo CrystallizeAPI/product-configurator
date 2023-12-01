@@ -1,26 +1,28 @@
 "use client";
 
-export default function VariantSelector({ variant, changeFrame, current }) {
-  if (!variant || !changeFrame || !current) return null;
-  const paint = variant.components.find((c) => c.id === "frame-color")?.content
-    ?.productVariants?.[0];
-  const paintAttributes = paint.components.find((p) => p.id === "color-config")
-    ?.content?.chunks?.[0];
-  const hex = paintAttributes.find((h) => h.id === "hex")?.content?.text;
+import { useUrlState } from '../utils/use-url-state'
+import type { Skus } from '../types'
+import { getColorConfig } from '../utils/get-data-from-model'
+
+type VariantSelectorProps = {
+  variant: any
+}
+
+export default function VariantSelector({ variant }) {
+  const [skus, setSkus] = useUrlState<Skus>()
+
+  if (!variant) {
+    return null;
+  }
+
+  const { hex } = getColorConfig(variant)
+
   return (
     <div
       className={`bg-white shadow cursor-pointer flex flex-col items-start  py-2 px-2 rounded-sm border border-solid ${
-        current.variant?.sku === variant.sku
-          ? "border-green-500 "
-          : "border-transparent"
+        skus.v === variant.sku ? "border-green-500 " : "border-transparent"
       }`}
-      onClick={() =>
-        changeFrame(
-          variant,
-          paintAttributes.find((h) => h.id === "3d-variant-attribute")?.content
-            ?.text
-        )
-      }
+      onClick={() => setSkus({ v: variant.sku }) }
     >
       <div
         style={{ background: `#${hex}` }}
