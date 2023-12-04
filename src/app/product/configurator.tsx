@@ -19,17 +19,26 @@ export default function Configurator({ product }) {
 
   useEffect(() => {
     // auto select the first variant when the param is not present in the URL
-    !skus.v && !!variants?.[0].sku && setSkus({ v: variants[0].sku })
+    if(!skus.v && !!variants?.[0].sku) {
+      const { saddles } = getOptions(variants[0]) 
+      setSkus({ v: variants[0].sku, saddle: saddles?.[0].sku })
+    }
   }, [setSkus, skus.v, variants])
 
   useEffect(() => {
-    if(!Object.keys(skus).length) {
+    const skuKeyCount = Object.keys(skus).length
+    if(!skuKeyCount) {
       return
     }
 
     if(!!skus.v) {
-      const { variantAttribute} = getColorConfig(variant)
+      const { variantAttribute } = getColorConfig(variant)
       modelViewer.current?.setFrameColor(variantAttribute);
+    }
+
+    if(!!skus.saddle) {
+      const saddle = saddles.find(sad => sad.sku === skus.saddle)
+      modelViewer.current?.setSaddleColor(saddle?.code);
     }
   }, [skus, variant])
 
@@ -71,7 +80,7 @@ export default function Configurator({ product }) {
           <div className="grid grid-cols-5 gap-1">
             {variants.map((v) => {
               return (
-                <VariantSelector key={v.sku} variant={v} />
+                <VariantSelector key={v.sku} variant={v} options={saddles} />
               );
             })}
           </div>

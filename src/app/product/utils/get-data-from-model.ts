@@ -11,7 +11,13 @@ export const getColorConfig = (variant) => {
 }
 
 export const getOptions = (variant) => {
-  const saddles = variant?.components.find((c) => c.id === "saddle-options")?.content?.productVariants;
+  const saddles = variant?.components.find((c) => c.id === "saddle-options")?.content?.productVariants?.map(variant => {
+    const [type, _, name] = variant.name.split(' ')
+    return {
+      ...variant,
+      code: `${name}-${type}`
+    }
+  })
   const grips = variant?.components.find((c) => c.id === "grip-options")?.content?.productVariants;
 
   return {saddles, grips}

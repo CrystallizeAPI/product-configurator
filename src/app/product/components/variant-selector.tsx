@@ -2,13 +2,14 @@
 
 import { useUrlState } from '../utils/use-url-state'
 import type { Skus } from '../types'
-import { getColorConfig } from '../utils/get-data-from-model'
+import { getColorConfig, getOptions } from '../utils/get-data-from-model'
 
 type VariantSelectorProps = {
   variant: any
+  options: any[]
 }
 
-export default function VariantSelector({ variant }) {
+export default function VariantSelector({ variant, options }) {
   const [skus, setSkus] = useUrlState<Skus>()
 
   if (!variant) {
@@ -16,13 +17,14 @@ export default function VariantSelector({ variant }) {
   }
 
   const { hex } = getColorConfig(variant)
+  const { saddles } = getOptions(variant)
 
   return (
     <div
       className={`bg-white shadow cursor-pointer flex flex-col items-start  py-2 px-2 rounded-sm border border-solid ${
         skus.v === variant.sku ? "border-green-500 " : "border-transparent"
       }`}
-      onClick={() => setSkus({ v: variant.sku }) }
+      onClick={() => setSkus({ v: variant.sku, saddle: saddles?.[0].sku }) }
     >
       <div
         style={{ background: `#${hex}` }}
