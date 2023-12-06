@@ -9,7 +9,7 @@ type VariantSelectorProps = {
   options: any[]
 }
 
-export default function VariantSelector({ variant, options }) {
+export default function VariantSelector({ variant, options }: VariantSelectorProps) {
   const [skus, setSkus] = useUrlState<Skus>()
 
   if (!variant) {
