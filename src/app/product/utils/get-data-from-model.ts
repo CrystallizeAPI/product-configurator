@@ -18,6 +18,7 @@ export const getOptions = (variant) => {
       code: `${name}-${type}`
     }
   })
+   
   const grips = variant?.components.find((c) => c.id === "grip-options")?.content?.productVariants;
 
   return {saddles, grips}

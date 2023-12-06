@@ -17,6 +17,7 @@ export default function Configurator({ product }) {
   const variant = variants.find(variant => variant.sku === skus.v)
   const { saddles, grips } = getOptions(variant) 
 
+
   useEffect(() => {
     // auto select the first variant when the param is not present in the URL
     if(!skus.v && !!variants?.[0].sku) {
@@ -33,19 +34,17 @@ export default function Configurator({ product }) {
 
     if(!!skus.v) {
       const { variantAttribute } = getColorConfig(variant)
-      modelViewer.current?.setFrameColor(variantAttribute);
+      modelViewer.current?.setFrameColor?.(variantAttribute);
     }
 
     if(!!skus.saddle) {
       const saddle = saddles.find(sad => sad.sku === skus.saddle)
-      modelViewer.current?.setSaddleColor(saddle?.code);
+      setTimeout(() => modelViewer.current?.setSaddleColor?.(saddle?.code), 0)
     }
   }, [skus, variant])
 
 
   const options = []
-
-  console.log(saddles);
 
   return (
     <div className="flex min-h-screen bg-[#F7F6F9] relative  items-center justify-between min-w-full ">
@@ -63,7 +62,7 @@ export default function Configurator({ product }) {
         />
         <div className="from-[#F7F6F9] to-transparent absolute bg-gradient-to-l h-screen w-52 top-0 right-0 z-1 pointer-events-none" />
       </div>
-      <div className="px-12 h-screen py-12">
+      <div className="px-12 h-screen py-12 overflow-auto">
         <h2 className="text-2xl font-medium text-gray-600">{product.name}</h2>
         <p className="font-medium text-gray-600">
           A classic curved bicycle re-imageined and engineered in modern
@@ -108,8 +107,11 @@ export default function Configurator({ product }) {
           <div className="flex flex-col gap-1">
             {grips?.map((grip) => (
               <div
-                className="bg-white overflow-hidden cursor-pointer shadow rounded flex items-center"
+                role="button"
                 key={grip.sku}
+                onClick={() => setSkus({ ...skus, saddle: saddle.sku })}
+                className={`bg-white overflow-hidden border border-solid cursor-pointer shadow rounded flex items-center ${skus.saddle === grip.sku ? "border-green-500 " : "border-transparent"}`}
+
               >
                 <div className="w-16 flex justify-center">
                   <img
