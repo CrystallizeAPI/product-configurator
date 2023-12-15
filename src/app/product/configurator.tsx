@@ -4,69 +4,81 @@ import { useState, useEffect, useRef } from "react";
 import VariantSelector from "./components/variant-selector";
 import { useUrlState } from "./utils/use-url-state";
 import type { Skus } from "./types";
-import {
-    getColorConfig,
-    getSaddleOptions,
-    getOptions,
-} from "./utils/get-data-from-model";
+import { UiProduct } from "@/use-cases/contracts/product";
 
 const priceFormatter = ({ currency, price }) => {
     return price.toLocaleString("en-US", { style: "currency", currency });
 };
 
-export default function Configurator({ product }) {
+type ConfiguratorProps = {
+    product: UiProduct;
+};
+
+export default function Configurator({ product }: ConfiguratorProps) {
+    const { id, name, variants, options } = product;
     const modelViewer = useRef(null);
     const [skus, setSkus] = useUrlState<Skus>();
-    const { variants, components } = product;
-    const variant = variants.find((variant) => variant.sku === skus.v);
-    const { saddles, grips } = getOptions(variant);
+    const currentVariant = variants?.find((variant) => variant.sku === skus.v);
 
-    console.log(product);
-
+    // auto select the first variant when the param is not present in the URL
     useEffect(() => {
-        // auto select the first variant when the param is not present in the URL
-        if (!skus.v && !!variants?.[0].sku) {
-            const { saddles } = getOptions(variants[0]);
-            setSkus({ v: variants[0].sku, saddle: saddles?.[0].sku });
+        const variant = variants?.[0];
+
+        if (!skus.v && !!variant) {
+            const { sku, saddles, grips } = variant;
+            setSkus({ v: sku, saddle: saddles?.[0].sku, grip: grips?.[0].sku });
         }
     }, [setSkus, skus.v, variants]);
 
-    useEffect(() => {
-        const skuKeyCount = Object.keys(skus).length;
-        if (!skuKeyCount) {
-            return;
-        }
+    // useEffect(() => {
+    //     const skuKeyCount = Object.keys(skus).length;
+    //     if (!skuKeyCount) {
+    //         return;
+    //     }
 
-        if (!!skus.v) {
-            const { variantAttribute } = getColorConfig(variant);
-            modelViewer.current?.setFrameColor?.(variantAttribute);
-        }
+    //     if (!!skus.v) {
+    //         const { variantAttribute } = getColorConfig(variant);
+    //         modelViewer.current?.setFrameColor?.(variantAttribute);
+    //     }
 
-        if (!!skus.saddle) {
-            const saddle = saddles.find((sad) => sad.sku === skus.saddle);
-            setTimeout(
-                () => modelViewer.current?.setSaddleColor?.(saddle?.code),
-                0
-            );
-        }
-    }, [skus, variant]);
-
-    const options = [];
+    //     if (!!skus.saddle) {
+    //         const saddle = saddles.find((sad) => sad.sku === skus.saddle);
+    //         setTimeout(
+    //             () => modelViewer.current?.setSaddleColor?.(saddle?.code),
+    //             0
+    //         );
+    //     }
+    // }, [skus, variant]);
 
     return (
         <div className="flex min-h-screen bg-[#F7F6F9] relative  items-center justify-between min-w-full ">
             <div className="h-screen w-screen relative">
-                <model-viewer
-                    ref={modelViewer}
-                    src="https://cdn2.charpstar.net/ConfigFiles/Crystallize/SpeedCurve/SpeedCurve.glb"
-                    camera-orbit="-135deg 0 0"
-                    // camera-target="-0.4m 0.5m 0"
-                    camera-controls
-                    shadow-intensity="4"
-                    shadow-softness="1"
-                    exposure="1.3"
-                    environment-image="https://cdn2.charpstar.net/HDR/HDRI-Default.hdr"
-                />
+                {!!currentVariant && (
+                    <model-viewer
+                        ref={(node) => {
+                            node.setFrameColor(
+                                currentVariant.frameColor?.["3dAttribute"]
+                            );
+                            const saddle = currentVariant.saddles?.find(
+                                (saddle) => saddle.sku === skus.saddle
+                            );
+                            node.setSaddleColor(saddle?.["3dAttribute"]);
+
+                            node.dismissPoster();
+                            modelViewer.current = node;
+                        }}
+                        src="https://cdn2.charpstar.net/ConfigFiles/Crystallize/SpeedCurve/SpeedCurve.glb"
+                        camera-orbit="-135deg 0 0"
+                        // camera-target="-0.4m 0.5m 0"
+                        camera-controls
+                        shadow-intensity="4"
+                        shadow-softness="1"
+                        exposure="1.3"
+                        environment-image="https://cdn2.charpstar.net/HDR/HDRI-Default.hdr"
+                        poster={currentVariant.imageUrl}
+                        reveal="manual"
+                    />
+                )}
                 <div className="from-[#F7F6F9] to-transparent absolute bg-gradient-to-l h-screen w-52 top-0 right-0 z-1 pointer-events-none" />
             </div>
             <div className="px-12 h-screen py-12 overflow-auto">
@@ -80,21 +92,16 @@ export default function Configurator({ product }) {
                 <div className="text-xl py-4 font-medium">
                     {priceFormatter({ price: 2990, currency: "EUR" })}
                 </div>
-                {/* <input value={value} onChange={(e) => setValue(e.target.value)} />
-        <button onClick={() => hideAll()}>Hide</button> */}
 
                 <div className="py-4">
                     <h2 className="font-medium text-sm pb-2">Frame Color</h2>
                     <div className="grid grid-cols-5 gap-1">
-                        {variants.map((v) => {
-                            return (
-                                <VariantSelector
-                                    key={v.sku}
-                                    variant={v}
-                                    options={saddles}
-                                />
-                            );
-                        })}
+                        {variants?.map((variant) => (
+                            <VariantSelector
+                                key={variant.sku}
+                                variant={variant}
+                            />
+                        ))}
                     </div>
                 </div>
                 <div className="py-4">
@@ -102,7 +109,7 @@ export default function Configurator({ product }) {
                         Saddles options
                     </h2>
                     <div className="flex flex-col gap-1">
-                        {saddles?.map((saddle) => (
+                        {variants?.[0].saddles?.map((saddle) => (
                             <div
                                 role="button"
                                 key={saddle.sku}
@@ -117,7 +124,7 @@ export default function Configurator({ product }) {
                             >
                                 <div className="w-16 ">
                                     <img
-                                        src={saddle.firstImage.url}
+                                        src={saddle.imageUrl}
                                         alt={saddle.name}
                                     />
                                 </div>
@@ -129,15 +136,15 @@ export default function Configurator({ product }) {
                 <div className="py-4">
                     <h2 className="font-medium text-sm pb-2">Grip options</h2>
                     <div className="flex flex-col gap-1">
-                        {grips?.map((grip) => (
+                        {variants?.[0].grips?.map((grip) => (
                             <div
                                 role="button"
                                 key={grip.sku}
                                 onClick={() =>
-                                    setSkus({ ...skus, saddle: saddle.sku })
+                                    setSkus({ ...skus, grip: grip.sku })
                                 }
                                 className={`bg-white overflow-hidden border border-solid cursor-pointer shadow rounded flex items-center ${
-                                    skus.saddle === grip.sku
+                                    skus.grip === grip.sku
                                         ? "border-green-500 "
                                         : "border-transparent"
                                 }`}
@@ -145,7 +152,7 @@ export default function Configurator({ product }) {
                                 <div className="w-16 flex justify-center">
                                     <img
                                         className="w-10"
-                                        src={grip.firstImage.url}
+                                        src={grip.imageUrl}
                                         alt={grip.name}
                                     />
                                 </div>
@@ -165,9 +172,7 @@ export default function Configurator({ product }) {
                                 <div className="w-16 flex justify-center">
                                     <img
                                         className="w-16"
-                                        src={
-                                            option.defaultVariant.firstImage.url
-                                        }
+                                        src={option.imageUrl}
                                         alt={option.name}
                                     />
                                 </div>

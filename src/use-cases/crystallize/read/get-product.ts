@@ -34,15 +34,15 @@ export async function getProduct(apiClient: ClientInterface, path: string) {
         components {
           id
           content {
-              ... on SingleLineContent {
-                text
-              }
-              ... on NumericContent {
-                unit
-                number
-              }
-              ... on ItemRelationsContent {
-                  ...itemRelation
+            ... on SingleLineContent {
+              text
+            }
+            ... on NumericContent {
+              unit
+              number
+            }
+            ... on ItemRelationsContent {
+              ...itemRelation
             }
           }
         }
