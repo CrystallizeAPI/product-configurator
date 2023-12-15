@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import VariantSelector from "./components/variant-selector";
 import { useUrlState } from "./utils/use-url-state";
-import type { Skus } from "./types";
-import { UiProduct } from "@/use-cases/contracts/product";
+import type { Skus, ModelViewerNode } from "./types";
+import type { UiProduct, OptionsSkus } from "@/use-cases/contracts/product";
+import { useConfigurator } from "./hooks/use-configurator";
 
 const priceFormatter = ({ currency, price }) => {
     return price.toLocaleString("en-US", { style: "currency", currency });
@@ -15,58 +16,17 @@ type ConfiguratorProps = {
 };
 
 export default function Configurator({ product }: ConfiguratorProps) {
-    const { id, name, variants, options } = product;
-    const modelViewer = useRef(null);
-    const [skus, setSkus] = useUrlState<Skus>();
-    const currentVariant = variants?.find((variant) => variant.sku === skus.v);
-
-    // auto select the first variant when the param is not present in the URL
-    useEffect(() => {
-        const variant = variants?.[0];
-
-        if (!skus.v && !!variant) {
-            const { sku, saddles, grips } = variant;
-            setSkus({ v: sku, saddle: saddles?.[0].sku, grip: grips?.[0].sku });
-        }
-    }, [setSkus, skus.v, variants]);
-
-    // useEffect(() => {
-    //     const skuKeyCount = Object.keys(skus).length;
-    //     if (!skuKeyCount) {
-    //         return;
-    //     }
-
-    //     if (!!skus.v) {
-    //         const { variantAttribute } = getColorConfig(variant);
-    //         modelViewer.current?.setFrameColor?.(variantAttribute);
-    //     }
-
-    //     if (!!skus.saddle) {
-    //         const saddle = saddles.find((sad) => sad.sku === skus.saddle);
-    //         setTimeout(
-    //             () => modelViewer.current?.setSaddleColor?.(saddle?.code),
-    //             0
-    //         );
-    //     }
-    // }, [skus, variant]);
+    const { name, variants, options } = product;
+    const { skus, setSkus, getViewer, currentVariant } =
+        useConfigurator(product);
 
     return (
         <div className="flex min-h-screen bg-[#F7F6F9] relative  items-center justify-between min-w-full ">
             <div className="h-screen w-screen relative">
                 {!!currentVariant && (
                     <model-viewer
-                        ref={(node) => {
-                            node.setFrameColor(
-                                currentVariant.frameColor?.["3dAttribute"]
-                            );
-                            const saddle = currentVariant.saddles?.find(
-                                (saddle) => saddle.sku === skus.saddle
-                            );
-                            node.setSaddleColor(saddle?.["3dAttribute"]);
-
-                            node.dismissPoster();
-                            modelViewer.current = node;
-                        }}
+                        id="viewer"
+                        ref={(node: ModelViewerNode) => getViewer(node)}
                         src="https://cdn2.charpstar.net/ConfigFiles/Crystallize/SpeedCurve/SpeedCurve.glb"
                         camera-orbit="-135deg 0 0"
                         // camera-target="-0.4m 0.5m 0"
@@ -75,16 +35,12 @@ export default function Configurator({ product }: ConfiguratorProps) {
                         shadow-softness="1"
                         exposure="1.3"
                         environment-image="https://cdn2.charpstar.net/HDR/HDRI-Default.hdr"
-                        poster={currentVariant.imageUrl}
-                        reveal="manual"
                     />
                 )}
                 <div className="from-[#F7F6F9] to-transparent absolute bg-gradient-to-l h-screen w-52 top-0 right-0 z-1 pointer-events-none" />
             </div>
             <div className="px-12 h-screen py-12 overflow-auto">
-                <h2 className="text-2xl font-medium text-gray-600">
-                    {product.name}
-                </h2>
+                <h2 className="text-2xl font-medium text-gray-600">{name}</h2>
                 <p className="font-medium text-gray-600">
                     A classic curved bicycle re-imageined and engineered in
                     modern materials. No plastic.

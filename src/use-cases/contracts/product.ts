@@ -19,8 +19,14 @@ type BaseItem = {
     imageUrl: string;
 };
 
+export type OptionsSkus = {
+    frontRack?: string;
+    rearRack?: string;
+    leatherBag?: string;
+};
 export type Price = { value?: number; currency?: string };
-export type Attribute = BaseItem & { "3dAttribute": string; hex?: string };
+export type Option = BaseItem & { id: keyof OptionsSkus };
+export type Attribute = BaseItem & { modelAttribute: string; hex?: string };
 export type Variant = BaseItem & {
     price: Price;
     frameColor?: Attribute;
@@ -31,6 +37,6 @@ export type Variant = BaseItem & {
 export type UiProduct = {
     id: string;
     name: string;
-    options?: BaseItem[];
+    options?: Option[];
     variants?: Variant[];
 };

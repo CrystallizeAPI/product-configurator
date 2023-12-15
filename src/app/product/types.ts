@@ -1,14 +1,28 @@
-export type Skus = {
+import type { OptionsSkus } from "@/use-cases/contracts/product";
+
+export type Skus = OptionsSkus & {
     v: string;
     grip?: string;
     saddle?: string;
+};
+
+export type ModelViewerNode = HTMLElement & {
+    setFrameColor: (attribute?: string) => void;
+    setSaddleColor: (attribute?: string) => void;
+    toggleLuggageRackBack: (isVisible: boolean) => void;
+    toggleLuggageRackFront: (isVisible: boolean) => void;
+    toggleLeatherBag: (isVisible: boolean) => void;
+    dismissPoster: () => void;
 };
 
 declare global {
     namespace JSX {
         interface IntrinsicElements {
             "model-viewer": React.DetailedHTMLProps<
-                React.HTMLAttributes<HTMLElement>,
+                React.HTMLAttributes<HTMLElement> & {
+                    src: string;
+                    exposure: string;
+                },
                 HTMLElement
             >;
         }
