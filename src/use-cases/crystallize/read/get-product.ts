@@ -1,13 +1,9 @@
 "use server";
 
-import { createClient } from "@crystallize/js-api-client";
+import type { ClientInterface } from "@crystallize/js-api-client";
 
-const apiClient = createClient({
-  tenantIdentifier: "product-configurator",
-});
-
-export async function fetchProduct(path) {
-  const query = `#graphql
+export async function getProduct(apiClient: ClientInterface, path: string) {
+    const query = `#graphql
   query($path: String!) {
     product: catalogue(path: $path, language: "en") {
     id
@@ -111,11 +107,8 @@ export async function fetchProduct(path) {
   }
   `;
 
-  const options = {
-    path,
-    language: "en",
-  };
+    const options = { path, language: "en" };
 
-  const response = await apiClient.catalogueApi(query, options);
-  return response;
+    const response = await apiClient.catalogueApi(query, options);
+    return response;
 }
