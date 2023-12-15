@@ -1,7 +1,7 @@
 export const getColorConfig = (variant) => {
   const paint = variant.components.find((c) => c.id === "frame-color")?.content
     ?.productVariants?.[0];
-  const paintAttributes = paint.components.find((p) => p.id === "color-config")
+  const paintAttributes = paint.components.find((p) => p.id === "config")
     ?.content?.chunks?.[0];
 
   const hex = paintAttributes.find((h) => h.id === "hex")?.content?.text;

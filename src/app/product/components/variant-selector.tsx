@@ -27,7 +27,7 @@ export default function VariantSelector({ variant, options }: VariantSelectorPro
       onClick={() => setSkus({ v: variant.sku, saddle: saddles?.[0].sku }) }
     >
       <div
-        style={{ background: `#${hex}` }}
+        style={{ background: hex }}
         className="w-full aspect-square rounded-sm"
       />
       <div className="pt-2 text-[13px] flex text-left w-1/2">

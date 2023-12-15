@@ -17,7 +17,6 @@ export default function Configurator({ product }) {
   const variant = variants.find(variant => variant.sku === skus.v)
   const { saddles, grips } = getOptions(variant) 
 
-
   useEffect(() => {
     // auto select the first variant when the param is not present in the URL
     if(!skus.v && !!variants?.[0].sku) {
