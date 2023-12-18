@@ -2,9 +2,11 @@
 
 import VariantSelector from "./components/variant-selector";
 import Image from "next/image";
-import type { ModelViewerNode } from "./types";
 import type { UiProduct } from "@/use-cases/contracts/product";
 import { useConfigurator } from "./hooks/use-configurator";
+import { SaddleSelector } from "./components/saddle-selector";
+import { GripSelector } from "./components/grip-selector";
+import { AccessorySelector } from "./components/accessory-selector";
 
 const priceFormatter = (price?: { value?: number; currency?: string }) => {
     return !!price && price.value
@@ -59,14 +61,15 @@ export default function Configurator({ product }: ConfiguratorProps) {
                 )}
                 <div className="from-[#F7F6F9] to-transparent absolute bg-gradient-to-l h-screen w-52 top-0 right-0 z-1 pointer-events-none" />
             </div>
-            <div className="px-12 h-screen py-12 overflow-auto">
-                <h2 className="text-2xl font-medium text-gray-600">{name}</h2>
-                <p className="font-medium text-gray-600">
-                    A classic curved bicycle re-imageined and engineered in
-                    modern materials. No plastic.
-                </p>
-                <div className="text-xl py-4 font-medium">
-                    {priceFormatter(currentVariant?.price)}
+            <div className="px-12 h-screen pt-10 overflow-hidden">
+                <div className="shrink-0">
+                    <h2 className="text-2xl font-medium text-gray-600">
+                        {name}
+                    </h2>
+                    <p className="font-medium text-gray-600">
+                        A classic curved bicycle re-imageined and engineered in
+                        modern materials. No plastic.
+                    </p>
                 </div>
 
                 <div className="py-4">
@@ -87,265 +90,31 @@ export default function Configurator({ product }: ConfiguratorProps) {
                     <h2 className="font-medium text-sm pb-2">
                         Saddles options
                     </h2>
-                    <div className="flex flex-col gap-1">
-                        {currentVariant?.saddles?.map((saddle) => (
-                            <div
-                                role="button"
-                                key={saddle.sku}
-                                onClick={() =>
-                                    onChange({
-                                        type: "saddle",
-                                        value: saddle.sku,
-                                    })
-                                }
-                                className={`bg-white overflow-hidden border border-solid cursor-pointer shadow rounded flex items-center ${
-                                    skus.saddle === saddle.sku
-                                        ? "border-green-500 "
-                                        : "border-transparent"
-                                }`}
-                            >
-                                <div className="w-16">
-                                    <Image
-                                        src={saddle.imageUrl}
-                                        alt={saddle.name}
-                                        width="64"
-                                        height="43"
-                                        loading="eager"
-                                    />
-                                </div>
-                                <div className="text-[13px]">{saddle.name}</div>
-                            </div>
-                        ))}
-                    </div>
+                    <SaddleSelector
+                        saddles={currentVariant?.saddles}
+                        skus={skus}
+                        onChange={(value) =>
+                            onChange({ type: "saddle", value })
+                        }
+                    />
                 </div>
                 <div className="py-4">
                     <h2 className="font-medium text-sm pb-2">Grip options</h2>
-                    <div className="flex flex-col gap-1">
-                        {currentVariant?.grips?.map((grip) => (
-                            <div
-                                role="button"
-                                key={grip.sku}
-                                onClick={() =>
-                                    onChange({ type: "grip", value: grip.sku })
-                                }
-                                className={`bg-white overflow-hidden border border-solid cursor-pointer shadow rounded flex items-center ${
-                                    skus.grip === grip.sku
-                                        ? "border-green-500 "
-                                        : "border-transparent"
-                                }`}
-                            >
-                                <div className="w-16 flex justify-center">
-                                    <Image
-                                        className="w-10"
-                                        src={grip.imageUrl}
-                                        alt={grip.name}
-                                        width="40"
-                                        height="50"
-                                        loading="eager"
-                                    />
-                                </div>
-                                <div className="text-[13px]">{grip.name}</div>
-                            </div>
-                        ))}
-                    </div>
+                    <GripSelector
+                        grips={currentVariant?.grips}
+                        skus={skus}
+                        onChange={(value) => onChange({ type: "grip", value })}
+                    />
                 </div>
                 <div className="py-4">
                     <h2 className="font-medium text-sm pb-2">Accessories</h2>
-                    <div className="flex flex-col gap-1">
-                        {options?.map((option) => {
-                            const isSelected = !!skus[option.id];
-                            const isBagDisabled =
-                                option.id === "leatherBag" &&
-                                skus.grip &&
-                                skus.grip !== "natural-leather";
-
-                            return (
-                                <div
-                                    key={option.id}
-                                    role="button"
-                                    onClick={() =>
-                                        !isBagDisabled &&
-                                        onChange({
-                                            type: option.id,
-                                            value: isSelected
-                                                ? undefined
-                                                : option.sku,
-                                        })
-                                    }
-                                    className={`bg-white overflow-hidden border border-solid shadow rounded flex items-center ${
-                                        isSelected
-                                            ? "border-green-500 "
-                                            : "border-transparent"
-                                    } ${
-                                        isBagDisabled
-                                            ? "opacity-50 cursor-default"
-                                            : "cursor-pointer"
-                                    }`}
-                                >
-                                    <div className="w-16 flex justify-center">
-                                        <Image
-                                            className="w-16"
-                                            src={option.imageUrl}
-                                            alt={option.name}
-                                            width="64"
-                                            height="43"
-                                            loading="eager"
-                                        />
-                                    </div>
-                                    <div className="text-[13px]">
-                                        <span>{option.name}</span>
-                                        <span>
-                                            {/* {priceFormatter(options.defaultVariant.defaultPrice)} */}
-                                        </span>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
+                    <AccessorySelector
+                        options={options}
+                        skus={skus}
+                        onChange={onChange}
+                    />
                 </div>
             </div>
         </div>
     );
 }
-
-{
-    /* <div className="font-bold">Saddle Color</div>
-<button
-  onClick={() =>
-    document
-      .getElementById("threeDViewer")
-      .setSaddleColor("Blue-City")
-  }
->
-  Blue
-</button>
-<button
-  onClick={() =>
-    document
-      .getElementById("threeDViewer")
-      .setSaddleColor("Cognac-Leather")
-  }
->
-  Cognac
-</button>
-<button
-  onClick={() =>
-    document
-      .getElementById("threeDViewer")
-      .setSaddleColor("Natural-Leather")
-  }
->
-  Natural
-</button>
-<button
-  onClick={() =>
-    document
-      .getElementById("threeDViewer")
-      .setSaddleColor("Maroon-Leather")
-  }
->
-  Maroon
-</button>
-<button
-  onClick={() =>
-    document
-      .getElementById("threeDViewer")
-      .setSaddleColor("Black-Leather")
-  }
->
-  Black
-</button>
-
-<div className="font-bold">Front Rack</div>
-<button
-  onClick={() =>
-    document
-      .getElementById("threeDViewer")
-      .toggleLuggageRackFront(true)
-  }
->
-  On
-</button>
-<button
-  onClick={() =>
-    document
-      .getElementById("threeDViewer")
-      .toggleLuggageRackFront(false)
-  }
->
-  Off
-</button>
-
-<div className="font-bold">Lugguage Rack</div>
-<button
-  onClick={() =>
-    document
-      .getElementById("threeDViewer")
-      .toggleLuggageRackBack(true)
-  }
->
-  On
-</button>
-<button
-  onClick={() =>
-    document
-      .getElementById("threeDViewer")
-      .toggleLuggageRackBack(false)
-  }
->
-  Off
-</button>
-<div className="font-bold">Leather Bag</div>
-<button
-  onClick={() =>
-    document.getElementById("threeDViewer").toggleLeatherBag(true)
-  }
->
-  On
-</button>
-<button
-  onClick={() =>
-    document.getElementById("threeDViewer").toggleLeatherBag(false)
-  }
->
-  Off
-</button> */
-}
-
-// <button
-// onClick={() =>
-//   document.getElementById("threeDViewer").setFrameColor("Light-Green")
-// }
-// >
-// Copper Patina
-// </button>
-// <button
-// onClick={() =>
-//   document
-//     .getElementById("threeDViewer")
-//     .setFrameColor("Antique-Pink")
-// }
-// >
-// Antique-Pink
-// </button>
-// <button
-// onClick={() =>
-//   document.getElementById("threeDViewer").setFrameColor("Dusty-Gray")
-// }
-// >
-// Midsummer Black
-// </button>
-// <button
-// onClick={() =>
-//   document.getElementById("threeDViewer").setFrameColor("Sun-Yellow")
-// }
-// >
-// Karma Yellow
-// </button>
-// <button
-// onClick={() =>
-//   document.getElementById("threeDViewer").setFrameColor("Azure-Blue")
-// }
-// >
-// Petroleum Blue
-// </button>

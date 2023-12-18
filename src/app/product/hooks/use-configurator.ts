@@ -82,6 +82,7 @@ export const useConfigurator = (product: UiProduct) => {
 
     const onChange = useCallback(
         ({ type, value }: OnChange) => {
+            const node = modelViewer.current;
             switch (type) {
                 case "frame": {
                     const nextVariant = variants?.find(
@@ -99,15 +100,10 @@ export const useConfigurator = (product: UiProduct) => {
                         grip,
                         ...bagProps.sku,
                     });
-                    bagProps.isHidden &&
-                        modelViewer.current?.toggleLeatherBag(false);
-                    modelViewer.current?.setFrameColor(
-                        frameColor?.modelAttribute
-                    );
+                    bagProps.isHidden && node?.toggleLeatherBag(false);
+                    node?.setFrameColor(frameColor?.modelAttribute);
                     setTimeout(() => {
-                        modelViewer.current?.setSaddleColor(
-                            saddles?.[0]?.modelAttribute
-                        );
+                        node?.setSaddleColor(saddles?.[0]?.modelAttribute);
                     }, 100);
 
                     break;
@@ -129,9 +125,8 @@ export const useConfigurator = (product: UiProduct) => {
                         grip: grip?.sku,
                         ...bagProps.sku,
                     });
-                    modelViewer.current?.setSaddleColor(saddle?.modelAttribute);
-                    bagProps.isHidden &&
-                        modelViewer.current?.toggleLeatherBag(false);
+                    node?.setSaddleColor(saddle?.modelAttribute);
+                    bagProps.isHidden && node?.toggleLeatherBag(false);
                     break;
                 }
                 case "grip": {
@@ -151,14 +146,13 @@ export const useConfigurator = (product: UiProduct) => {
                         saddle: saddle?.sku,
                         ...bagProps.sku,
                     });
-                    modelViewer.current?.setSaddleColor(grip?.modelAttribute);
-                    bagProps.isHidden &&
-                        modelViewer.current?.toggleLeatherBag(false);
+                    node?.setSaddleColor(grip?.modelAttribute);
+                    bagProps.isHidden && node?.toggleLeatherBag(false);
                     break;
                 }
                 case "frontRack": {
                     setSkus({ ...skus, frontRack: value });
-                    modelViewer.current?.toggleLuggageRackFront(!!value);
+                    node?.toggleLuggageRackFront(!!value);
                     break;
                 }
                 case "rearRack": {
@@ -169,10 +163,8 @@ export const useConfigurator = (product: UiProduct) => {
                         ...(hasLeatherBag && { leatherBag: undefined }),
                     });
 
-                    modelViewer.current?.toggleLuggageRackBack(!!value);
-                    !value &&
-                        hasLeatherBag &&
-                        modelViewer.current?.toggleLeatherBag(false);
+                    node?.toggleLuggageRackBack(!!value);
+                    !value && hasLeatherBag && node?.toggleLeatherBag(false);
                     break;
                 }
                 case "leatherBag": {
@@ -186,8 +178,8 @@ export const useConfigurator = (product: UiProduct) => {
                             ? { leatherBag: value, rearRack: rearRackSku }
                             : { leatherBag: undefined }),
                     });
-                    modelViewer.current?.toggleLeatherBag(hasBag);
-                    hasBag && modelViewer.current?.toggleLuggageRackBack(true);
+                    node?.toggleLeatherBag(hasBag);
+                    hasBag && node?.toggleLuggageRackBack(true);
                     break;
                 }
             }
