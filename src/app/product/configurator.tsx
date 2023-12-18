@@ -21,14 +21,8 @@ type ConfiguratorProps = {
 
 export default function Configurator({ product }: ConfiguratorProps) {
     const { name, variants, options } = product;
-    const {
-        skus,
-        setSkus,
-        getViewer,
-        currentVariant,
-        isModelLoaded,
-        onChange,
-    } = useConfigurator(product);
+    const { skus, getViewer, currentVariant, isModelLoaded, onChange } =
+        useConfigurator(product);
 
     return (
         <div className="flex min-h-screen bg-[#F7F6F9] relative  items-center justify-between min-w-full ">
@@ -47,17 +41,20 @@ export default function Configurator({ product }: ConfiguratorProps) {
                             exposure="1.3"
                             environment-image="https://cdn2.charpstar.net/HDR/HDRI-Default.hdr"
                         />
-                        {!isModelLoaded && (
-                            <div className="absolute top-0 left-0 w-full h-full bg-white">
-                                <Image
-                                    width="2000"
-                                    height="2000"
-                                    src={currentVariant.imageUrl}
-                                    alt="Bicycle image"
-                                    className="absolute left-1/2 -translate-x-1/2 w-4/5 h-full object-contain"
-                                />
-                            </div>
-                        )}
+                        <div
+                            className={`absolute top-0 left-0 w-full h-full bg-white transition pointer-events-none ${
+                                isModelLoaded ? "opacity-0" : "opacity-100"
+                            }`}
+                        >
+                            <Image
+                                width="1000"
+                                height="1000"
+                                src={currentVariant.imageUrl}
+                                alt="Bicycle image"
+                                className="w-full h-full object-contain"
+                                loading="eager"
+                            />
+                        </div>
                     </>
                 )}
                 <div className="from-[#F7F6F9] to-transparent absolute bg-gradient-to-l h-screen w-52 top-0 right-0 z-1 pointer-events-none" />
@@ -113,6 +110,7 @@ export default function Configurator({ product }: ConfiguratorProps) {
                                         alt={saddle.name}
                                         width="64"
                                         height="43"
+                                        loading="eager"
                                     />
                                 </div>
                                 <div className="text-[13px]">{saddle.name}</div>
@@ -143,6 +141,7 @@ export default function Configurator({ product }: ConfiguratorProps) {
                                         alt={grip.name}
                                         width="40"
                                         height="50"
+                                        loading="eager"
                                     />
                                 </div>
                                 <div className="text-[13px]">{grip.name}</div>
@@ -190,6 +189,7 @@ export default function Configurator({ product }: ConfiguratorProps) {
                                             alt={option.name}
                                             width="64"
                                             height="43"
+                                            loading="eager"
                                         />
                                     </div>
                                     <div className="text-[13px]">

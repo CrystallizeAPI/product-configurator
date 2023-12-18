@@ -76,10 +76,6 @@ export const useConfigurator = (product: UiProduct) => {
                 v: sku,
                 saddle: saddles?.[0].sku,
                 grip: grips?.[0].sku,
-                ...options?.reduce((acc, opt) => {
-                    acc[opt.id] = opt.sku;
-                    return acc;
-                }, {} as Record<keyof OptionsSkus, string>),
             });
         }
     }, [setSkus, skus.v, variants, options]);
