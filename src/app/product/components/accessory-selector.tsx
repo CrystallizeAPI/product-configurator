@@ -5,11 +5,15 @@ import type { Skus } from "../types";
 
 type AccessoriesSelectorProps = {
     options?: Option[];
-    skus: Skus
-    onChange: ({ type, value }: { type: Option['id'], value?: string}) => 
+    skus: Skus;
+    onChange: ({ type, value }: { type: Option["id"]; value?: string }) => void;
 };
 
-export const AccessorySelector = ({options, skus, onChange}: AccessoriesSelectorProps) => {
+export const AccessorySelector = ({
+    options,
+    skus,
+    onChange,
+}: AccessoriesSelectorProps) => {
     return (
         <div className="flex flex-col gap-1">
             {options?.map((option) => {
