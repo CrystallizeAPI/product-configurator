@@ -6,8 +6,13 @@ import type { ModelViewerNode } from "./types";
 import type { UiProduct } from "@/use-cases/contracts/product";
 import { useConfigurator } from "./hooks/use-configurator";
 
-const priceFormatter = ({ currency, price }) => {
-    return price.toLocaleString("en-US", { style: "currency", currency });
+const priceFormatter = (price?: { value?: number; currency?: string }) => {
+    return !!price && price.value
+        ? price.value.toLocaleString("en-US", {
+              style: "currency",
+              currency: price.currency,
+          })
+        : "";
 };
 
 type ConfiguratorProps = {
@@ -64,7 +69,7 @@ export default function Configurator({ product }: ConfiguratorProps) {
                     modern materials. No plastic.
                 </p>
                 <div className="text-xl py-4 font-medium">
-                    {priceFormatter({ price: 2990, currency: "EUR" })}
+                    {priceFormatter(currentVariant?.price)}
                 </div>
 
                 <div className="py-4">
@@ -102,10 +107,12 @@ export default function Configurator({ product }: ConfiguratorProps) {
                                         : "border-transparent"
                                 }`}
                             >
-                                <div className="w-16 ">
-                                    <img
+                                <div className="w-16">
+                                    <Image
                                         src={saddle.imageUrl}
                                         alt={saddle.name}
+                                        width="64"
+                                        height="43"
                                     />
                                 </div>
                                 <div className="text-[13px]">{saddle.name}</div>
@@ -130,10 +137,12 @@ export default function Configurator({ product }: ConfiguratorProps) {
                                 }`}
                             >
                                 <div className="w-16 flex justify-center">
-                                    <img
+                                    <Image
                                         className="w-10"
                                         src={grip.imageUrl}
                                         alt={grip.name}
+                                        width="40"
+                                        height="50"
                                     />
                                 </div>
                                 <div className="text-[13px]">{grip.name}</div>
@@ -175,10 +184,12 @@ export default function Configurator({ product }: ConfiguratorProps) {
                                     }`}
                                 >
                                     <div className="w-16 flex justify-center">
-                                        <img
+                                        <Image
                                             className="w-16"
                                             src={option.imageUrl}
                                             alt={option.name}
+                                            width="64"
+                                            height="43"
                                         />
                                     </div>
                                     <div className="text-[13px]">
