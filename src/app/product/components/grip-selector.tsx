@@ -19,7 +19,7 @@ export const GripSelector = ({ grips, skus, onChange }: GripSelectorProps) => {
                     onClick={() => onChange(grip.sku)}
                     className={`bg-white overflow-hidden border border-solid cursor-pointer shadow rounded flex items-center ${
                         skus.grip === grip.sku
-                            ? "border-green-500 "
+                            ? "border-accent"
                             : "border-transparent"
                     }`}
                 >

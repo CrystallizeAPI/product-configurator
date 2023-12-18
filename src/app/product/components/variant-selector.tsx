@@ -19,9 +19,7 @@ export default function VariantSelector({
         <div
             onClick={() => onChange(variant.sku)}
             className={`bg-white shadow cursor-pointer flex flex-col items-start  py-2 px-2 rounded-sm border border-solid ${
-                skus.v === variant.sku
-                    ? "border-green-500 "
-                    : "border-transparent"
+                skus.v === variant.sku ? "border-accent" : "border-transparent"
             }`}
         >
             <div

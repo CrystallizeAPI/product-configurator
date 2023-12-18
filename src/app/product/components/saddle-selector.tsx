@@ -23,7 +23,7 @@ export const SaddleSelector = ({
                     onClick={() => onChange(saddle.sku)}
                     className={`bg-white overflow-hidden border border-solid cursor-pointer shadow rounded flex items-center ${
                         skus.saddle === saddle.sku
-                            ? "border-green-500 "
+                            ? "border-accent"
                             : "border-transparent"
                     }`}
                 >

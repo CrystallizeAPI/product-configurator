@@ -61,8 +61,8 @@ export default function Configurator({ product }: ConfiguratorProps) {
                 )}
                 <div className="from-[#F7F6F9] to-transparent absolute bg-gradient-to-l h-screen w-52 top-0 right-0 z-1 pointer-events-none" />
             </div>
-            <div className="px-12 h-screen pt-10 overflow-hidden">
-                <div className="shrink-0">
+            <div className="flex flex-col h-screen pt-10 overflow-hidden">
+                <div className="shrink-0 px-12">
                     <h2 className="text-2xl font-medium text-gray-600">
                         {name}
                     </h2>
@@ -72,47 +72,65 @@ export default function Configurator({ product }: ConfiguratorProps) {
                     </p>
                 </div>
 
-                <div className="py-4">
-                    <h2 className="font-medium text-sm pb-2">Frame Color</h2>
-                    <div className="grid grid-cols-5 gap-1">
-                        {variants?.map((variant) => (
-                            <VariantSelector
-                                key={variant.sku}
-                                variant={variant}
-                                onChange={(value) =>
-                                    onChange({ type: "frame", value })
-                                }
-                            />
-                        ))}
+                <div className="flex-1 overflow-auto px-12">
+                    <div className="py-4">
+                        <h2 className="font-medium text-sm pb-2">
+                            Frame Color
+                        </h2>
+                        <div className="grid grid-cols-5 gap-1">
+                            {variants?.map((variant) => (
+                                <VariantSelector
+                                    key={variant.sku}
+                                    variant={variant}
+                                    onChange={(value) =>
+                                        onChange({ type: "frame", value })
+                                    }
+                                />
+                            ))}
+                        </div>
+                    </div>
+                    <div className="py-4">
+                        <h2 className="font-medium text-sm pb-2">
+                            Saddles options
+                        </h2>
+                        <SaddleSelector
+                            saddles={currentVariant?.saddles}
+                            skus={skus}
+                            onChange={(value) =>
+                                onChange({ type: "saddle", value })
+                            }
+                        />
+                    </div>
+                    <div className="py-4">
+                        <h2 className="font-medium text-sm pb-2">
+                            Grip options
+                        </h2>
+                        <GripSelector
+                            grips={currentVariant?.grips}
+                            skus={skus}
+                            onChange={(value) =>
+                                onChange({ type: "grip", value })
+                            }
+                        />
+                    </div>
+                    <div className="py-4">
+                        <h2 className="font-medium text-sm pb-2">
+                            Accessories
+                        </h2>
+                        <AccessorySelector
+                            options={options}
+                            skus={skus}
+                            onChange={onChange}
+                        />
                     </div>
                 </div>
-                <div className="py-4">
-                    <h2 className="font-medium text-sm pb-2">
-                        Saddles options
-                    </h2>
-                    <SaddleSelector
-                        saddles={currentVariant?.saddles}
-                        skus={skus}
-                        onChange={(value) =>
-                            onChange({ type: "saddle", value })
-                        }
-                    />
-                </div>
-                <div className="py-4">
-                    <h2 className="font-medium text-sm pb-2">Grip options</h2>
-                    <GripSelector
-                        grips={currentVariant?.grips}
-                        skus={skus}
-                        onChange={(value) => onChange({ type: "grip", value })}
-                    />
-                </div>
-                <div className="py-4">
-                    <h2 className="font-medium text-sm pb-2">Accessories</h2>
-                    <AccessorySelector
-                        options={options}
-                        skus={skus}
-                        onChange={onChange}
-                    />
+                <div className="flex justify-between shrink-0 px-12 py-4 items-center">
+                    <h3 className="text-xl font-medium">
+                        Price: {priceFormatter(currentVariant?.price)}
+                    </h3>
+                    <button className="px-4 py-2 rounded bg-accent font-medium text-white">
+                        Add to cart
+                    </button>
                 </div>
             </div>
         </div>
