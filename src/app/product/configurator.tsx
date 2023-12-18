@@ -81,6 +81,7 @@ export default function Configurator({ product }: ConfiguratorProps) {
                             {variants?.map((variant) => (
                                 <VariantSelector
                                     key={variant.sku}
+                                    skus={skus}
                                     variant={variant}
                                     onChange={(value) =>
                                         onChange({ type: "frame", value })

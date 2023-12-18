@@ -35,9 +35,7 @@ export const AccessorySelector = ({
                             })
                         }
                         className={`bg-white overflow-hidden border border-solid shadow rounded flex items-center ${
-                            isSelected
-                                ? "border-green-500 "
-                                : "border-transparent"
+                            isSelected ? "border-accent" : "border-transparent"
                         } ${
                             isBagDisabled
                                 ? "opacity-50 cursor-default"

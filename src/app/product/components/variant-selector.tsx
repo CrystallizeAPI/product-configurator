@@ -1,20 +1,19 @@
 "use client";
 
-import { useUrlState } from "../utils/use-url-state";
 import type { Skus } from "../types";
 import type { Variant } from "@/use-cases/contracts/product";
 
 type VariantSelectorProps = {
     variant: Variant;
+    skus: Skus;
     onChange: (value: string) => void;
 };
 
 export default function VariantSelector({
+    skus,
     variant,
     onChange,
 }: VariantSelectorProps) {
-    const [skus, setSkus] = useUrlState<Skus>();
-
     return (
         <div
             onClick={() => onChange(variant.sku)}
