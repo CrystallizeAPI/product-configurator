@@ -1,10 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
 import VariantSelector from "./components/variant-selector";
-import { useUrlState } from "./utils/use-url-state";
-import type { Skus, ModelViewerNode } from "./types";
-import type { UiProduct, OptionsSkus } from "@/use-cases/contracts/product";
+import Image from "next/image";
+import type { ModelViewerNode } from "./types";
+import type { UiProduct } from "@/use-cases/contracts/product";
 import { useConfigurator } from "./hooks/use-configurator";
 
 const priceFormatter = ({ currency, price }) => {
@@ -17,25 +16,44 @@ type ConfiguratorProps = {
 
 export default function Configurator({ product }: ConfiguratorProps) {
     const { name, variants, options } = product;
-    const { skus, setSkus, getViewer, currentVariant } =
-        useConfigurator(product);
+    const {
+        skus,
+        setSkus,
+        getViewer,
+        currentVariant,
+        isModelLoaded,
+        onChange,
+    } = useConfigurator(product);
 
     return (
         <div className="flex min-h-screen bg-[#F7F6F9] relative  items-center justify-between min-w-full ">
-            <div className="h-screen w-screen relative">
+            <div className="h-screen w-full relative">
                 {!!currentVariant && (
-                    <model-viewer
-                        id="viewer"
-                        ref={(node: ModelViewerNode) => getViewer(node)}
-                        src="https://cdn2.charpstar.net/ConfigFiles/Crystallize/SpeedCurve/SpeedCurve.glb"
-                        camera-orbit="-135deg 0 0"
-                        // camera-target="-0.4m 0.5m 0"
-                        camera-controls
-                        shadow-intensity="4"
-                        shadow-softness="1"
-                        exposure="1.3"
-                        environment-image="https://cdn2.charpstar.net/HDR/HDRI-Default.hdr"
-                    />
+                    <>
+                        <model-viewer
+                            id="viewer"
+                            ref={getViewer}
+                            src="https://cdn2.charpstar.net/ConfigFiles/Crystallize/SpeedCurve/SpeedCurve.glb"
+                            camera-orbit="-135deg 0 0"
+                            // camera-target="-0.4m 0.5m 0"
+                            camera-controls
+                            shadow-intensity="4"
+                            shadow-softness="1"
+                            exposure="1.3"
+                            environment-image="https://cdn2.charpstar.net/HDR/HDRI-Default.hdr"
+                        />
+                        {!isModelLoaded && (
+                            <div className="absolute top-0 left-0 w-full h-full bg-white">
+                                <Image
+                                    width="2000"
+                                    height="2000"
+                                    src={currentVariant.imageUrl}
+                                    alt="Bicycle image"
+                                    className="absolute left-1/2 -translate-x-1/2 w-4/5 h-full object-contain"
+                                />
+                            </div>
+                        )}
+                    </>
                 )}
                 <div className="from-[#F7F6F9] to-transparent absolute bg-gradient-to-l h-screen w-52 top-0 right-0 z-1 pointer-events-none" />
             </div>
@@ -56,6 +74,9 @@ export default function Configurator({ product }: ConfiguratorProps) {
                             <VariantSelector
                                 key={variant.sku}
                                 variant={variant}
+                                onChange={(value) =>
+                                    onChange({ type: "frame", value })
+                                }
                             />
                         ))}
                     </div>
@@ -65,12 +86,15 @@ export default function Configurator({ product }: ConfiguratorProps) {
                         Saddles options
                     </h2>
                     <div className="flex flex-col gap-1">
-                        {variants?.[0].saddles?.map((saddle) => (
+                        {currentVariant?.saddles?.map((saddle) => (
                             <div
                                 role="button"
                                 key={saddle.sku}
                                 onClick={() =>
-                                    setSkus({ ...skus, saddle: saddle.sku })
+                                    onChange({
+                                        type: "saddle",
+                                        value: saddle.sku,
+                                    })
                                 }
                                 className={`bg-white overflow-hidden border border-solid cursor-pointer shadow rounded flex items-center ${
                                     skus.saddle === saddle.sku
@@ -92,12 +116,12 @@ export default function Configurator({ product }: ConfiguratorProps) {
                 <div className="py-4">
                     <h2 className="font-medium text-sm pb-2">Grip options</h2>
                     <div className="flex flex-col gap-1">
-                        {variants?.[0].grips?.map((grip) => (
+                        {currentVariant?.grips?.map((grip) => (
                             <div
                                 role="button"
                                 key={grip.sku}
                                 onClick={() =>
-                                    setSkus({ ...skus, grip: grip.sku })
+                                    onChange({ type: "grip", value: grip.sku })
                                 }
                                 className={`bg-white overflow-hidden border border-solid cursor-pointer shadow rounded flex items-center ${
                                     skus.grip === grip.sku
@@ -120,26 +144,52 @@ export default function Configurator({ product }: ConfiguratorProps) {
                 <div className="py-4">
                     <h2 className="font-medium text-sm pb-2">Accessories</h2>
                     <div className="flex flex-col gap-1">
-                        {options?.map((option) => (
-                            <div
-                                className="bg-white overflow-hidden cursor-pointer shadow rounded flex items-center"
-                                key={option.name}
-                            >
-                                <div className="w-16 flex justify-center">
-                                    <img
-                                        className="w-16"
-                                        src={option.imageUrl}
-                                        alt={option.name}
-                                    />
+                        {options?.map((option) => {
+                            const isSelected = !!skus[option.id];
+                            const isBagDisabled =
+                                option.id === "leatherBag" &&
+                                skus.grip &&
+                                skus.grip !== "natural-leather";
+
+                            return (
+                                <div
+                                    key={option.id}
+                                    role="button"
+                                    onClick={() =>
+                                        !isBagDisabled &&
+                                        onChange({
+                                            type: option.id,
+                                            value: isSelected
+                                                ? undefined
+                                                : option.sku,
+                                        })
+                                    }
+                                    className={`bg-white overflow-hidden border border-solid shadow rounded flex items-center ${
+                                        isSelected
+                                            ? "border-green-500 "
+                                            : "border-transparent"
+                                    } ${
+                                        isBagDisabled
+                                            ? "opacity-50 cursor-default"
+                                            : "cursor-pointer"
+                                    }`}
+                                >
+                                    <div className="w-16 flex justify-center">
+                                        <img
+                                            className="w-16"
+                                            src={option.imageUrl}
+                                            alt={option.name}
+                                        />
+                                    </div>
+                                    <div className="text-[13px]">
+                                        <span>{option.name}</span>
+                                        <span>
+                                            {/* {priceFormatter(options.defaultVariant.defaultPrice)} */}
+                                        </span>
+                                    </div>
                                 </div>
-                                <div className="text-[13px]">
-                                    <span>{option.name}</span>
-                                    <span>
-                                        {/* {priceFormatter(options.defaultVariant.defaultPrice)} */}
-                                    </span>
-                                </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </div>

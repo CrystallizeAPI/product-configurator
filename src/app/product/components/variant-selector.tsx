@@ -6,25 +6,23 @@ import type { Variant } from "@/use-cases/contracts/product";
 
 type VariantSelectorProps = {
     variant: Variant;
+    onChange: (value: string) => void;
 };
 
-export default function VariantSelector({ variant }: VariantSelectorProps) {
+export default function VariantSelector({
+    variant,
+    onChange,
+}: VariantSelectorProps) {
     const [skus, setSkus] = useUrlState<Skus>();
 
     return (
         <div
+            onClick={() => onChange(variant.sku)}
             className={`bg-white shadow cursor-pointer flex flex-col items-start  py-2 px-2 rounded-sm border border-solid ${
                 skus.v === variant.sku
                     ? "border-green-500 "
                     : "border-transparent"
             }`}
-            onClick={() =>
-                setSkus({
-                    v: variant.sku,
-                    saddle: variant.saddles?.[0].sku,
-                    grip: variant.grips?.[0].sku,
-                })
-            }
         >
             <div
                 style={{ background: variant.frameColor?.hex }}
