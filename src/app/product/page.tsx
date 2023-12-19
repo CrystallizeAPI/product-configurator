@@ -6,7 +6,7 @@ export default async function Page() {
     const { product } = await api.getProduct("/bicycles/speed-curve");
 
     return (
-        <div className="flex min-h-[100vh] bg-[#FAfdf3] relative  items-center justify-between min-w-full ">
+        <div className="flex min-h-[100vh] bg-[#fafdf3] relative  items-center justify-between min-w-full ">
             <Configurator product={product} />
         </div>
     );

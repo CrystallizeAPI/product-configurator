@@ -1,6 +1,7 @@
 "use server";
 
 import type { ClientInterface } from "@crystallize/js-api-client";
+import { productMapper } from "../mapper/product-mapper";
 
 export async function getProduct(apiClient: ClientInterface, path: string) {
     const query = `#graphql
@@ -113,6 +114,6 @@ export async function getProduct(apiClient: ClientInterface, path: string) {
 
     const options = { path, language: "en" };
 
-    const response = await apiClient.catalogueApi(query, options);
-    return response;
+    const { product } = await apiClient.catalogueApi(query, options);
+    return productMapper(product);
 }

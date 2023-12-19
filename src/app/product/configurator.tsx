@@ -1,15 +1,18 @@
 "use client";
 
-import VariantSelector from "./components/variant-selector";
+import { useState } from "react";
 import Image from "next/image";
+
 import type { UiProduct } from "@/use-cases/contracts/product";
+
 import { useConfigurator } from "./hooks/use-configurator";
 import { SaddleSelector } from "./components/saddle-selector";
 import { GripSelector } from "./components/grip-selector";
 import { AccessorySelector } from "./components/accessory-selector";
 import { PriceBar } from "./components/price-bar";
 import { Cart } from "./components/cart";
-import { useState } from "react";
+import VariantSelector from "./components/variant-selector";
+import { ModelViewer } from "./components/model-viewer";
 
 const priceFormatter = (price?: { value?: number; currency?: string }) => {
     return !!price && price.value
@@ -35,18 +38,7 @@ export default function Configurator({ product }: ConfiguratorProps) {
             <div className="h-screen w-full relative">
                 {!!currentVariant && (
                     <>
-                        <model-viewer
-                            id="viewer"
-                            ref={getViewer}
-                            src="https://cdn2.charpstar.net/ConfigFiles/Crystallize/SpeedCurve/SpeedCurve.glb"
-                            camera-orbit="-135deg 0 0"
-                            // camera-target="-0.4m 0.5m 0"
-                            camera-controls
-                            shadow-intensity="4"
-                            shadow-softness="1"
-                            exposure="1.3"
-                            environment-image="https://cdn2.charpstar.net/HDR/HDRI-Default.hdr"
-                        />
+                        <ModelViewer ref={getViewer} />
                         <div
                             className={`absolute top-0 left-0 w-full h-full bg-white transition pointer-events-none ${
                                 isModelLoaded ? "opacity-0" : "opacity-100"
@@ -59,6 +51,7 @@ export default function Configurator({ product }: ConfiguratorProps) {
                                 alt="Bicycle image"
                                 className="w-full h-full object-contain"
                                 loading="eager"
+                                priority
                             />
                         </div>
                     </>
@@ -66,7 +59,10 @@ export default function Configurator({ product }: ConfiguratorProps) {
                 <div className="from-[#F7F6F9] to-transparent absolute bg-gradient-to-l h-screen w-52 top-0 right-0 z-1 pointer-events-none" />
             </div>
             <div className="flex flex-col h-screen pt-10 overflow-hidden relative">
-                <Cart isOpen={isCartOpen} />
+                <Cart
+                    isOpen={isCartOpen}
+                    onClose={() => setIsCartOpen(false)}
+                />
                 <div className="shrink-0 px-12">
                     <h2 className="text-2xl font-medium text-gray-600">
                         {name}
@@ -135,7 +131,7 @@ export default function Configurator({ product }: ConfiguratorProps) {
                         skus={skus}
                         currentVariant={currentVariant}
                         options={options}
-                        onOpenCartClick={() => setIsCartOpen(true)}
+                        onOpenCart={() => setIsCartOpen(true)}
                     />
                 </div>
             </div>

@@ -50,7 +50,7 @@ export const useConfigurator = (product: UiProduct) => {
                     node.toggleLeatherBag(!!skus.leatherBag);
 
                     modelViewer.current = node;
-                    // give some time remove bag animation to complete
+                    // give some time the remove bag animation to complete
                     setTimeout(() => setIsModelLoaded(true), 400);
                 } catch {
                     // the model may throw is it is not loaded when trying to access it to set it up
@@ -194,5 +194,6 @@ export const useConfigurator = (product: UiProduct) => {
         getViewer,
         isModelLoaded,
         onChange,
+        modelViewer: modelViewer.current,
     };
 };

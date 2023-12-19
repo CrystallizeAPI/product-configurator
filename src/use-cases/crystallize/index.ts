@@ -2,13 +2,11 @@
 
 import type { ClientInterface } from "@crystallize/js-api-client";
 import { getProduct } from "./read/get-product";
-import { productMapper } from "./mapper/product-mapper";
+import { saveCart } from "./write/save-cart";
 
 export const getApi = (apiClient: ClientInterface) => {
     return {
-        getProduct: async (path: string) => {
-            const { product } = await getProduct(apiClient, path);
-            return productMapper(product);
-        },
+        saveCart,
+        getProduct: getProduct.bind(null, apiClient),
     };
 };
