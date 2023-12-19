@@ -5,10 +5,11 @@ type PriceBarProps = {
     skus: Skus;
     currentVariant: Variant | undefined;
     options: Option[] | undefined;
+    onOpenCartClick: () => void;
 };
 
 const priceFormatter = (price?: { value?: number; currency?: string }) => {
-    if (!price || typeof price.value !== "number") {
+    if (!price || typeof price.value !== "number" || !price.currency) {
         return "0";
     }
 
@@ -18,7 +19,11 @@ const priceFormatter = (price?: { value?: number; currency?: string }) => {
     });
 };
 
-const getTotalPrice = ({ skus, currentVariant, options }: PriceBarProps) => {
+const getTotalPrice = ({
+    skus,
+    currentVariant,
+    options,
+}: Omit<PriceBarProps, "onOpenCartClick">) => {
     const framePrice = currentVariant?.price.value ?? 0;
     const saddlePrice =
         currentVariant?.saddles?.find((saddle) => saddle.sku === skus.saddle)
@@ -46,16 +51,24 @@ const getTotalPrice = ({ skus, currentVariant, options }: PriceBarProps) => {
     ].reduce((acc, price) => acc + price, 0);
 };
 
-export const PriceBar = (props: PriceBarProps) => {
+export const PriceBar = ({
+    skus,
+    currentVariant,
+    options,
+    onOpenCartClick,
+}: PriceBarProps) => {
     const price = priceFormatter({
-        value: getTotalPrice(props),
-        currency: props.currentVariant?.price.currency,
+        value: getTotalPrice({ skus, currentVariant, options }),
+        currency: currentVariant?.price.currency,
     });
 
     return (
         <div className="flex justify-between items-center">
             <h3 className="text-xl font-medium">Price: {price}</h3>
-            <button className="px-4 py-2 rounded bg-accent font-medium text-white">
+            <button
+                onClick={() => onOpenCartClick()}
+                className="px-4 py-2 rounded bg-accent font-medium text-white"
+            >
                 Add to cart
             </button>
         </div>

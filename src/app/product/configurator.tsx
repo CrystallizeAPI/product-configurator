@@ -8,6 +8,8 @@ import { SaddleSelector } from "./components/saddle-selector";
 import { GripSelector } from "./components/grip-selector";
 import { AccessorySelector } from "./components/accessory-selector";
 import { PriceBar } from "./components/price-bar";
+import { Cart } from "./components/cart";
+import { useState } from "react";
 
 const priceFormatter = (price?: { value?: number; currency?: string }) => {
     return !!price && price.value
@@ -23,6 +25,7 @@ type ConfiguratorProps = {
 };
 
 export default function Configurator({ product }: ConfiguratorProps) {
+    const [isCartOpen, setIsCartOpen] = useState(false);
     const { name, variants, options } = product;
     const { skus, getViewer, currentVariant, isModelLoaded, onChange } =
         useConfigurator(product);
@@ -62,7 +65,8 @@ export default function Configurator({ product }: ConfiguratorProps) {
                 )}
                 <div className="from-[#F7F6F9] to-transparent absolute bg-gradient-to-l h-screen w-52 top-0 right-0 z-1 pointer-events-none" />
             </div>
-            <div className="flex flex-col h-screen pt-10 overflow-hidden">
+            <div className="flex flex-col h-screen pt-10 overflow-hidden relative">
+                <Cart isOpen={isCartOpen} />
                 <div className="shrink-0 px-12">
                     <h2 className="text-2xl font-medium text-gray-600">
                         {name}
@@ -131,6 +135,7 @@ export default function Configurator({ product }: ConfiguratorProps) {
                         skus={skus}
                         currentVariant={currentVariant}
                         options={options}
+                        onOpenCartClick={() => setIsCartOpen(true)}
                     />
                 </div>
             </div>
