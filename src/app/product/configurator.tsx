@@ -7,6 +7,7 @@ import { useConfigurator } from "./hooks/use-configurator";
 import { SaddleSelector } from "./components/saddle-selector";
 import { GripSelector } from "./components/grip-selector";
 import { AccessorySelector } from "./components/accessory-selector";
+import { PriceBar } from "./components/price-bar";
 
 const priceFormatter = (price?: { value?: number; currency?: string }) => {
     return !!price && price.value
@@ -66,14 +67,14 @@ export default function Configurator({ product }: ConfiguratorProps) {
                     <h2 className="text-2xl font-medium text-gray-600">
                         {name}
                     </h2>
-                    <p className="font-medium text-gray-600">
+                    <p className="font-medium text-gray-600 mb-4">
                         A classic curved bicycle re-imageined and engineered in
                         modern materials. No plastic.
                     </p>
                 </div>
 
                 <div className="flex-1 overflow-auto px-12">
-                    <div className="py-4">
+                    <div className="pb-4">
                         <h2 className="font-medium text-sm pb-2">
                             Frame Color
                         </h2>
@@ -125,13 +126,12 @@ export default function Configurator({ product }: ConfiguratorProps) {
                         />
                     </div>
                 </div>
-                <div className="flex justify-between shrink-0 px-12 py-4 items-center">
-                    <h3 className="text-xl font-medium">
-                        Price: {priceFormatter(currentVariant?.price)}
-                    </h3>
-                    <button className="px-4 py-2 rounded bg-accent font-medium text-white">
-                        Add to cart
-                    </button>
+                <div className="shrink-0 px-12 py-4">
+                    <PriceBar
+                        skus={skus}
+                        currentVariant={currentVariant}
+                        options={options}
+                    />
                 </div>
             </div>
         </div>

@@ -61,6 +61,10 @@ export async function getProduct(apiClient: ClientInterface, path: string) {
           firstImage {
             url
           }
+          defaultPrice: priceVariant(identifier:"default"){
+            currency
+            price
+          }
         }
       }
       components {

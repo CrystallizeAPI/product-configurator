@@ -17,6 +17,7 @@ type BaseItem = {
     name: string;
     sku: string;
     imageUrl: string;
+    price: Price;
 };
 
 export type OptionsSkus = {

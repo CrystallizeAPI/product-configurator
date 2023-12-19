@@ -11,6 +11,7 @@ import type {
     Product,
     ProductVariant,
     SingleLineContent,
+    ProductPriceVariant,
 } from "../__generated__/types";
 
 const getOptionIdMapper = (sku: string) => {
@@ -29,7 +30,10 @@ const getOptions = (components: ApiProduct["components"]) => {
     const content = options.content as ItemRelationsContent;
     return content.items?.reduce<NonNullable<UiProduct["options"]>>(
         (acc, item) => {
-            const variant = (item as Product).defaultVariant;
+            const variant = (item as Product)
+                .defaultVariant as ProductVariant & {
+                defaultPrice?: ProductPriceVariant | null;
+            };
 
             if (!!variant) {
                 acc.push({
@@ -37,6 +41,9 @@ const getOptions = (components: ApiProduct["components"]) => {
                     name: variant.name ?? "",
                     sku: variant.sku,
                     imageUrl: variant.firstImage?.url ?? "",
+                    price: {
+                        value: variant.defaultPrice?.price ?? undefined,
+                    },
                 });
             }
 
@@ -59,7 +66,9 @@ const getAttribute = (
 
     const content = options.content as ItemRelationsContent;
     return content.productVariants?.reduce<Attribute[]>((acc, item) => {
-        const variant = item as ProductVariant;
+        const variant = item as ProductVariant & {
+            defaultPrice?: ProductPriceVariant | null;
+        };
         const config = variant.components?.find(
             (component) => component.id === "config"
         );
@@ -76,6 +85,9 @@ const getAttribute = (
                 name: variant.name ?? "",
                 sku: variant.sku,
                 imageUrl: variant.firstImage?.url ?? "",
+                price: {
+                    value: variant.defaultPrice?.price ?? undefined,
+                },
                 hex: (hexComponent?.content as SingleLineContent)?.text ?? "",
                 modelAttribute:
                     (attributeComponent?.content as SingleLineContent).text ??
