@@ -35,5 +35,6 @@ export async function saveCart(input: CartInput) {
         }
     );
 
-    return await response.json();
+    const { data } = await response.json();
+    return data.hydrate;
 }

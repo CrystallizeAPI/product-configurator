@@ -15,6 +15,17 @@ export type ModelViewerNode = HTMLElement & {
     dismissPoster: () => void;
 };
 
+export type CartItem = {
+    imageUrl: string;
+    name: string;
+
+    childrenItems: {
+        name: string;
+        imageUrl: string;
+        sku: string;
+    }[];
+};
+
 declare global {
     namespace JSX {
         interface IntrinsicElements {

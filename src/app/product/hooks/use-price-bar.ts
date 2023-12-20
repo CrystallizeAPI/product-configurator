@@ -4,23 +4,14 @@ import { saveCart } from "@/use-cases/crystallize/write/save-cart";
 
 import type { Skus } from "../types";
 import { useCallback } from "react";
+import { CART_ID } from "../utils/const";
+import { priceFormatter } from "../utils/format-price";
 
 export type PriceBarProps = {
     skus: Skus;
     currentVariant: Variant | undefined;
     options: Option[] | undefined;
     onOpenCart: () => void;
-};
-
-const priceFormatter = (price?: { value?: number; currency?: string }) => {
-    if (!price || typeof price.value !== "number" || !price.currency) {
-        return "0";
-    }
-
-    return price.value.toLocaleString("en-US", {
-        style: "currency",
-        currency: price.currency,
-    });
 };
 
 const getTotalPrice = ({
@@ -79,7 +70,8 @@ export const usePriceBar = ({
             ),
         };
 
-        const da = await saveCart(input);
+        const { id } = await saveCart(input);
+        localStorage.setItem(CART_ID, id);
         onOpenCart();
     }, []);
 

@@ -1,9 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useUrlState } from "../utils/use-url-state";
+import { useUrlState } from "./use-url-state";
 import type { Skus, ModelViewerNode } from "../types";
-import type { UiProduct, OptionsSkus } from "@/use-cases/contracts/product";
+import type { UiProduct } from "@/use-cases/contracts/product";
 
 type OnChange =
     | { type: "frame"; value: string }

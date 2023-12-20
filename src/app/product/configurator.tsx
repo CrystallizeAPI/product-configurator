@@ -62,6 +62,9 @@ export default function Configurator({ product }: ConfiguratorProps) {
                 <Cart
                     isOpen={isCartOpen}
                     onClose={() => setIsCartOpen(false)}
+                    currentVariant={currentVariant}
+                    options={options}
+                    skus={skus}
                 />
                 <div className="shrink-0 px-12">
                     <h2 className="text-2xl font-medium text-gray-600">
