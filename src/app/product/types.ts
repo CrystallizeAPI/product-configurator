@@ -18,11 +18,18 @@ export type ModelViewerNode = HTMLElement & {
 export type CartItem = {
     imageUrl: string;
     name: string;
-
+    price?: {
+        value?: number;
+        currency?: string;
+    };
     childrenItems: {
         name: string;
         imageUrl: string;
         sku: string;
+        price: {
+            value?: number;
+            currency?: string;
+        };
     }[];
 };
 

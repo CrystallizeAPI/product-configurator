@@ -1,111 +1,39 @@
-export const CartForm = () => {
+import { CartCustomer } from "./cart-customer";
+import { CartItem } from "./cart-item";
+import type { CartItem as CartItemProps } from "../types";
+import { priceFormatter } from "../utils/format-price";
+import { Price } from "@/use-cases/contracts/product";
+
+type CartFormProps = {
+    onSubmit?: (formData: FormData) => Promise<unknown>;
+    cartItems?: CartItemProps[];
+    price?: Price;
+};
+
+export const CartForm = ({ onSubmit, cartItems, price }: CartFormProps) => {
     return (
-        <div className="leading-loose px-12">
-            <p className="font-medium">Customer information</p>
-            <div className="">
-                <label
-                    className="block text-sm text-gray-00"
-                    htmlFor="cus_name"
+        // @ts-expect-error
+        <form action={onSubmit} className="flex flex-col h-full">
+            <h2 className="font-medium text-xl mx-12 my-10">
+                Your shopping cart
+            </h2>
+            <div className="mx-12 flex-1">
+                {cartItems?.map((item) => {
+                    return <CartItem key={item.name} {...item} />;
+                })}
+            </div>
+            <CartCustomer />
+            <div className="flex justify-between shrink-0 items-center mx-12 mt-8 mb-4">
+                <h3 className="text-xl font-medium">
+                    Total price: {priceFormatter(price)}
+                </h3>
+                <button
+                    type="submit"
+                    className="px-4 py-2 rounded bg-accent font-medium text-white"
                 >
-                    Name
-                </label>
-                <input
-                    className="w-full p-2 text-gray-700 bg-gray-200 rounded placeholder:text-sm"
-                    id="cus_name"
-                    name="cus_name"
-                    type="text"
-                    required
-                    placeholder="Your Name"
-                    aria-label="Name"
-                />
+                    Buy
+                </button>
             </div>
-            <div className="mt-2">
-                <label
-                    className="block text-sm text-gray-600"
-                    htmlFor="cus_email"
-                >
-                    Email
-                </label>
-                <input
-                    className="w-full p-2 text-gray-700 bg-gray-200 rounded placeholder:text-sm"
-                    id="cus_email"
-                    name="cus_email"
-                    type="text"
-                    required
-                    placeholder="Your Email"
-                    aria-label="Email"
-                />
-            </div>
-            <div className="mt-2">
-                <label
-                    className="block text-sm text-gray-600"
-                    htmlFor="cus_email"
-                >
-                    Address
-                </label>
-                <input
-                    className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded placeholder:text-sm"
-                    id="cus_email"
-                    name="cus_email"
-                    type="text"
-                    required
-                    placeholder="Street"
-                    aria-label="Email"
-                />
-            </div>
-            <div className="mt-2">
-                <label
-                    className="block text-sm text-gray-600"
-                    htmlFor="cus_email"
-                >
-                    City
-                </label>
-                <input
-                    className="w-full p-2 text-gray-700 bg-gray-200 rounded placeholder:text-sm"
-                    id="cus_email"
-                    name="cus_email"
-                    type="text"
-                    required
-                    placeholder="City"
-                    aria-label="Email"
-                />
-            </div>
-            <div className="flex gap-2 mt-2">
-                <div className="flex-1">
-                    <label
-                        className="block text-sm text-gray-600"
-                        htmlFor="cus_email"
-                    >
-                        Country
-                    </label>
-                    <input
-                        className="w-full p-2 text-gray-700 bg-gray-200 rounded placeholder:text-sm"
-                        id="cus_email"
-                        name="cus_email"
-                        type="text"
-                        required
-                        placeholder="Country"
-                        aria-label="Email"
-                    />
-                </div>
-                <div className="flex-1">
-                    <label
-                        className="block text-sm text-gray-600"
-                        htmlFor="cus_email"
-                    >
-                        Zip
-                    </label>
-                    <input
-                        className="w-full p-2 text-gray-700 bg-gray-200 rounded placeholder:text-sm"
-                        id="cus_email"
-                        name="cus_email"
-                        type="text"
-                        required
-                        placeholder="Zip"
-                        aria-label="Email"
-                    />
-                </div>
-            </div>
-        </div>
+        </form>
     );
 };

@@ -1,8 +1,15 @@
 "use server";
 
-import type { ClientInterface } from "@crystallize/js-api-client";
+import { createClient } from "@crystallize/js-api-client";
 
-export async function createOrder(apiClient: ClientInterface, input: any) {
+const apiClient = createClient({
+    tenantIdentifier: "product-configurator",
+    tenantId: "6566eee5c53426877c8ad16a",
+    accessTokenId: `${process.env.CRYSTALLIZE_ACCESS_TOKEN_ID}`,
+    accessTokenSecret: `${process.env.CRYSTALLIZE_ACCESS_TOKEN_SECRET}`,
+});
+
+export async function createOrder(input: any) {
     const query = `#graphql
     mutation ($input: CreateOrderInput!) {
       orders {
