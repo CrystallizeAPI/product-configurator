@@ -12,8 +12,13 @@ type CartFormProps = {
 
 export const CartForm = ({ onSubmit, cartItems, price }: CartFormProps) => {
     return (
-        // @ts-expect-error
-        <form action={onSubmit} className="flex flex-col h-full">
+        <form
+            className="flex flex-col h-full"
+            onSubmit={(e) => {
+                e.preventDefault();
+                onSubmit?.(new FormData(e.currentTarget));
+            }}
+        >
             <h2 className="font-medium text-xl mx-12 my-10">
                 Your shopping cart
             </h2>

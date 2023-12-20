@@ -75,6 +75,23 @@ export const useCart = ({
                 },
             ],
         };
+        const parts = cartItems.flatMap((cartItem) =>
+            cartItem.childrenItems.flatMap((item) => ({
+                name: item.name,
+                sku: item.sku,
+                quantity: 1,
+                imageUrl: item.imageUrl,
+                price: {
+                    gross: item.price.value,
+                    net: item.price.value,
+                    currency: currentVariant.price.currency,
+                },
+                meta: {
+                    key: "item",
+                    value: "Part",
+                },
+            }))
+        );
         const cart = [
             {
                 name: currentVariant.name,
@@ -86,20 +103,18 @@ export const useCart = ({
                     net: currentVariant.price.value,
                     currency: currentVariant.price.currency,
                 },
-            },
-            ...cartItems.flatMap((cartItem) =>
-                cartItem.childrenItems.flatMap((item) => ({
-                    name: item.name,
-                    sku: item.sku,
-                    quantity: 1,
-                    imageUrl: item.imageUrl,
-                    price: {
-                        gross: item.price.value,
-                        net: item.price.value,
-                        currency: currentVariant.price.currency,
+                meta: [
+                    {
+                        key: "item",
+                        value: "Main",
                     },
-                }))
-            ),
+                    {
+                        key: "BOM",
+                        value: parts.map(({ sku }) => sku).join("_"),
+                    },
+                ],
+            },
+            ...parts,
         ];
 
         const { id } = await createOrder({ customer, cart });
