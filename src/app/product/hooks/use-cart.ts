@@ -87,8 +87,8 @@ export const useCart = ({
                     currency: currentVariant.price.currency,
                 },
                 meta: {
-                    key: "item",
-                    value: "Part",
+                    key: "type",
+                    value: "Composable",
                 },
             }))
         );
@@ -105,11 +105,11 @@ export const useCart = ({
                 },
                 meta: [
                     {
-                        key: "item",
+                        key: "type",
                         value: "Main",
                     },
                     {
-                        key: "BOM",
+                        key: "bom",
                         value: parts.map(({ sku }) => sku).join("_"),
                     },
                 ],
