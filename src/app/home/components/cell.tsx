@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { priceFormatter } from "../../utils/format-price";
-import type { Column } from "@/use-cases/contracts/grid";
+import type { Column, UiProductVariant } from "@/use-cases/contracts/grid";
 import { Image } from "@crystallize/reactjs-components";
 
 type ImageProps = React.ComponentProps<typeof Image>;
@@ -9,14 +9,50 @@ type CellProps = {
     cell: Column;
 };
 
+//TODO: find better way to construct the url
+const getQueryParams = (
+    productVariants?: Array<UiProductVariant | undefined>
+) => {
+    const queryParams = new URLSearchParams();
+
+    productVariants?.forEach((variant) => {
+        let key = "";
+        const sku = variant?.sku;
+        if (!sku) {
+            return;
+        }
+
+        if (sku.includes("speed-curve")) {
+            key = "v";
+        } else if (sku.includes("saddle")) {
+            key = "saddle";
+        } else if (sku.includes("front")) {
+            key = "frontRack";
+        } else if (sku.includes("rear")) {
+            key = "rearRack";
+        } else if (sku.includes("bag")) {
+            key = "leatherBag";
+        } else {
+            key = "grip";
+        }
+
+        queryParams.set(key, sku);
+    });
+
+    return queryParams.toString();
+};
+
 export function Cell({ cell }: CellProps) {
     const { item } = cell;
     const [activeIndex, setActiveIndex] = useState<number | undefined>(
         undefined
     );
+    const productVariants = item.image.showcase?.map(
+        (showcase) => showcase.productVariant
+    );
 
     return (
-        <Link href="/">
+        <Link href={`/product?${getQueryParams(productVariants)}`}>
             <div className="w-full h-full relative">
                 <Image
                     {...(item.image as ImageProps)}

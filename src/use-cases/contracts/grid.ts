@@ -6,6 +6,11 @@ import {
 
 export type ApiGrid = Grid;
 
+export type UiProductVariant = Pick<
+    ProductVariant,
+    "name" | "sku" | "images" | "priceVariant"
+>;
+
 type Image = {
     url?: string;
     width?: number | null;
@@ -34,10 +39,7 @@ export type Column = {
         image: Image & {
             showcase?: {
                 hotspot?: FocalPoint;
-                productVariant?: Pick<
-                    ProductVariant,
-                    "name" | "sku" | "images" | "priceVariant"
-                >;
+                productVariant?: UiProductVariant;
             }[];
         };
     };
