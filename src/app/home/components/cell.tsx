@@ -58,7 +58,7 @@ export function Cell({ cell }: CellProps) {
                     {...(item.image as ImageProps)}
                     sizes={
                         cell.index === 0
-                            ? "(max-width: 800px) 550px, 1000px"
+                            ? "(max-width: 800px) 550px, 800px"
                             : "(max-width: 800px) 260px, 380px"
                     }
                     className="w-full h-full [&_img]:h-full [&_img]:object-cover [&_img]:rounded-md"
