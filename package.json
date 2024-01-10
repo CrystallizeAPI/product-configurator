@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "@crystallize/js-api-client": "^1.12.2",
+        "@crystallize/reactjs-components": "^2.0.1",
         "next": "14.0.3",
         "react": "^18",
         "react-dom": "^18"

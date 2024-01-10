@@ -1,7 +1,7 @@
 import { CartCustomer } from "./cart-customer";
 import { CartItem } from "./cart-item";
 import type { CartItem as CartItemProps } from "../types";
-import { priceFormatter } from "../utils/format-price";
+import { priceFormatter } from "../../utils/format-price";
 import { Price } from "@/use-cases/contracts/product";
 
 type CartFormProps = {

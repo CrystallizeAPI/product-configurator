@@ -1,7 +1,7 @@
 import type { Option, Variant } from "@/use-cases/contracts/product";
 import { createOrder } from "@/use-cases/crystallize/write/create-order";
 import type { Skus, CartItem } from "../types";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 type UseCartProps = {
     currentVariant?: Variant;

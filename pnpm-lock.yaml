@@ -8,6 +8,9 @@ dependencies:
   '@crystallize/js-api-client':
     specifier: ^1.12.2
     version: 1.12.2
+  '@crystallize/reactjs-components':
+    specifier: ^2.0.1
+    version: 2.0.1(react-dom@18.0.0)(react@18.0.0)
   next:
     specifier: 14.0.3
     version: 14.0.3(@babel/core@7.23.6)(react-dom@18.0.0)(react@18.0.0)
@@ -650,6 +653,19 @@ packages:
       tiny-invariant: 1.3.1
       typescript: 4.9.5
       zod: 3.22.4
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
+  /@crystallize/reactjs-components@2.0.1(react-dom@18.0.0)(react@18.0.0):
+    resolution: {integrity: sha512-aX0qP3mzYDflHH72EgPvJNPqcx8r/3fwPl2EzXnC6bWI/G131dwhuR3EhQ4eGZ6Gg8wf3TJ++xlas4a5oScLJQ==}
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      '@crystallize/js-api-client': 1.12.2
+      react: 18.0.0
+      react-dom: 18.0.0(react@18.0.0)
     transitivePeerDependencies:
       - encoding
     dev: false

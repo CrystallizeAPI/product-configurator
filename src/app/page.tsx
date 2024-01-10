@@ -1,21 +1,14 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { Metadata } from 'next'
-
+import { Metadata } from "next";
+import { Home } from "./home";
+import { services } from "@/core/services";
 
 export const metadata: Metadata = {
-  title: 'Product Configurator Boilerplate with Crystallize',
-}
+    title: "Product Configurator Boilerplate with Crystallize",
+};
 
-export default function Home() {
-  return  (
-    <ul>
-      <li>
-        <Link href="/">Home</Link>
-      </li>
-      <li>
-        <Link href="/product">Product Configurator</Link>
-      </li>
-    </ul>
-  )
+export default async function HomePage() {
+    const { api } = await services();
+    const { grid } = await api.getGrid("6595737433383f7ef75d6d68");
+
+    return <Home grid={grid} />;
 }

@@ -5,7 +5,7 @@ import { CartForm } from "./cart-form";
 import type { Skus } from "../types";
 import { useCart } from "../hooks/use-cart";
 import { CartItem } from "./cart-item";
-import { priceFormatter } from "../utils/format-price";
+import { priceFormatter } from "../../utils/format-price";
 import { OrderConfirmation } from "./order-confirmation";
 
 type CartProps = {

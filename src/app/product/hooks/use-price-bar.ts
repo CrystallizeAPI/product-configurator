@@ -5,7 +5,7 @@ import { saveCart } from "@/use-cases/crystallize/write/save-cart";
 import type { Skus } from "../types";
 import { useCallback } from "react";
 import { CART_ID } from "../utils/const";
-import { priceFormatter } from "../utils/format-price";
+import { priceFormatter } from "../../utils/format-price";
 
 export type PriceBarProps = {
     skus: Skus;
