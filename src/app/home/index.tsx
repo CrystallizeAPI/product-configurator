@@ -5,13 +5,13 @@ import {
     GridRenderingType,
 } from "@crystallize/reactjs-components";
 import { Cell } from "./components/cell";
+import type { UiGrid } from "@/use-cases/contracts/grid";
 
 type HomeProps = {
-    grid: any;
+    grid: UiGrid;
 };
 
 export function Home({ grid }: HomeProps) {
-    console.log(grid);
     return (
         <div className="my-10 max-w-6xl m-auto [&_div]:gap-4">
             <GridRenderer

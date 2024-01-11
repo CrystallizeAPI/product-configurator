@@ -52,7 +52,6 @@ export async function getGrid(apiClient: ClientInterface, id: string) {
 
     fragment Image on Image {
       url
-      key
       width
       height
       altText

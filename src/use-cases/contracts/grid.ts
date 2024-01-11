@@ -28,7 +28,7 @@ type Image = {
 
 export type Column = {
     index: number;
-    layout?: {
+    layout: {
         colspan: number;
         rowspan: number;
         colIndex: number;
