@@ -8,7 +8,8 @@ import { createOrder } from "./write/create-order";
 
 export const getApi = (apiClient: ClientInterface) => {
     return {
-        saveCart,
+        saveCart: async (...input: Parameters<typeof saveCart>) =>
+            saveCart(...input),
         getProduct: getProduct.bind(null, apiClient),
         getGrid: getGrid.bind(null, apiClient),
         createOrder: createOrder.bind(null, apiClient),

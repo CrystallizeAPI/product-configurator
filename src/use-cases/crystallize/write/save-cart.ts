@@ -35,6 +35,7 @@ export async function saveCart(input: CartInput) {
         }
     );
 
-    const { data } = await response.json();
-    return data.hydrate;
+    // TODO: return cart ID here
+    const data = await response.json();
+    return {};
 }

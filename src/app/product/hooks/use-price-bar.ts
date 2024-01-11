@@ -1,11 +1,10 @@
 import type { Option, Variant } from "@/use-cases/contracts/product";
-//import { services } from "@/core/services";
-import { saveCart } from "@/use-cases/crystallize/write/save-cart";
 
 import type { Skus } from "../types";
 import { useCallback } from "react";
-import { CART_ID } from "../utils/const";
 import { priceFormatter } from "../../utils/format-price";
+// import { CART_ID } from "../utils/const";
+// import { saveCart } from "../actions/save-cart";
 
 export type PriceBarProps = {
     skus: Skus;
@@ -52,26 +51,15 @@ export const usePriceBar = ({
     options,
     onOpenCart,
 }: PriceBarProps) => {
-    //const { api } = services();
     const price = priceFormatter({
         value: getTotalPrice({ skus, currentVariant, options }),
         currency: currentVariant?.price.currency,
     });
 
     const onSaveCartClick = useCallback(async () => {
-        const input = {
-            items: (Object.keys(skus) as Array<keyof typeof skus>).map(
-                (key) => {
-                    return {
-                        sku: skus[key] as string,
-                        quantity: 1,
-                    };
-                }
-            ),
-        };
-
-        const { id } = await saveCart(input);
-        localStorage.setItem(CART_ID, id);
+        // TODO: save cart
+        // const { id } = await saveCart(skus);
+        // localStorage.setItem(CART_ID, id);
         onOpenCart();
     }, []);
 
