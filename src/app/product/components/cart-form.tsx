@@ -5,40 +5,49 @@ import { priceFormatter } from "../../utils/format-price";
 import { Price } from "@/use-cases/contracts/product";
 
 type CartFormProps = {
-    onSubmit?: (formData: FormData) => Promise<unknown>;
-    cartItems?: CartItemProps[];
-    price?: Price;
+  onSubmit?: (formData: FormData) => Promise<unknown>;
+  cartItems?: CartItemProps[];
+  price?: Price;
 };
 
 export const CartForm = ({ onSubmit, cartItems, price }: CartFormProps) => {
-    return (
-        <form
-            className="flex flex-col h-full"
-            onSubmit={(e) => {
-                e.preventDefault();
-                onSubmit?.(new FormData(e.currentTarget));
-            }}
-        >
-            <h2 className="font-medium text-xl mx-12 my-10">
-                Your shopping cart
-            </h2>
-            <div className="mx-12 flex-1">
-                {cartItems?.map((item) => {
-                    return <CartItem key={item.name} {...item} />;
-                })}
+  return (
+    <form
+      className="flex flex-col h-full"
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit?.(new FormData(e.currentTarget));
+      }}
+    >
+      <h2 className="font-medium text-gray-800 pb-8 text-2xl py-10 px-12">
+        Your shopping cart
+      </h2>
+      <div className="mx-12">
+        {cartItems?.map((item) => {
+          return <CartItem key={item.name} {...item} />;
+        })}
+      </div>
+      <div className=" px-12">
+        <div className="mt-12">
+          <CartCustomer />
+          <div className="px-12  bg-gray-100 rounded-xl py-6 mt-12">
+            <div className="flex flex-col  justify-between items-center">
+              <h3 className="flex flex-col w-full py-4">
+                <span className="text-sm font-medium text-gray-600">Total</span>
+                <span className="text-3xl font-medium">
+                  {priceFormatter(price)}
+                </span>
+              </h3>
+              <button
+                type="submit"
+                className="px-8 py-4 rounded-xl w-full bg-gray-800 font-medium text-white"
+              >
+                Place order
+              </button>
             </div>
-            <CartCustomer />
-            <div className="flex justify-between shrink-0 items-center mx-12 mt-8 mb-4">
-                <h3 className="text-xl font-medium">
-                    Total price: {priceFormatter(price)}
-                </h3>
-                <button
-                    type="submit"
-                    className="px-4 py-2 rounded bg-accent font-medium text-white"
-                >
-                    Buy
-                </button>
-            </div>
-        </form>
-    );
+          </div>
+        </div>
+      </div>
+    </form>
+  );
 };
