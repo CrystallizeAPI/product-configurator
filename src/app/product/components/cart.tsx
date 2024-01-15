@@ -31,8 +31,8 @@ export const Cart = ({
   });
   return (
     <div
-      className={`bg-white right-0 fixed w-[500px] h-screen top-0 transition-all z-10 border-l ${
-        isOpen ? "right-0" : "-right-[500px]"
+      className={`bg-white fixed w-[500px] h-screen top-0 transition-all z-10 border-l ${
+        isOpen ? "right-0" : "-right-[501px]"
       }`}
     >
       <button
