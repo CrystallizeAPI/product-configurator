@@ -1,9 +1,10 @@
 import type { OptionsSkus } from "@/use-cases/contracts/product";
 
-export type Skus = OptionsSkus & {
+export type Skus = {
     v: string;
     grip?: string;
     saddle?: string;
+    options?: string;
 };
 
 export type ModelViewerNode = HTMLElement & {

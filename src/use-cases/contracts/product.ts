@@ -20,13 +20,8 @@ type BaseItem = {
     price: Price;
 };
 
-export type OptionsSkus = {
-    frontRack?: string;
-    rearRack?: string;
-    leatherBag?: string;
-};
 export type Price = { value?: number; currency?: string };
-export type Option = BaseItem & { id: keyof OptionsSkus };
+export type Option = BaseItem & { id: string };
 export type Attribute = BaseItem & { modelAttribute: string; hex?: string };
 export type Variant = BaseItem & {
     price: Price;

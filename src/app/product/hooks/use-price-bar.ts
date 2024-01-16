@@ -18,31 +18,7 @@ const getTotalPrice = ({
     currentVariant,
     options,
 }: Omit<PriceBarProps, "onOpenCart">) => {
-    const framePrice = currentVariant?.price.value ?? 0;
-    const saddlePrice =
-        currentVariant?.saddles?.find((saddle) => saddle.sku === skus.saddle)
-            ?.price.value ?? 0;
-    const gripPrice =
-        currentVariant?.grips?.find((grip) => grip.sku === skus.grip)?.price
-            .value ?? 0;
-    const frontRack = skus.frontRack
-        ? options?.find((opt) => opt.sku === skus.frontRack)?.price.value ?? 0
-        : 0;
-    const rearRack = skus.rearRack
-        ? options?.find((opt) => opt.sku === skus.rearRack)?.price.value ?? 0
-        : 0;
-    const bagPrice = skus.leatherBag
-        ? options?.find((opt) => opt.sku === skus.leatherBag)?.price.value ?? 0
-        : 0;
-
-    return [
-        framePrice,
-        saddlePrice,
-        gripPrice,
-        frontRack,
-        rearRack,
-        bagPrice,
-    ].reduce((acc, price) => acc + price, 0);
+    return [0].reduce((acc, price) => acc + price, 0);
 };
 
 export const usePriceBar = ({

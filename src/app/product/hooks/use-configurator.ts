@@ -9,14 +9,27 @@ type OnChange =
     | { type: "frame"; value: string }
     | { type: "saddle"; value: string }
     | { type: "grip"; value: string }
-    | { type: "frontRack"; value?: string }
-    | { type: "rearRack"; value?: string }
-    | { type: "leatherBag"; value?: string };
+    | { type: "options"; value?: string };
 
 const getBagProps = (gripSku?: string) => {
     return gripSku && gripSku !== "natural-leather"
         ? { sku: { leatherBag: undefined }, isHidden: true }
         : {};
+};
+
+const toggleOption = (
+    node: ModelViewerNode | null,
+    id: string,
+    isVisible: boolean
+) => {
+    const optionKey = id as keyof typeof optionMap;
+    const optionMap = {
+        frontRack: () => node?.toggleLuggageRackFront(isVisible),
+        rearRack: () => node?.toggleLuggageRackBack(isVisible),
+        leatherBag: () => node?.toggleLeatherBag(isVisible),
+    };
+
+    optionMap[optionKey]?.();
 };
 
 export const useConfigurator = (product: UiProduct) => {
@@ -45,9 +58,11 @@ export const useConfigurator = (product: UiProduct) => {
                         node?.setSaddleColor(saddle?.modelAttribute);
                     }, 100);
 
-                    node.toggleLuggageRackBack(!!skus.rearRack);
-                    node.toggleLuggageRackFront(!!skus.frontRack);
-                    node.toggleLeatherBag(!!skus.leatherBag);
+                    const optionSkus = skus.options?.split(",") ?? [];
+                    options?.forEach((opt) => {
+                        const isVisible = optionSkus.includes(opt.sku);
+                        toggleOption(node, opt.id, isVisible);
+                    });
 
                     modelViewer.current = node;
                     // give some time the remove bag animation to complete
@@ -62,7 +77,7 @@ export const useConfigurator = (product: UiProduct) => {
 
             setView(node);
         },
-        [currentVariant, skus, isModelLoaded]
+        [currentVariant, skus, isModelLoaded, options]
     );
 
     // auto select the first variant when the param is not present in the URL
@@ -83,6 +98,7 @@ export const useConfigurator = (product: UiProduct) => {
     const onChange = useCallback(
         ({ type, value }: OnChange) => {
             const node = modelViewer.current;
+            console.log(type, value);
             switch (type) {
                 case "frame": {
                     const nextVariant = variants?.find(
@@ -150,36 +166,16 @@ export const useConfigurator = (product: UiProduct) => {
                     bagProps.isHidden && node?.toggleLeatherBag(false);
                     break;
                 }
-                case "frontRack": {
-                    setSkus({ ...skus, frontRack: value });
-                    node?.toggleLuggageRackFront(!!value);
-                    break;
-                }
-                case "rearRack": {
-                    const hasLeatherBag = !!skus.leatherBag;
+                case "options": {
+                    options?.forEach((opt) => {
+                        const isVisible = value?.includes(opt.sku) ?? false;
+                        console.log(opt.id, isVisible);
+                        toggleOption(node, opt.id, isVisible);
+                    });
                     setSkus({
                         ...skus,
-                        rearRack: value,
-                        ...(hasLeatherBag && { leatherBag: undefined }),
+                        options: !value ? undefined : value,
                     });
-
-                    node?.toggleLuggageRackBack(!!value);
-                    !value && hasLeatherBag && node?.toggleLeatherBag(false);
-                    break;
-                }
-                case "leatherBag": {
-                    const hasBag = !!value;
-                    const rearRackSku = options?.find(
-                        (opt) => opt.id === "rearRack"
-                    )?.sku;
-                    setSkus({
-                        ...skus,
-                        ...(hasBag
-                            ? { leatherBag: value, rearRack: rearRackSku }
-                            : { leatherBag: undefined }),
-                    });
-                    node?.toggleLeatherBag(hasBag);
-                    hasBag && node?.toggleLuggageRackBack(true);
                     break;
                 }
             }

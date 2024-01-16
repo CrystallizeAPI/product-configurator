@@ -21,27 +21,20 @@ export const useCart = ({
         return {};
     }
     const childrenItems: CartItem["childrenItems"] = [];
+
     const saddle = skus.saddle
         ? currentVariant.saddles?.find((saddle) => saddle.sku === skus.saddle)
         : undefined;
     const grip = skus.grip
         ? currentVariant.grips?.find((grip) => grip.sku === skus.grip)
         : undefined;
-    const frontRack = skus.frontRack
-        ? options.find((opt) => opt.id === "frontRack")
-        : undefined;
-    const rearRack = skus.rearRack
-        ? options.find((opt) => opt.id === "rearRack")
-        : undefined;
-    const bag = skus.leatherBag
-        ? options.find((opt) => opt.id === "leatherBag")
-        : undefined;
 
     !!saddle && childrenItems.push(saddle);
     !!grip && childrenItems.push(grip);
-    !!frontRack && childrenItems.push(frontRack);
-    !!rearRack && childrenItems.push(rearRack);
-    !!bag && childrenItems.push(bag);
+    skus.options?.split(",").forEach((sku) => {
+        const item = options.find((opt) => opt.sku === sku);
+        !!item && childrenItems.push(item);
+    });
 
     const cartItems: CartItem[] = [
         {
@@ -122,14 +115,7 @@ export const useCart = ({
     };
 
     const price = {
-        value: [
-            currentVariant.price.value ?? 0,
-            saddle?.price.value ?? 0,
-            grip?.price.value ?? 0,
-            frontRack?.price.value ?? 0,
-            rearRack?.price.value ?? 0,
-            bag?.price.value ?? 0,
-        ].reduce((acc, price) => acc + price, 0),
+        value: [0].reduce((acc, price) => acc + price, 0),
         currency: currentVariant.price.currency,
     };
 

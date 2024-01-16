@@ -66,33 +66,36 @@ export async function getProduct(apiClient: ClientInterface, path: string) {
             currency
             price
           }
+          components {
+            ...content
+          }
         }
       }
       components {
-        id
         ...content
       }
     }
       productVariants {
-          name
-          defaultPrice: priceVariant(identifier:"default"){
-            currency
-            price
-          }
-          sku
-          components {
-            id
-          }
-          firstImage {
-            url
-          }
-          components {
-              ...content
+        name
+        defaultPrice: priceVariant(identifier:"default"){
+          currency
+          price
+        }
+        sku
+        components {
+          id
+        }
+        firstImage {
+          url
+        }
+        components {
+          ...content
         }
       }
   }
 
   fragment content on Component  {
+      id
       content {
           ...on SingleLineContent {
             text
