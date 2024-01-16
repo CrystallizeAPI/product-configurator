@@ -18,7 +18,7 @@ const getQueryParams = (
         let key = "";
         const sku = variant?.sku;
         const path = variant?.product?.paths?.canonical;
-        console.log(path);
+
         if (!sku || !path) {
             return;
         }
