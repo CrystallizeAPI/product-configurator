@@ -9,7 +9,9 @@ export type ApiGrid = Grid;
 export type UiProductVariant = Pick<
     ProductVariant,
     "name" | "sku" | "images" | "priceVariant"
->;
+> & {
+    product?: { paths?: { canonical?: string | null } | null } | null;
+};
 
 type Image = {
     url?: string;

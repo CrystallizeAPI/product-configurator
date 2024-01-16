@@ -31,6 +31,11 @@ export async function getGrid(apiClient: ClientInterface, id: string) {
                         productVariants(language: $language) {
                           name
                           sku
+                          product {
+                            paths {
+                              canonical
+                            }
+                          }
                           images {
                             ...Image
                           }
