@@ -4,22 +4,19 @@ import { useState } from "react";
 import Image from "next/image";
 
 import type { UiProduct } from "@/use-cases/contracts/product";
+import { Cart } from "@/components/cart";
 
 import { useConfigurator } from "./hooks/use-configurator";
 import { SaddleSelector } from "./components/saddle-selector";
 import { GripSelector } from "./components/grip-selector";
 import { AccessorySelector } from "./components/accessory-selector";
 import { PriceBar } from "./components/price-bar";
-import { Cart } from "./components/cart";
 import VariantSelector from "./components/variant-selector";
 import { ModelViewer } from "./components/model-viewer";
 
 type ConfiguratorProps = {
     product: UiProduct;
 };
-
-const setBodyOverflow = (isHidden: boolean) =>
-    document.body.classList[isHidden ? "add" : "remove"]("!overflow-hidden");
 
 export default function Configurator({ product }: ConfiguratorProps) {
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -67,23 +64,10 @@ export default function Configurator({ product }: ConfiguratorProps) {
                 </div>
 
                 <div className="flex flex-col relative h-auto">
-                    <div
-                        className={`bg-white fixed w-[500px] overflow-auto h-screen top-0 transition-all z-10 border-l ${
-                            isCartOpen ? "right-0" : "-right-[501px]"
-                        }`}
-                    >
-                        {isCartOpen && (
-                            <Cart
-                                onClose={() => {
-                                    setBodyOverflow(false);
-                                    setIsCartOpen(false);
-                                }}
-                                currentVariant={currentVariant}
-                                options={options}
-                                skus={skus}
-                            />
-                        )}
-                    </div>
+                    <Cart
+                        isCartOpen={isCartOpen}
+                        setIsCartOpen={setIsCartOpen}
+                    />
                     <div className="px-12 w-[500px]">
                         <div className="pb-4 min-h-[65vh] justify-center flex flex-col">
                             <h2 className="text-2xl  text-gray-800 pb-8 font-medium">
@@ -158,10 +142,7 @@ export default function Configurator({ product }: ConfiguratorProps) {
                             </h2>
                             <PriceBar
                                 skus={skus}
-                                onOpenCart={() => {
-                                    setBodyOverflow(true);
-                                    setIsCartOpen(true);
-                                }}
+                                onOpenCart={() => setIsCartOpen(true)}
                             />
                         </div>
                     </div>

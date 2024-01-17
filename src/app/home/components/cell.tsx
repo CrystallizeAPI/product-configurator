@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
-import { priceFormatter } from "../../utils/format-price";
+import { priceFormatter } from "../../../utils/format-price";
 import type { Column, UiProductVariant } from "@/use-cases/contracts/grid";
 import { Image } from "@crystallize/reactjs-components";
 

@@ -1,6 +1,6 @@
 import { CartCustomer } from "./cart-customer";
 import { CartItem } from "./cart-item";
-import type { CartItem as CartItemProps } from "../types";
+import type { CartItem as CartItemProps } from "../../app/product/types";
 import { placeOrder } from "@/actions/place-order";
 
 type CartFormProps = {

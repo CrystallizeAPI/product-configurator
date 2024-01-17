@@ -2,7 +2,7 @@
 
 import { shopApiClient } from "@/core";
 import { getCart as getCartQuery } from "@/use-cases/crystallize";
-import { priceFormatter } from "@/app/utils/format-price";
+import { priceFormatter } from "@/utils/format-price";
 import { CartItem } from "@/app/product/types";
 
 export async function getCart(id: string) {

@@ -3,7 +3,7 @@
 import type { Skus } from "../types";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getTotalPrice } from "../../../actions/get-total-price";
-import { CART_ID } from "../utils/const";
+import { CART_ID } from "../../../utils/const";
 
 export type PriceBarProps = {
     skus: Skus;

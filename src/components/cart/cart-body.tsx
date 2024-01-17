@@ -1,28 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import type { Option, Variant } from "@/use-cases/contracts/product";
 import { CartForm } from "./cart-form";
-import type { Skus } from "../types";
-import { useCart } from "../hooks/use-cart";
+import { useCart } from "./use-cart";
 import { OrderConfirmation } from "./order-confirmation";
-import { CART_ID } from "../utils/const";
+import { CART_ID } from "@/utils/const";
 
 type CartProps = {
     onClose: () => void;
-    currentVariant?: Variant;
-    options?: Option[];
-    skus?: Skus;
 };
 
-export const Cart = ({ onClose, currentVariant, options, skus }: CartProps) => {
+export const CartBody = ({ onClose }: CartProps) => {
     const [orderId, setOrderId] = useState<string | undefined>(undefined);
-    const { cartItem, price } = useCart({
-        currentVariant,
-        options,
-        skus,
-        onClose,
-    });
+    const { cartItem, price } = useCart();
 
     const onCloseCart = () => {
         setOrderId(undefined);

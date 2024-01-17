@@ -3,7 +3,7 @@
 import { shopApiClient } from "@/core";
 import { getCartTotalPrice } from "@/use-cases/crystallize";
 import { Skus } from "@/app/product/types";
-import { priceFormatter } from "@/app/utils/format-price";
+import { priceFormatter } from "@/utils/format-price";
 
 export async function getTotalPrice(skus: Skus) {
     const items = (Object.keys(skus) as Array<keyof Skus>).reduce<
