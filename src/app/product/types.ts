@@ -1,5 +1,3 @@
-import type { OptionsSkus } from "@/use-cases/contracts/product";
-
 export type Skus = {
     v: string;
     grip?: string;

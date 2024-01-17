@@ -1,9 +1,8 @@
 import Configurator from "./configurator";
-import { services } from "@/core/services";
+import { getProduct } from "../../actions/get-product";
 
 export default async function Page() {
-    const { api } = await services();
-    const { product } = await api.getProduct("/bicycles/speed-curve");
+    const { product } = await getProduct("/bicycles/speed-curve");
 
     return (
         <div className="flex min-h-[100vh] bg-white relative  items-center justify-between min-w-full ">
