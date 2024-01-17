@@ -1,11 +1,9 @@
 "use client";
 
-import type { Option, Variant } from "@/use-cases/contracts/product";
-
 import type { Skus } from "../types";
-import { useCallback, useEffect, useState } from "react";
-import { priceFormatter } from "../../utils/format-price";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { getTotalPrice } from "../../../actions/get-total-price";
+import { CART_ID } from "../utils/const";
 
 export type PriceBarProps = {
     skus: Skus;
@@ -13,16 +11,21 @@ export type PriceBarProps = {
 };
 
 export const usePriceBar = ({ skus, onOpenCart }: PriceBarProps) => {
+    const lastCartIdRef = useRef<string | undefined>();
     const [price, setPrice] = useState<string | undefined>();
 
     useEffect(() => {
-        (async () => setPrice(await getTotalPrice(skus)))();
+        (async () => {
+            const { price, id } = await getTotalPrice(skus);
+            lastCartIdRef.current = id;
+            setPrice(price);
+        })();
     }, [skus]);
 
     const onSaveCartClick = useCallback(async () => {
-        // TODO: save cart
-        // const { id } = await saveCart(skus);
-        // localStorage.setItem(CART_ID, id);
+        !!lastCartIdRef.current &&
+            localStorage.setItem(CART_ID, lastCartIdRef.current);
+
         onOpenCart();
     }, [skus]);
 

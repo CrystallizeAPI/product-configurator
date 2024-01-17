@@ -1,7 +1,9 @@
 import type { Option, Variant } from "@/use-cases/contracts/product";
 import { createOrder } from "@/use-cases/crystallize/write/create-order";
 import type { Skus, CartItem } from "../types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { CART_ID } from "../utils/const";
+import { getCart } from "@/actions/get-cart";
 
 type UseCartProps = {
     currentVariant?: Variant;
@@ -10,6 +12,8 @@ type UseCartProps = {
     onClose: () => void;
 };
 
+type Cart = { cartItem: CartItem; price: string };
+
 export const useCart = ({
     currentVariant,
     options,
@@ -17,33 +21,16 @@ export const useCart = ({
     onClose,
 }: UseCartProps) => {
     const [orderId, setOrderId] = useState<string | undefined>(undefined);
+    const [cart, setCart] = useState<Cart | undefined>();
+    const cartId = localStorage.getItem(CART_ID);
+
+    useEffect(() => {
+        (async () => !!cartId && setCart(await getCart(cartId)))();
+    }, [cartId]);
+
     if (!currentVariant || !options || !skus) {
         return {};
     }
-    const childrenItems: CartItem["childrenItems"] = [];
-
-    const saddle = skus.saddle
-        ? currentVariant.saddles?.find((saddle) => saddle.sku === skus.saddle)
-        : undefined;
-    const grip = skus.grip
-        ? currentVariant.grips?.find((grip) => grip.sku === skus.grip)
-        : undefined;
-
-    !!saddle && childrenItems.push(saddle);
-    !!grip && childrenItems.push(grip);
-    skus.options?.split(",").forEach((sku) => {
-        const item = options.find((opt) => opt.sku === sku);
-        !!item && childrenItems.push(item);
-    });
-
-    const cartItems: CartItem[] = [
-        {
-            name: currentVariant?.name,
-            imageUrl: currentVariant.imageUrl,
-            price: currentVariant.price,
-            childrenItems,
-        },
-    ];
 
     const onSubmit = async (formaData: FormData) => {
         const fullName = formaData.get("name") as string;
@@ -68,24 +55,22 @@ export const useCart = ({
                 },
             ],
         };
-        const parts = cartItems.flatMap((cartItem) =>
-            cartItem.childrenItems.flatMap((item) => ({
-                name: item.name,
-                sku: item.sku,
-                quantity: 1,
-                imageUrl: item.imageUrl,
-                price: {
-                    gross: item.price.value,
-                    net: item.price.value,
-                    currency: currentVariant.price.currency,
-                },
-                meta: {
-                    key: "type",
-                    value: "Composable",
-                },
-            }))
-        );
-        const cart = [
+        const parts = cart?.cartItem.childrenItems.flatMap((item) => ({
+            name: item.name,
+            sku: item.sku,
+            quantity: 1,
+            imageUrl: item.imageUrl,
+            price: {
+                gross: item.price.value,
+                net: item.price.value,
+                currency: currentVariant.price.currency,
+            },
+            meta: {
+                key: "type",
+                value: "Composable",
+            },
+        }));
+        const orderCart = [
             {
                 name: currentVariant.name,
                 sku: currentVariant.sku,
@@ -103,20 +88,15 @@ export const useCart = ({
                     },
                     {
                         key: "bom",
-                        value: parts.map(({ sku }) => sku).join("_"),
+                        value: parts?.map(({ sku }) => sku).join("_"),
                     },
                 ],
             },
-            ...parts,
+            ...(parts ?? []),
         ];
 
-        const { id } = await createOrder({ customer, cart });
+        const { id } = await createOrder({ customer, cart: orderCart });
         setOrderId(id);
-    };
-
-    const price = {
-        value: [0].reduce((acc, price) => acc + price, 0),
-        currency: currentVariant.price.currency,
     };
 
     const onCloseCart = () => {
@@ -126,8 +106,8 @@ export const useCart = ({
 
     return {
         onSubmit,
-        cartItems,
-        price,
+        cartItem: cart?.cartItem,
+        price: cart?.price,
         orderId,
         onCloseCart,
     };

@@ -17,6 +17,10 @@ export async function getTotalPrice(skus: Skus) {
         return acc;
     }, []);
 
-    const { total } = await getCartTotalPrice(shopApiClient, { items });
-    return priceFormatter({ value: total.gross, currency: total.currency });
+    const { id, total } = await getCartTotalPrice(shopApiClient, { items });
+    console.log(id);
+    return {
+        id,
+        price: priceFormatter({ value: total.gross, currency: total.currency }),
+    };
 }

@@ -2,7 +2,7 @@
 
 type Data = {
     data: {
-        hydrate: { total: { gross: number; currency: string } };
+        hydrate: { id: string; total: { gross: number; currency: string } };
     };
 };
 
@@ -16,6 +16,7 @@ export async function getCartTotalPrice(
     const query = `#graphql
     mutation GET_CART_TOTAL_PRICE($input: CartInput!) {
         hydrate(input: $input) {
+            id
             total {
                 gross
                 currency

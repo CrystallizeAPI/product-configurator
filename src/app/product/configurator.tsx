@@ -64,13 +64,20 @@ export default function Configurator({ product }: ConfiguratorProps) {
                 </div>
 
                 <div className="flex flex-col relative h-auto">
-                    <Cart
-                        isOpen={isCartOpen}
-                        onClose={() => setIsCartOpen(false)}
-                        currentVariant={currentVariant}
-                        options={options}
-                        skus={skus}
-                    />
+                    <div
+                        className={`bg-white fixed w-[500px] h-screen top-0 transition-all z-10 border-l ${
+                            isCartOpen ? "right-0" : "-right-[501px]"
+                        }`}
+                    >
+                        {isCartOpen && (
+                            <Cart
+                                onClose={() => setIsCartOpen(false)}
+                                currentVariant={currentVariant}
+                                options={options}
+                                skus={skus}
+                            />
+                        )}
+                    </div>
                     <div className="px-12 w-[500px]">
                         <div className="pb-4 min-h-[65vh] justify-center flex flex-col">
                             <h2 className="text-2xl  text-gray-800 pb-8 font-medium">
