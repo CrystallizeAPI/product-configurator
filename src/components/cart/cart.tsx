@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import { CartBody } from "./cart-body";
+"use client";
 
-type CartProps = {
-    isCartOpen: boolean;
-    setIsCartOpen: (isCartOpen: boolean) => void;
-};
+import { useEffect } from "react";
+import { CartBody } from "./cart-body";
+import { useCartContext } from "@/context/cart-context";
 
 const setBodyOverflow = (isHidden: boolean) =>
     document.body.classList[isHidden ? "add" : "remove"]("!overflow-hidden");
 
-export function Cart({ isCartOpen, setIsCartOpen }: CartProps) {
+export function Cart() {
+    const { isCartOpen, setIsCartOpen } = useCartContext();
     useEffect(() => setBodyOverflow(isCartOpen), [isCartOpen]);
 
     return (
@@ -22,7 +21,7 @@ export function Cart({ isCartOpen, setIsCartOpen }: CartProps) {
                 <CartBody
                     onClose={() => {
                         setBodyOverflow(false);
-                        setIsCartOpen(false);
+                        setIsCartOpen?.(false);
                     }}
                 />
             )}

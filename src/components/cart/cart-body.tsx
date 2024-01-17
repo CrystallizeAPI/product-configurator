@@ -12,14 +12,14 @@ type CartProps = {
 
 export const CartBody = ({ onClose }: CartProps) => {
     const [orderId, setOrderId] = useState<string | undefined>(undefined);
-    const { cartItem, price } = useCart();
+    const { isLoading, cartItem, price } = useCart();
 
     const onCloseCart = () => {
         setOrderId(undefined);
         onClose();
     };
 
-    if (!cartItem) {
+    if (isLoading) {
         return null;
     }
 
@@ -34,7 +34,13 @@ export const CartBody = ({ onClose }: CartProps) => {
                 </svg>
             </button>
 
-            {!!orderId ? (
+            {!cartItem ? (
+                <div className="grid w-full h-full place-content-center text-base font-medium text-gray-500">
+                    <h2 className="font-medium text-gray-800 pb-8 text-2xl py-7 px-12">
+                        Your cart is empty
+                    </h2>
+                </div>
+            ) : !!orderId ? (
                 <OrderConfirmation
                     orderId={orderId}
                     onCloseCart={onCloseCart}

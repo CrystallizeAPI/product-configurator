@@ -1,10 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-
 import type { UiProduct } from "@/use-cases/contracts/product";
-import { Cart } from "@/components/cart";
 
 import { useConfigurator } from "./hooks/use-configurator";
 import { SaddleSelector } from "./components/saddle-selector";
@@ -13,13 +10,14 @@ import { AccessorySelector } from "./components/accessory-selector";
 import { PriceBar } from "./components/price-bar";
 import VariantSelector from "./components/variant-selector";
 import { ModelViewer } from "./components/model-viewer";
+import { useCartContext } from "@/context/cart-context";
 
 type ConfiguratorProps = {
     product: UiProduct;
 };
 
 export default function Configurator({ product }: ConfiguratorProps) {
-    const [isCartOpen, setIsCartOpen] = useState(false);
+    const { setIsCartOpen } = useCartContext();
     const { name, variants, options } = product;
     const { skus, getViewer, currentVariant, isModelLoaded, onChange } =
         useConfigurator(product);
@@ -64,10 +62,6 @@ export default function Configurator({ product }: ConfiguratorProps) {
                 </div>
 
                 <div className="flex flex-col relative h-auto">
-                    <Cart
-                        isCartOpen={isCartOpen}
-                        setIsCartOpen={setIsCartOpen}
-                    />
                     <div className="px-12 w-[500px]">
                         <div className="pb-4 min-h-[65vh] justify-center flex flex-col">
                             <h2 className="text-2xl  text-gray-800 pb-8 font-medium">
@@ -142,7 +136,7 @@ export default function Configurator({ product }: ConfiguratorProps) {
                             </h2>
                             <PriceBar
                                 skus={skus}
-                                onOpenCart={() => setIsCartOpen(true)}
+                                onOpenCart={() => setIsCartOpen?.(true)}
                             />
                         </div>
                     </div>

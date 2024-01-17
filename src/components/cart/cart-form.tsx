@@ -22,7 +22,7 @@ export function CartForm({ cartItem, price, onOrderPlaced }: CartFormProps) {
                     orderId && onOrderPlaced(orderId);
                 }}
             >
-                <h2 className="font-medium text-gray-800 pb-8 text-2xl py-10 px-12">
+                <h2 className="font-medium text-gray-800 pb-8 text-2xl py-7 px-12">
                     Your shopping cart
                 </h2>
                 <div className="mx-12">
