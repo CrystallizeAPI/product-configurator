@@ -47,7 +47,6 @@ export const useAccessories = ({
                         )
                     );
                 });
-                console.log(nextOptionSkus);
             }
 
             onChange({ type: "options", value: nextOptionSkus.join(",") });

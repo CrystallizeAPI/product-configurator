@@ -98,7 +98,6 @@ export const useConfigurator = (product: UiProduct) => {
     const onChange = useCallback(
         ({ type, value }: OnChange) => {
             const node = modelViewer.current;
-            console.log(type, value);
             switch (type) {
                 case "frame": {
                     const nextVariant = variants?.find(
@@ -169,7 +168,6 @@ export const useConfigurator = (product: UiProduct) => {
                 case "options": {
                     options?.forEach((opt) => {
                         const isVisible = value?.includes(opt.sku) ?? false;
-                        console.log(opt.id, isVisible);
                         toggleOption(node, opt.id, isVisible);
                     });
                     setSkus({

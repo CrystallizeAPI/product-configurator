@@ -12,6 +12,8 @@ export async function getCart(id: string) {
     const cartItem: CartItem = {
         name: firstItem.name,
         imageUrl: firstItem.images[0].url,
+        sku: firstItem.variant.sku,
+        price: firstItem.price,
         childrenItems: childrenItems.map((item) => ({
             name: item.name,
             imageUrl: item.images[0].url,

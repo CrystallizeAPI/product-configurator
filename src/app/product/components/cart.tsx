@@ -1,10 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import type { Option, Variant } from "@/use-cases/contracts/product";
 import { CartForm } from "./cart-form";
 import type { Skus } from "../types";
 import { useCart } from "../hooks/use-cart";
 import { OrderConfirmation } from "./order-confirmation";
+import { CART_ID } from "../utils/const";
 
 type CartProps = {
     onClose: () => void;
@@ -14,12 +16,18 @@ type CartProps = {
 };
 
 export const Cart = ({ onClose, currentVariant, options, skus }: CartProps) => {
-    const { cartItem, price, onSubmit, orderId, onCloseCart } = useCart({
+    const [orderId, setOrderId] = useState<string | undefined>(undefined);
+    const { cartItem, price } = useCart({
         currentVariant,
         options,
         skus,
         onClose,
     });
+
+    const onCloseCart = () => {
+        setOrderId(undefined);
+        onClose();
+    };
 
     if (!cartItem) {
         return null;
@@ -43,9 +51,12 @@ export const Cart = ({ onClose, currentVariant, options, skus }: CartProps) => {
                 />
             ) : (
                 <CartForm
-                    onSubmit={onSubmit}
                     cartItem={cartItem}
                     price={price}
+                    onOrderPlaced={(id) => {
+                        localStorage.removeItem(CART_ID);
+                        setOrderId(id);
+                    }}
                 />
             )}
         </>

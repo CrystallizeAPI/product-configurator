@@ -17,8 +17,10 @@ export type ModelViewerNode = HTMLElement & {
 export type CartItem = {
     imageUrl: string;
     name: string;
+    sku: string;
     price?: {
-        value?: number;
+        next?: number;
+        cross?: number;
         currency?: string;
     };
     childrenItems: {
@@ -26,7 +28,8 @@ export type CartItem = {
         imageUrl: string;
         sku: string;
         price: {
-            value?: number;
+            next?: number;
+            cross?: number;
             currency?: string;
         };
     }[];

@@ -18,6 +18,9 @@ type ConfiguratorProps = {
     product: UiProduct;
 };
 
+const setBodyOverflow = (isHidden: boolean) =>
+    document.body.classList[isHidden ? "add" : "remove"]("!overflow-hidden");
+
 export default function Configurator({ product }: ConfiguratorProps) {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const { name, variants, options } = product;
@@ -65,13 +68,16 @@ export default function Configurator({ product }: ConfiguratorProps) {
 
                 <div className="flex flex-col relative h-auto">
                     <div
-                        className={`bg-white fixed w-[500px] h-screen top-0 transition-all z-10 border-l ${
+                        className={`bg-white fixed w-[500px] overflow-auto h-screen top-0 transition-all z-10 border-l ${
                             isCartOpen ? "right-0" : "-right-[501px]"
                         }`}
                     >
                         {isCartOpen && (
                             <Cart
-                                onClose={() => setIsCartOpen(false)}
+                                onClose={() => {
+                                    setBodyOverflow(false);
+                                    setIsCartOpen(false);
+                                }}
                                 currentVariant={currentVariant}
                                 options={options}
                                 skus={skus}
@@ -152,7 +158,10 @@ export default function Configurator({ product }: ConfiguratorProps) {
                             </h2>
                             <PriceBar
                                 skus={skus}
-                                onOpenCart={() => setIsCartOpen(true)}
+                                onOpenCart={() => {
+                                    setBodyOverflow(true);
+                                    setIsCartOpen(true);
+                                }}
                             />
                         </div>
                     </div>
