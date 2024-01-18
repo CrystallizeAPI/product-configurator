@@ -123,12 +123,11 @@ export const useConfigurator = (product: UiProduct) => {
 
     const onChange = useCallback(
         ({ type, value }: OnChange) => {
-            console.log(type, value);
             const node = modelViewer.current;
+            let nextSkus: Skus | undefined = undefined;
 
             switch (type) {
                 case "frame": {
-                    console.log(options);
                     const nextVariant = variants?.find(
                         (variant) => variant.sku === value
                     );
@@ -141,12 +140,12 @@ export const useConfigurator = (product: UiProduct) => {
                         options,
                     });
 
-                    setSkus({
+                    nextSkus = {
                         v: value,
                         saddle,
                         grip,
                         options: skuOptions,
-                    });
+                    };
                     isBagHidden && node?.toggleLeatherBag(false);
                     node?.setFrameColor(frameColor?.modelAttribute);
                     setTimeout(() => {
@@ -170,12 +169,12 @@ export const useConfigurator = (product: UiProduct) => {
                         options,
                     });
 
-                    setSkus({
+                    nextSkus = {
                         ...skus,
                         saddle: value,
                         grip: grip?.sku,
                         options: skuOptions,
-                    });
+                    };
                     node?.setSaddleColor(saddle?.modelAttribute);
                     isBagHidden && node?.toggleLeatherBag(false);
                     break;
@@ -195,12 +194,12 @@ export const useConfigurator = (product: UiProduct) => {
                         options,
                     });
 
-                    setSkus({
+                    nextSkus = {
                         ...skus,
                         grip: value,
                         saddle: saddle?.sku,
                         options: skuOptions,
-                    });
+                    };
                     node?.setSaddleColor(grip?.modelAttribute);
                     isBagHidden && node?.toggleLeatherBag(false);
                     break;
@@ -210,12 +209,18 @@ export const useConfigurator = (product: UiProduct) => {
                         const isVisible = value?.includes(opt.sku) ?? false;
                         toggleOption(node, opt.id, isVisible);
                     });
-                    setSkus({
+                    nextSkus = {
                         ...skus,
                         options: !value ? undefined : value,
-                    });
+                    };
                     break;
                 }
+            }
+
+            if (!!nextSkus) {
+                const { v, ...restSkus } = nextSkus;
+                // Make sure "v" (version) query param is always first
+                setSkus({ v, ...restSkus });
             }
         },
         [setSkus, variants, currentVariant, skus, options]
