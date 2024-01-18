@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export function Header() {
     const { setIsCartOpen } = useCartContext();
-    const hasCartId = !!localStorage.getItem(CART_ID);
+    const hasCartId = !!localStorage?.getItem(CART_ID);
 
     return (
         <header className="bg-white px-12 py-4 flex border-b justify-between items-center">
