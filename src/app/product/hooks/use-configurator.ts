@@ -1,9 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import type {
+    Option,
+    UiProduct,
+    Attribute,
+} from "@/use-cases/contracts/product";
 import { useUrlState } from "./use-url-state";
 import type { Skus, ModelViewerNode } from "../types";
-import type { UiProduct } from "@/use-cases/contracts/product";
 
 type OnChange =
     | { type: "frame"; value: string }
@@ -11,10 +15,32 @@ type OnChange =
     | { type: "grip"; value: string }
     | { type: "options"; value?: string };
 
-const getBagProps = (gripSku?: string) => {
-    return gripSku && gripSku !== "natural-leather"
-        ? { sku: { leatherBag: undefined }, isHidden: true }
-        : {};
+type GetBagDependencies = {
+    grip?: Attribute;
+    skuOptions?: string;
+    options?: Option[];
+};
+
+const getBagDependencies = ({
+    grip,
+    skuOptions,
+    options,
+}: GetBagDependencies) => {
+    const modelAttribute = grip?.modelAttribute;
+    const bagSku = options?.find((opt) => opt.id === "leatherBag")?.sku;
+    if (
+        modelAttribute === "Natural-Leather" ||
+        (!!bagSku && !skuOptions?.includes(bagSku))
+    ) {
+        return { skuOptions, isBagHidden: false };
+    }
+
+    const nextOptions = skuOptions
+        ?.split(",")
+        .filter((sku) => sku !== bagSku)
+        .join(",");
+
+    return { skuOptions: nextOptions, isBagHidden: true };
 };
 
 const toggleOption = (
@@ -97,25 +123,31 @@ export const useConfigurator = (product: UiProduct) => {
 
     const onChange = useCallback(
         ({ type, value }: OnChange) => {
+            console.log(type, value);
             const node = modelViewer.current;
+
             switch (type) {
                 case "frame": {
+                    console.log(options);
                     const nextVariant = variants?.find(
                         (variant) => variant.sku === value
                     );
                     const { frameColor, saddles, grips } = nextVariant ?? {};
                     const saddle = saddles?.[0].sku;
                     const grip = grips?.[0].sku;
-                    const bagProps = getBagProps(grip);
+                    const { skuOptions, isBagHidden } = getBagDependencies({
+                        grip: grips?.[0],
+                        skuOptions: skus.options,
+                        options,
+                    });
 
                     setSkus({
-                        ...skus,
                         v: value,
                         saddle,
                         grip,
-                        ...bagProps.sku,
+                        options: skuOptions,
                     });
-                    bagProps.isHidden && node?.toggleLeatherBag(false);
+                    isBagHidden && node?.toggleLeatherBag(false);
                     node?.setFrameColor(frameColor?.modelAttribute);
                     setTimeout(() => {
                         node?.setSaddleColor(saddles?.[0]?.modelAttribute);
@@ -132,16 +164,20 @@ export const useConfigurator = (product: UiProduct) => {
                             variantGrip.modelAttribute ===
                             saddle?.modelAttribute
                     );
-                    const bagProps = getBagProps(grip?.sku);
+                    const { skuOptions, isBagHidden } = getBagDependencies({
+                        grip,
+                        skuOptions: skus.options,
+                        options,
+                    });
 
                     setSkus({
                         ...skus,
                         saddle: value,
                         grip: grip?.sku,
-                        ...bagProps.sku,
+                        options: skuOptions,
                     });
                     node?.setSaddleColor(saddle?.modelAttribute);
-                    bagProps.isHidden && node?.toggleLeatherBag(false);
+                    isBagHidden && node?.toggleLeatherBag(false);
                     break;
                 }
                 case "grip": {
@@ -153,16 +189,20 @@ export const useConfigurator = (product: UiProduct) => {
                             variantSaddle.modelAttribute ===
                             grip?.modelAttribute
                     );
-                    const bagProps = getBagProps(grip?.sku);
+                    const { skuOptions, isBagHidden } = getBagDependencies({
+                        grip,
+                        skuOptions: skus.options,
+                        options,
+                    });
 
                     setSkus({
                         ...skus,
                         grip: value,
                         saddle: saddle?.sku,
-                        ...bagProps.sku,
+                        options: skuOptions,
                     });
                     node?.setSaddleColor(grip?.modelAttribute);
-                    bagProps.isHidden && node?.toggleLeatherBag(false);
+                    isBagHidden && node?.toggleLeatherBag(false);
                     break;
                 }
                 case "options": {
