@@ -8,7 +8,6 @@ export const ModelViewer = forwardRef<ModelViewerNode>((_, ref) => {
             ref={ref}
             src="https://cdn2.charpstar.net/ConfigFiles/Crystallize/SpeedCurve/SpeedCurve.glb"
             camera-orbit="-135deg 0 0"
-            // camera-target="-0.4m 0.5m 0"
             camera-controls
             shadow-intensity="4"
             shadow-softness="1"
@@ -17,3 +16,5 @@ export const ModelViewer = forwardRef<ModelViewerNode>((_, ref) => {
         />
     );
 });
+
+ModelViewer.displayName = "ModelViewer";
