@@ -43,12 +43,7 @@
 						"maxItems": null,
 						"minSkus": 0,
 						"maxSkus": 0,
-						"acceptedShapeIdentifiers": ["option"],
-						"quickSelect": {
-							"folders": [
-								{ "folderId": "6566fb9d787adc7ee65e63e3" }
-							]
-						}
+						"acceptedShapeIdentifiers": ["option"]
 					}
 				},
 				{
@@ -235,13 +230,7 @@
 						"maxItems": 0,
 						"minSkus": 0,
 						"maxSkus": null,
-						"acceptedShapeIdentifiers": ["option"],
-						"quickSelect": {
-							"folders": [
-								{ "folderId": "6566fb9d787adc7ee65e63e3" },
-								{ "folderId": "6566f859a8c5469c36d8f054" }
-							]
-						}
+						"acceptedShapeIdentifiers": ["option"]
 					}
 				}
 			],
