@@ -56,12 +56,7 @@
 						"maxItems": 1,
 						"minSkus": 0,
 						"maxSkus": 0,
-						"acceptedShapeIdentifiers": ["brand"],
-						"quickSelect": {
-							"folders": [
-								{ "folderId": "6567006d787adc7ee65e6413" }
-							]
-						}
+						"acceptedShapeIdentifiers": ["brand"]
 					}
 				},
 				{
@@ -106,12 +101,7 @@
 						"maxItems": 0,
 						"minSkus": 1,
 						"maxSkus": 1,
-						"acceptedShapeIdentifiers": ["paint"],
-						"quickSelect": {
-							"folders": [
-								{ "folderId": "6566f307787adc7ee65e6367" }
-							]
-						}
+						"acceptedShapeIdentifiers": ["paint"]
 					}
 				},
 				{
@@ -124,12 +114,7 @@
 						"maxItems": 0,
 						"minSkus": 1,
 						"maxSkus": null,
-						"acceptedShapeIdentifiers": ["option"],
-						"quickSelect": {
-							"folders": [
-								{ "folderId": "6566f859a8c5469c36d8f054" }
-							]
-						}
+						"acceptedShapeIdentifiers": ["option"]
 					}
 				},
 				{
@@ -142,12 +127,7 @@
 						"maxItems": 0,
 						"minSkus": 1,
 						"maxSkus": null,
-						"acceptedShapeIdentifiers": ["option"],
-						"quickSelect": {
-							"folders": [
-								{ "folderId": "65674642787adc7ee65e6aca" }
-							]
-						}
+						"acceptedShapeIdentifiers": ["option"]
 					}
 				}
 			]
@@ -245,14 +225,7 @@
 						"maxItems": 0,
 						"minSkus": 0,
 						"maxSkus": null,
-						"acceptedShapeIdentifiers": ["option"],
-						"quickSelect": {
-							"folders": [
-								{ "folderId": "6567467b04ca78a8bf94a19c" },
-								{ "folderId": "65674642787adc7ee65e6aca" },
-								{ "folderId": "6566f859a8c5469c36d8f054" }
-							]
-						}
+						"acceptedShapeIdentifiers": ["option"]
 					}
 				},
 				{
