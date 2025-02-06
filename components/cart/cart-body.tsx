@@ -2,10 +2,11 @@
 
 import { useState } from 'react';
 import clsx from 'classnames';
+
+import { CART_ID } from '@/utils/const';
 import { CartForm } from './cart-form';
 import { useCart } from './use-cart';
 import { OrderConfirmation } from './order-confirmation';
-import { CART_ID } from '../../utils/const';
 
 type CartProps = {
     onClose: () => void;
@@ -27,11 +28,11 @@ export const CartBody = ({ onClose }: CartProps) => {
     return (
         <>
             <button
+                onClick={onCloseCart}
                 className={clsx(
                     'absolute top-6 right-6 rounded cursor-pointer',
                     'border border-transparent hover:border-gray-200 p-2 bg-gray-100',
                 )}
-                onClick={onCloseCart}
             >
                 <svg height="24" viewBox="0 -960 960 960" width="24">
                     <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />

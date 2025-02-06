@@ -27,6 +27,7 @@ export const usePriceBar = ({ skus, onOpenCart }: PriceBarProps) => {
         !!lastCartIdRef.current && localStorage.setItem(CART_ID, lastCartIdRef.current);
 
         onOpenCart();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [skus]);
 
     return { price, onSaveCartClick };

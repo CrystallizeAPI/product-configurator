@@ -31,12 +31,13 @@ export function Showcase({ showcase }: ShowcaseProps) {
 
             <div className="pointer-events-none absolute rounded-md bg-white mb-2 bottom-full duration-200 left-2.5 -translate-x-1/2 p-1 transition scale-0 group-hover:scale-100 origin-bottom">
                 <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 duration-150">
-                    <div className="w-8 h-10">
+                    <div className="w-8 h-10 rounded overflow-hidden">
                         <Image
                             {...image}
                             sizes="40px"
-                            className="w-full h-full [&_img]:h-full [&_img]:object-cover [&_img]:rounded"
+                            className="crystallize-image-cover"
                             altText={image?.altText ?? undefined}
+                            width={image?.width ?? undefined}
                         />
                     </div>
                     <div className="font-medium text-gray-600 text-sm">

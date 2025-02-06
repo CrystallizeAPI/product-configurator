@@ -6,7 +6,7 @@ export const CartItem = ({ imageUrl, name, childrenItems }: CartItemProps) => {
         <div className="border-gray-200 border p-6 rounded-lg">
             <div className="flex gap-4">
                 <div className="w-28 h-28  rounded bg-gray-100 border-solid">
-                    <img src={imageUrl} alt="Product image" />
+                    <Image src={imageUrl} alt="Product image" />
                 </div>
             </div>
             <h3 className="text-xl font-medium text-gray-800 pt-2 pb-2">{name}</h3>
@@ -21,6 +21,7 @@ export const CartItem = ({ imageUrl, name, childrenItems }: CartItemProps) => {
                                         width={60}
                                         height={60}
                                         className="crystallize-image-contain"
+                                        alt={item.name}
                                     />
                                 </div>
                                 <div className="text-sm text-gray-600">{item.name}</div>

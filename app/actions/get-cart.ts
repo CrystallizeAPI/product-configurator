@@ -3,7 +3,7 @@
 import { shopApiClient } from '@/core';
 import { getCart as getCartQuery } from '@/use-cases/crystallize';
 import { priceFormatter } from '@/utils/format-price';
-import { CartItem } from '@/use-cases/contracts/product';
+import type { CartItem } from '@/use-cases/contracts/product';
 
 export async function getCart(id: string) {
     const { items, total } = await getCartQuery(shopApiClient, id);
