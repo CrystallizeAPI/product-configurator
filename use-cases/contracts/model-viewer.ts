@@ -7,7 +7,7 @@ export type ModelViewerNode = HTMLElement & {
     dismissPoster: () => void;
 };
 
-declare global {
+declare module 'react' {
     namespace JSX {
         interface IntrinsicElements {
             'model-viewer': React.DetailedHTMLProps<
