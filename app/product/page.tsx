@@ -1,5 +1,6 @@
 import Configurator from './configurator';
 import { getProduct } from '../actions/get-product';
+import { Suspense } from 'react';
 
 export default async function Page() {
     const { product } = await getProduct('/bicycles/speed-curve');
@@ -13,7 +14,9 @@ export default async function Page() {
                         A classic curved bicycle re-imageined and engineered in modern materials. No plastic.
                     </p>
                 </div>
-                <Configurator product={product} />
+                <Suspense fallback={null}>
+                    <Configurator product={product} />
+                </Suspense>
             </div>
         </div>
     );

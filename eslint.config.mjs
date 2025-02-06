@@ -16,6 +16,7 @@ const eslintConfig = [
             '@typescript-eslint/no-unused-expressions': 'off',
             'jsx-a11y/alt-text': 'off',
         },
+        ignores: ['**/__generated__/'],
     },
 ];
 
