@@ -3,7 +3,7 @@ import { getCart } from '@/app/actions/get-cart';
 
 import type { CartItem } from '@/use-cases/contracts/product';
 
-import { CART_ID } from '../../utils/const';
+import { CART_ID } from '@/utils/const';
 
 type Cart = { cartItem: CartItem; price: string };
 

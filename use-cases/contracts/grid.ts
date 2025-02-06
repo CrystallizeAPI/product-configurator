@@ -4,7 +4,7 @@ export type ApiGrid = Grid;
 
 export type UiProductVariant = Pick<ProductVariant, 'name' | 'sku' | 'priceVariant'> & {
     product?: { paths?: { canonical?: string | null } | null } | null;
-    images?: { url: string; width: number; altText?: string }[];
+    images?: { url: string; width?: number | null; altText?: string | null }[] | null;
 };
 
 type Image = {
