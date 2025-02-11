@@ -1,24 +1,56 @@
-import { Component, ProductPriceVariant, ProductVariant } from '../crystallize/__generated__/types';
+import {
+    Component,
+    ProductPriceVariant,
+    ProductVariant,
+} from "../crystallize/__generated__/types";
 
-export type ApiProduct = {
+type Image = { url: string; width?: number; altText?: string };
+
+export type ServerProduct = {
     id: string;
     name: string;
     components?: Component[] | null;
-    variants?: Array<ProductVariant & { defaultPrice: ProductPriceVariant }> | null;
+    variants?: Array<
+        ProductVariant & { defaultPrice: ProductPriceVariant }
+    > | null;
 };
 
-type BaseItem = {
+export type ServerCart = {
+    id: string;
+    total: Price;
+    items?: {
+        images?: Image[];
+        variant: { name: string; sku: string };
+    }[];
+};
+
+export type Price = {
+    gross?: number;
+    currency?: string;
+    net?: number;
+    taxAmount?: number;
+    discounts?: {
+        percent: number;
+        amount: number;
+    }[];
+};
+
+export type BaseItem = {
     name: string;
     sku: string;
-    imageUrl: string;
-    price: Price;
+    quantity?: number;
+    price?: Price;
+    image?: Image;
+    meta?: Array<
+        | { key: "type"; value: "main" | "composable" }
+        | { key: "bom"; value: string }
+    >;
 };
 
-export type Price = { value?: number; currency?: string };
 export type Option = BaseItem & { id: string };
 export type Attribute = BaseItem & { modelAttribute: string; hex?: string };
 export type Variant = BaseItem & {
-    price: Price;
+    price?: Price;
     frameColor?: Attribute;
     grips?: Attribute[];
     saddles?: Attribute[];
@@ -38,23 +70,8 @@ export type Skus = {
     options?: string;
 };
 
-export type CartItem = {
-    imageUrl: string;
-    name: string;
-    sku: string;
-    price?: {
-        next?: number;
-        cross?: number;
-        currency?: string;
-    };
-    childrenItems: {
-        name: string;
-        imageUrl: string;
-        sku: string;
-        price: {
-            next?: number;
-            cross?: number;
-            currency?: string;
-        };
-    }[];
+export type Cart = {
+    id?: string;
+    total: Price;
+    items?: BaseItem[];
 };

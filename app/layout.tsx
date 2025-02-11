@@ -1,16 +1,15 @@
-import type { Metadata } from 'next';
-import { Manrope } from 'next/font/google';
-import { CartProvider } from '@/context/cart-context';
-import { Header } from '@/components/header';
-import { Cart } from '@/components/cart';
+import type { Metadata } from "next";
+import { Manrope } from "next/font/google";
+import { CartProvider } from "@/components/cart/cart-provider";
+import { Header } from "@/components/header";
 
-import './globals.css';
+import "./globals.css";
 
-const manrope = Manrope({ subsets: ['latin'] });
+const manrope = Manrope({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: 'Product configurator ',
-    description: 'Product configurator boilerplate powered by Crystallize',
+    title: "Product configurator ",
+    description: "Product configurator boilerplate powered by Crystallize",
 };
 
 type LayoutProps = { children: React.ReactNode };
@@ -25,11 +24,12 @@ export default function RootLayout({ children }: LayoutProps) {
                     src="https://cdn2.charpstar.net/ConfigFiles/Crystallize/SpeedCurve/mvc.js"
                 />
             </head>
-            <body className={`${manrope.className} bg-white`}>
+            <body
+                className={`${manrope.className} flex flex-col bg-white h-screen overflow-hidden`}
+            >
                 <CartProvider>
                     <Header />
                     {children}
-                    <Cart />
                 </CartProvider>
             </body>
         </html>

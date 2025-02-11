@@ -1,5 +1,5 @@
 @tailwind utilities;
-@import 'tailwindcss';
+@import "tailwindcss";
 
 :root {
     --foreground-rgb: 0, 0, 0;
@@ -32,4 +32,14 @@ body {
 
 .crystallize-image-contain img {
     @apply object-contain;
+}
+
+@theme {
+    --color-transparent: transparent;
+    --color-dark: #211a1d;
+    --color-light: #ffffff;
+    --color-soft: #f6f4f3;
+    --color-accent: #79745d;
+    --color-muted: #dfdfdf;
+    --color-vivid: #ee7674;
 }

@@ -1,29 +1,31 @@
-'use server';
+"use server";
 
-import { shopApiClient } from '@/core';
-import { getCart as getCartQuery } from '@/use-cases/crystallize';
-import { priceFormatter } from '@/utils/format-price';
-import type { CartItem } from '@/use-cases/contracts/product';
+import { storage } from "@/core/storage.server";
+import { fetchCart } from "@/use-cases/fetch-cart";
 
-export async function getCart(id: string) {
-    const { items, total } = await getCartQuery(shopApiClient, id);
+export const getCart = async () => {
+    const cartId = await storage.getCartId();
 
-    const [firstItem, ...childrenItems] = items;
-    const cartItem: CartItem = {
-        name: firstItem.name,
-        imageUrl: firstItem.images[0].url,
-        sku: firstItem.variant.sku,
-        price: firstItem.price,
-        childrenItems: childrenItems.map((item) => ({
-            name: item.name,
-            imageUrl: item.images[0].url,
-            sku: item.variant.sku,
-            price: item.price,
-        })),
-    };
+    const cart = cartId
+        ? await fetchCart(cartId)
+        : {
+              items: [],
+              total: {
+                  currency: "eur",
+                  gross: 0,
+                  net: 0,
+                  taxAmount: 0,
+              },
+          };
 
     return {
-        cartItem,
-        price: priceFormatter({ value: total.gross, currency: total.currency }),
+        cart: {
+            ...cart,
+            items: cart.items?.map((item) => ({
+                ...item.variant,
+                image: item.images?.[0],
+            })),
+        },
+        cartId,
     };
-}
+};

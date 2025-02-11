@@ -7,10 +7,11 @@ export type ModelViewerNode = HTMLElement & {
     dismissPoster: () => void;
 };
 
-declare module 'react' {
+declare module "react" {
+    // eslint-disable-next-line @typescript-eslint/no-namespace
     namespace JSX {
         interface IntrinsicElements {
-            'model-viewer': React.DetailedHTMLProps<
+            "model-viewer": React.DetailedHTMLProps<
                 React.HTMLAttributes<HTMLElement> & {
                     src: string;
                     exposure: string;

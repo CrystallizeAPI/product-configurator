@@ -1,1 +1,1 @@
-export { Cart } from './cart';
+export { CartSidebar } from "./cart-sidebar";

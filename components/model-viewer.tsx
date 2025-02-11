@@ -1,6 +1,6 @@
-import { forwardRef } from 'react';
+import { forwardRef } from "react";
 
-import type { ModelViewerNode } from '@/use-cases/contracts/model-viewer';
+import type { ModelViewerNode } from "@/use-cases/contracts/model-viewer";
 
 export const ModelViewer = forwardRef<ModelViewerNode>((_, ref) => {
     return (
@@ -18,4 +18,4 @@ export const ModelViewer = forwardRef<ModelViewerNode>((_, ref) => {
     );
 });
 
-ModelViewer.displayName = 'ModelViewer';
+ModelViewer.displayName = "ModelViewer";
