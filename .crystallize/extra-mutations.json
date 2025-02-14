@@ -1,0 +1,2299 @@
+{
+    "create-root-folders": {
+        "target": "pim",
+        "mutation": "mutation CreateFolder($input: CreateFolderInput!) { folder { create(language: \"en\", input: $input, disableComponentValidation: true) { id } } }",
+        "sets": [
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": { "parentId": "$root.TENANT_ROOT_ID" },
+                    "shapeIdentifier": "folder",
+                    "name": "Bicycles"
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": { "parentId": "$root.TENANT_ROOT_ID" },
+                    "shapeIdentifier": "folder",
+                    "name": "Options"
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": { "parentId": "$root.TENANT_ROOT_ID" },
+                    "shapeIdentifier": "folder",
+                    "name": "Paints"
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": { "parentId": "$root.TENANT_ROOT_ID" },
+                    "shapeIdentifier": "folder",
+                    "name": "Brands"
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": { "parentId": "$root.TENANT_ROOT_ID" },
+                    "shapeIdentifier": "folder",
+                    "name": "Tiles"
+                }
+            }
+        ]
+    },
+    "create-options-folders": {
+        "target": "pim",
+        "mutation": "mutation CreateFolder($input: CreateFolderInput!) { folder { create(language: \"en\", input: $input, disableComponentValidation: true) { id } } }",
+        "sets": [
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[1].folder.create.id"
+                    },
+                    "shapeIdentifier": "folder",
+                    "name": "Saddles"
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[1].folder.create.id"
+                    },
+                    "shapeIdentifier": "folder",
+                    "name": "Grips"
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[1].folder.create.id"
+                    },
+                    "shapeIdentifier": "folder",
+                    "name": "Accessories"
+                }
+            }
+        ]
+    },
+    "create-options-products": {
+        "target": "pim",
+        "mutation": "mutation CreateProduct($input: CreateProductInput!) { product { create(language: \"en\", input: $input, disableComponentValidation: true) { id } } }",
+        "sets": [
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-options-folders[0].folder.create.id"
+                    },
+                    "shapeIdentifier": "option",
+                    "name": "Leather Saddle",
+                    "vatTypeId": "$root.TENANT_DEFAULT_VATTYPE_ID",
+                    "variants": [
+                        {
+                            "attributes": null,
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-touring-saddle-natural-jpeg"
+                                }
+                            ],
+                            "isDefault": true,
+                            "name": "Leather Saddle Natural",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 120
+                                }
+                            ],
+                            "sku": "leather-saddle-natural",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 0
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": ""
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Natural-Leather"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "attributes": null,
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-touring-saddle-cognac-jpeg"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Leather Saddle Cognac",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 140
+                                }
+                            ],
+                            "sku": "leather-saddle-cognac",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 0
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": ""
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Cognac-Leather"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "attributes": null,
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-touring-saddle-maroon-jpeg"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Leather Saddle Maroon",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 150
+                                }
+                            ],
+                            "sku": "leather-saddle-maroon",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 0
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": ""
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Maroon-Leather"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "attributes": null,
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-touring-saddle-black-jpeg"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Leather Saddle Black",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 150
+                                }
+                            ],
+                            "sku": "leather-saddle-black",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 0
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": ""
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Black-Leather"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "attributes": null,
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-touring-saddle-blue-jpeg"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Leather Saddle Blue",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 180
+                                }
+                            ],
+                            "sku": "leather-saddle-blue",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 0
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": ""
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Blue-City"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-options-folders[1].folder.create.id"
+                    },
+                    "shapeIdentifier": "option",
+                    "name": "Leather Grips",
+                    "vatTypeId": "$root.TENANT_DEFAULT_VATTYPE_ID",
+                    "variants": [
+                        {
+                            "attributes": null,
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-natural-grip-png"
+                                }
+                            ],
+                            "isDefault": true,
+                            "name": "Leather Grips Natural",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 120
+                                }
+                            ],
+                            "sku": "natural-leather",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "requires-option",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["natural-leather"]
+                                    }
+                                },
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": ""
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Natural-Leather"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "attributes": null,
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-cognac-grip-png"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Leather Grips Cognac",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 130
+                                }
+                            ],
+                            "sku": "cognac-leather",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "requires-option",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["cognac-leather"]
+                                    }
+                                },
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": ""
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Cognac-Leather"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "attributes": null,
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-maroon-grip-png"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Leather Grips Maroon",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 140
+                                }
+                            ],
+                            "sku": "maroon-leather",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "requires-option",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["maroon-leather"]
+                                    }
+                                },
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": ""
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Maroon-Leather"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "attributes": null,
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-black-grip-png"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Leather Grips Black",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 140
+                                }
+                            ],
+                            "sku": "black-leather",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "requires-option",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["black-leather"]
+                                    }
+                                },
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": ""
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Black-Leather"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "attributes": null,
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-blue-grip-png"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Leather Grips Blue",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 120
+                                }
+                            ],
+                            "sku": "blue-leather",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "requires-option",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["blue-leather"]
+                                    }
+                                },
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": ""
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Blue-City"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-options-folders[2].folder.create.id"
+                    },
+                    "shapeIdentifier": "option",
+                    "name": "Front Rack",
+                    "vatTypeId": "$root.TENANT_DEFAULT_VATTYPE_ID",
+                    "variants": [
+                        {
+                            "attributes": null,
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-speed-curve-front-rack-jpg"
+                                }
+                            ],
+                            "isDefault": true,
+                            "name": "Front Rack",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 190
+                                }
+                            ],
+                            "sku": "front-rack",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 11
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": ""
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "frontRack"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Front Rack"
+                            }
+                        },
+                        {
+                            "componentId": "description",
+                            "richText": {
+                                "json": [
+                                    {
+                                        "kind": "block",
+                                        "type": "paragraph",
+                                        "textContent": "Front aluminium rack."
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-options-folders[2].folder.create.id"
+                    },
+                    "shapeIdentifier": "option",
+                    "name": "Rear Rack",
+                    "vatTypeId": "$root.TENANT_DEFAULT_VATTYPE_ID",
+                    "variants": [
+                        {
+                            "attributes": null,
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-speed-curve-back-rack-jpg"
+                                }
+                            ],
+                            "isDefault": true,
+                            "name": "Rear Rack",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 250
+                                }
+                            ],
+                            "sku": "rear-rack",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 12
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": ""
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "rearRack"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Rear Rack"
+                            }
+                        },
+                        {
+                            "componentId": "description",
+                            "richText": {
+                                "json": [
+                                    {
+                                        "kind": "block",
+                                        "type": "paragraph",
+                                        "textContent": "Rear luggage rack in aluminium."
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-options-folders[2].folder.create.id"
+                    },
+                    "shapeIdentifier": "option",
+                    "name": "Leather Bag",
+                    "vatTypeId": "$root.TENANT_DEFAULT_VATTYPE_ID",
+                    "variants": [
+                        {
+                            "attributes": null,
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-leather-bag-jpeg"
+                                }
+                            ],
+                            "isDefault": true,
+                            "name": "Leather Bag",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 290
+                                }
+                            ],
+                            "sku": "leather-bag",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 11
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "requires-option",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": [
+                                            "rear-rack",
+                                            "leather-saddle-natural",
+                                            "natural-leather"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": ""
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "leatherBag"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Leather Bag"
+                            }
+                        },
+                        {
+                            "componentId": "requires-option",
+                            "itemRelations": {
+                                "itemIds": [],
+                                "skus": ["rear-rack", "natural-leather"]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "create-brands": {
+        "target": "pim",
+        "mutation": "mutation CreateDocument($input: CreateDocumentInput!) { document { create(language: \"en\", input: $input, disableComponentValidation: true) { id } } }",
+        "sets": [
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[3].folder.create.id"
+                    },
+                    "shapeIdentifier": "brand",
+                    "name": "Skiens Cykkelfabrik",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": { "text": "Skiens Cykkelfabrik" }
+                        },
+                        {
+                            "componentId": "logo",
+                            "images": [
+                                {
+                                    "key": "$images.images-speed-skien-png",
+                                    "altText": "Speed Skien"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "create-tiles": {
+        "target": "pim",
+        "mutation": "mutation CreateDocument($input: CreateDocumentInput!) { document { create(language: \"en\", input: $input, disableComponentValidation: true) { id } } }",
+        "sets": [
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[4].folder.create.id"
+                    },
+                    "shapeIdentifier": "tile",
+                    "name": "Karma Yellow",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": { "text": "Karma Yellow" }
+                        },
+                        {
+                            "componentId": "image",
+                            "images": [
+                                {
+                                    "key": "$images.images-tile-karma-yellow-png",
+                                    "altText": "Tile Karma Yellow"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[4].folder.create.id"
+                    },
+                    "shapeIdentifier": "tile",
+                    "name": "Midsummer Black",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": { "text": "Midsummer Black" }
+                        },
+                        {
+                            "componentId": "image",
+                            "images": [
+                                {
+                                    "key": "$images.images-tile-midsummer-black-png",
+                                    "altText": "Tile Midsummer Black"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[4].folder.create.id"
+                    },
+                    "shapeIdentifier": "tile",
+                    "name": "Pretty Pink",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": { "text": "Pretty Pink" }
+                        },
+                        {
+                            "componentId": "image",
+                            "images": [
+                                {
+                                    "key": "$images.images-tile-pink-png",
+                                    "altText": "Tile Pretty Pink"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[4].folder.create.id"
+                    },
+                    "shapeIdentifier": "tile",
+                    "name": "Classic Rider",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": { "text": "Classic Rider" }
+                        },
+                        {
+                            "componentId": "image",
+                            "images": [
+                                {
+                                    "key": "$images.images-tile-classic-rider-png",
+                                    "altText": "Tile Classic Rider"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[4].folder.create.id"
+                    },
+                    "shapeIdentifier": "tile",
+                    "name": "Clean Blue",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": { "text": "Clean Blue" }
+                        },
+                        {
+                            "componentId": "image",
+                            "images": [
+                                {
+                                    "key": "$images.images-tile-clean-blue-png",
+                                    "altText": "Tile Clean Blue"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[4].folder.create.id"
+                    },
+                    "shapeIdentifier": "tile",
+                    "name": "Hot Rod",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": { "text": "Hot Rod" }
+                        },
+                        {
+                            "componentId": "image",
+                            "images": [
+                                {
+                                    "key": "$images.images-tile-hot-rod-png",
+                                    "altText": "Tile Hot Rod"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[4].folder.create.id"
+                    },
+                    "shapeIdentifier": "tile",
+                    "name": "Classic Clean",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": { "text": "Classic Clean" }
+                        },
+                        {
+                            "componentId": "image",
+                            "images": [
+                                {
+                                    "key": "$images.images-tile-classic-png",
+                                    "altText": "Tile Classic Clean"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "create-paints": {
+        "target": "pim",
+        "mutation": "mutation CreateProduct($input: CreateProductInput!) { product { create(language: \"en\", input: $input, disableComponentValidation: true) { id } } }",
+        "sets": [
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[2].folder.create.id"
+                    },
+                    "shapeIdentifier": "paint",
+                    "name": "Classic Colors",
+                    "vatTypeId": "$root.TENANT_DEFAULT_VATTYPE_ID",
+                    "variants": [
+                        {
+                            "attributes": [
+                                {
+                                    "attribute": "Color",
+                                    "value": "Copper Patina"
+                                }
+                            ],
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-copper-patina-png"
+                                }
+                            ],
+                            "isDefault": true,
+                            "name": "Copper Patina",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 100
+                                }
+                            ],
+                            "sku": "copper-patina",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": {
+                                "componentId": "config",
+                                "contentChunk": {
+                                    "chunks": [
+                                        [
+                                            {
+                                                "componentId": "hex",
+                                                "singleLine": {
+                                                    "text": "#7ebab5"
+                                                }
+                                            },
+                                            {
+                                                "componentId": "3d-variant-attribute",
+                                                "singleLine": {
+                                                    "text": "Light-Green"
+                                                }
+                                            }
+                                        ]
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "attributes": [
+                                {
+                                    "attribute": "Color",
+                                    "value": "Karma Yellow"
+                                }
+                            ],
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-karma-yellow-png"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Karma Yellow",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 100
+                                }
+                            ],
+                            "sku": "karma-yellow",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": "#ed7d36"
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Sun-Yellow"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "attributes": [
+                                {
+                                    "attribute": "Color",
+                                    "value": "Petroleum Blue"
+                                }
+                            ],
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-azure-blue-png"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Petroleum Blue",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 100
+                                }
+                            ],
+                            "sku": "petroleum-blue",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": "#225f78"
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Azure-Blue"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "attributes": [
+                                {
+                                    "attribute": "Color",
+                                    "value": "Midnight Black"
+                                }
+                            ],
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-midsummer-black-png"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Midnight Black",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 100
+                                }
+                            ],
+                            "sku": "midnight-black",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": "#7a7b7a"
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Dusty-Gray"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "attributes": [
+                                {
+                                    "attribute": "Color",
+                                    "value": "Pink"
+                                }
+                            ],
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-pink-png"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Pink",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 100
+                                }
+                            ],
+                            "sku": "pink",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": "#cb7375"
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Antique-Pink"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Classic Colors"
+                            }
+                        },
+                        {
+                            "componentId": "description",
+                            "richText": {
+                                "json": [
+                                    {
+                                        "kind": "block",
+                                        "type": "paragraph",
+                                        "textContent": "A selection of classic frame colors."
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "create-main-product": {
+        "target": "pim",
+        "mutation": "mutation CreateProduct($input: CreateProductInput!) { product { create(language: \"en\", input: $input, disableComponentValidation: true) { id } } }",
+        "sets": [
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[0].folder.create.id"
+                    },
+                    "shapeIdentifier": "bicycle",
+                    "name": "Speed Curve",
+                    "vatTypeId": "$root.TENANT_DEFAULT_VATTYPE_ID",
+                    "variants": [
+                        {
+                            "attributes": [
+                                {
+                                    "attribute": "Frame Color",
+                                    "value": "Copper Patina"
+                                }
+                            ],
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-copper-patina-webp"
+                                }
+                            ],
+                            "isDefault": true,
+                            "name": "Copper Patina",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 2890
+                                }
+                            ],
+                            "sku": "speed-curve-copper-patina",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "description",
+                                    "richText": {
+                                        "json": [
+                                            {
+                                                "kind": "block",
+                                                "type": "paragraph",
+                                                "textContent": "A beautiful and classic bike."
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "componentId": "frame-color",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["copper-patina"]
+                                    }
+                                },
+                                {
+                                    "componentId": "grip-options",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["natural-leather"]
+                                    }
+                                },
+                                {
+                                    "componentId": "saddle-options",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["leather-saddle-natural"]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "attributes": [
+                                {
+                                    "attribute": "Frame Color",
+                                    "value": "Petroleum Blue"
+                                }
+                            ],
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-petroleum-blue-webp"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Petroleum Blue",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 2990
+                                }
+                            ],
+                            "sku": "speed-curve-petroleum-blue",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "description",
+                                    "richText": {
+                                        "json": [
+                                            {
+                                                "kind": "block",
+                                                "type": "paragraph",
+                                                "textContent": "A beautiful and classic bike."
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "componentId": "frame-color",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["petroleum-blue"]
+                                    }
+                                },
+                                {
+                                    "componentId": "grip-options",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": [
+                                            "natural-leather",
+                                            "cognac-leather",
+                                            "maroon-leather",
+                                            "black-leather"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "componentId": "saddle-options",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": [
+                                            "leather-saddle-maroon",
+                                            "leather-saddle-black",
+                                            "leather-saddle-cognac",
+                                            "leather-saddle-natural"
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "attributes": [
+                                {
+                                    "attribute": "Frame Color",
+                                    "value": "Midsummer Black"
+                                }
+                            ],
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-midsummer-black-webp"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Midsummer Black",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 2990
+                                }
+                            ],
+                            "sku": "speed-curve-midsummer-black",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "description",
+                                    "richText": {
+                                        "json": [
+                                            {
+                                                "kind": "block",
+                                                "type": "paragraph",
+                                                "textContent": "A beautiful and classic bike."
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "componentId": "frame-color",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["midnight-black"]
+                                    }
+                                },
+                                {
+                                    "componentId": "grip-options",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": [
+                                            "natural-leather",
+                                            "cognac-leather",
+                                            "maroon-leather",
+                                            "black-leather",
+                                            "blue-leather"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "componentId": "saddle-options",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": [
+                                            "leather-saddle-maroon",
+                                            "leather-saddle-black",
+                                            "leather-saddle-cognac",
+                                            "leather-saddle-natural",
+                                            "leather-saddle-blue"
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "attributes": [
+                                {
+                                    "attribute": "Frame Color",
+                                    "value": "Karma Yellow"
+                                }
+                            ],
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-karma-yellow-webp"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Karma Yellow",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 2990
+                                }
+                            ],
+                            "sku": "speed-curve-karma-yellow",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "description",
+                                    "richText": {
+                                        "json": [
+                                            {
+                                                "kind": "block",
+                                                "type": "paragraph",
+                                                "textContent": "A beautiful and classic bike."
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "componentId": "frame-color",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["karma-yellow"]
+                                    }
+                                },
+                                {
+                                    "componentId": "grip-options",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["black-leather"]
+                                    }
+                                },
+                                {
+                                    "componentId": "saddle-options",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["leather-saddle-black"]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "attributes": [
+                                {
+                                    "attribute": "Frame Color",
+                                    "value": "Pink"
+                                }
+                            ],
+                            "externalReference": null,
+                            "images": [
+                                {
+                                    "key": "$images.images-pink-webp"
+                                }
+                            ],
+                            "isDefault": false,
+                            "name": "Pink",
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 2990
+                                }
+                            ],
+                            "sku": "speed-curve-pink",
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "subscriptionPlans": [],
+                            "videos": [],
+                            "components": [
+                                {
+                                    "componentId": "description",
+                                    "richText": {
+                                        "json": [
+                                            {
+                                                "kind": "block",
+                                                "type": "paragraph",
+                                                "textContent": "A beautiful and classic bike."
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "componentId": "frame-color",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["pink"]
+                                    }
+                                },
+                                {
+                                    "componentId": "grip-options",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["black-leather"]
+                                    }
+                                },
+                                {
+                                    "componentId": "saddle-options",
+                                    "itemRelations": {
+                                        "itemIds": [],
+                                        "skus": ["leather-saddle-black"]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Speed Curve"
+                            }
+                        },
+                        {
+                            "componentId": "description",
+                            "richText": {
+                                "json": [
+                                    {
+                                        "kind": "block",
+                                        "type": "paragraph",
+                                        "textContent": "A classic curved bicycle re-imageined and engineered in modern materials. No plastic."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "componentId": "story",
+                            "paragraphCollection": {
+                                "paragraphs": [
+                                    {
+                                        "body": {
+                                            "json": [
+                                                {
+                                                    "kind": "block",
+                                                    "type": "paragraph",
+                                                    "textContent": "Speed Curve is a heritage bicycle designed with modern materials and vintage lines."
+                                                }
+                                            ]
+                                        },
+                                        "title": {
+                                            "text": "A Heritage Bicycle"
+                                        },
+                                        "images": null,
+                                        "videos": null
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "componentId": "options",
+                            "itemRelations": {
+                                "itemIds": [
+                                    "$create-options-products[2].product.create.id",
+                                    "$create-options-products[3].product.create.id",
+                                    "$create-options-products[4].product.create.id"
+                                ],
+                                "skus": []
+                            }
+                        },
+                        {
+                            "componentId": "brand",
+                            "itemRelations": {
+                                "itemIds": [
+                                    "$create-brands[0].document.create.id"
+                                ],
+                                "skus": []
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "add-item-relations": {
+        "target": "pim",
+        "mutation": "mutation UpdateVariantComponent($productId: ID!, $sku: String!, $input: ComponentInput!) { product { updateVariantComponent(productId: $productId, sku: $sku,  language: \"en\", input: $input, disableValidation: true) { id }}}",
+        "sets": [
+            {
+                "productId": "$create-options-products[0].product.create.id",
+                "sku": "leather-saddle-natural",
+                "input": {
+                    "componentId": "requires-option",
+                    "itemRelations": {
+                        "skus": ["natural-leather"],
+                        "itemIds": []
+                    }
+                }
+            },
+            {
+                "productId": "$create-options-products[0].product.create.id",
+                "sku": "leather-saddle-cognac",
+                "input": {
+                    "componentId": "requires-option",
+                    "itemRelations": {
+                        "skus": ["cognac-leather"],
+                        "itemIds": []
+                    }
+                }
+            },
+            {
+                "productId": "$create-options-products[0].product.create.id",
+                "sku": "leather-saddle-maroon",
+                "input": {
+                    "componentId": "requires-option",
+                    "itemRelations": {
+                        "skus": ["maroon-leather"],
+                        "itemIds": []
+                    }
+                }
+            },
+            {
+                "productId": "$create-options-products[0].product.create.id",
+                "sku": "leather-saddle-black",
+                "input": {
+                    "componentId": "requires-option",
+                    "itemRelations": {
+                        "skus": ["black-leather"],
+                        "itemIds": []
+                    }
+                }
+            },
+            {
+                "productId": "$create-options-products[0].product.create.id",
+                "sku": "leather-saddle-blue",
+                "input": {
+                    "componentId": "requires-option",
+                    "itemRelations": {
+                        "skus": ["blue-leather"],
+                        "itemIds": []
+                    }
+                }
+            }
+        ]
+    },
+    "add-showcases": {
+        "target": "pim",
+        "mutation": "mutation UPDATE_IMAGE_DETAILS($key: String!, $input: UpdateImageInput!) { image { update(key: $key, language: \"en\", input: $input) { key } } }",
+        "sets": [
+            {
+                "key": "$images.images-tile-karma-yellow-png",
+                "input": {
+                    "showcase": [
+                        {
+                            "hotspot": {
+                                "x": 0.48,
+                                "y": 0.42
+                            },
+                            "meta": null,
+                            "skus": ["speed-curve-karma-yellow"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.65,
+                                "y": 0.22
+                            },
+                            "meta": null,
+                            "skus": ["leather-saddle-black"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.55,
+                                "y": 0.23
+                            },
+                            "meta": null,
+                            "skus": ["black-leather"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.27,
+                                "y": 0.43
+                            },
+                            "meta": null,
+                            "skus": ["front-rack"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.78,
+                                "y": 0.31
+                            },
+                            "meta": null,
+                            "skus": ["rear-rack"]
+                        }
+                    ]
+                }
+            },
+            {
+                "key": "$images.images-tile-midsummer-black-png",
+                "input": {
+                    "showcase": [
+                        {
+                            "hotspot": {
+                                "x": 0.38,
+                                "y": 0.4
+                            },
+                            "meta": null,
+                            "skus": ["speed-curve-midsummer-black"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.31,
+                                "y": 0.19
+                            },
+                            "meta": null,
+                            "skus": ["leather-saddle-black"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.59,
+                                "y": 0.22
+                            },
+                            "meta": null,
+                            "skus": ["black-leather"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.77,
+                                "y": 0.62
+                            },
+                            "meta": null,
+                            "skus": ["front-rack"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.12,
+                                "y": 0.2
+                            },
+                            "meta": null,
+                            "skus": ["rear-rack"]
+                        }
+                    ]
+                }
+            },
+            {
+                "key": "$images.images-tile-pink-png",
+                "input": {
+                    "focalPoint": {
+                        "x": 0.84,
+                        "y": 0.46
+                    },
+                    "showcase": [
+                        {
+                            "hotspot": {
+                                "x": 0.39,
+                                "y": 0.42
+                            },
+                            "meta": null,
+                            "skus": ["speed-curve-pink"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.34,
+                                "y": 0.22
+                            },
+                            "meta": null,
+                            "skus": ["leather-saddle-black"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.38,
+                                "y": 0.15
+                            },
+                            "meta": null,
+                            "skus": ["black-leather"]
+                        }
+                    ]
+                }
+            },
+            {
+                "key": "$images.images-tile-classic-rider-png",
+                "input": {
+                    "showcase": [
+                        {
+                            "hotspot": {
+                                "x": 0.5,
+                                "y": 0.41
+                            },
+                            "meta": null,
+                            "skus": ["speed-curve-copper-patina"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.68,
+                                "y": 0.24
+                            },
+                            "meta": null,
+                            "skus": ["leather-saddle-natural"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.6,
+                                "y": 0.2
+                            },
+                            "meta": null,
+                            "skus": ["natural-leather"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.31,
+                                "y": 0.4
+                            },
+                            "meta": null,
+                            "skus": ["front-rack"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.83,
+                                "y": 0.33
+                            },
+                            "meta": null,
+                            "skus": ["rear-rack"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.81,
+                                "y": 0.48
+                            },
+                            "meta": null,
+                            "skus": ["leather-bag"]
+                        }
+                    ]
+                }
+            },
+            {
+                "key": "$images.images-tile-clean-blue-png",
+                "input": {
+                    "altText": "Clean blue Speed Curve",
+                    "caption": {
+                        "json": [
+                            {
+                                "kind": "block",
+                                "type": "paragraph",
+                                "textContent": "Clean blue Speed Curve"
+                            }
+                        ]
+                    },
+                    "focalPoint": {
+                        "x": 0.69,
+                        "y": 0.62
+                    },
+                    "showcase": [
+                        {
+                            "hotspot": {
+                                "x": 0.48,
+                                "y": 0.45
+                            },
+                            "meta": null,
+                            "skus": ["speed-curve-petroleum-blue"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.31,
+                                "y": 0.25
+                            },
+                            "meta": null,
+                            "skus": ["leather-saddle-natural"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.42,
+                                "y": 0.15
+                            },
+                            "meta": null,
+                            "skus": ["natural-leather"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.7,
+                                "y": 0.32
+                            },
+                            "meta": null,
+                            "skus": ["front-rack"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.26,
+                                "y": 0.39
+                            },
+                            "meta": null,
+                            "skus": ["rear-rack"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.17,
+                                "y": 0.54
+                            },
+                            "meta": null,
+                            "skus": ["leather-bag"]
+                        }
+                    ]
+                }
+            },
+            {
+                "key": "$images.images-tile-hot-rod-png",
+                "input": {
+                    "altText": " Hot rod bike",
+                    "caption": {
+                        "json": [
+                            {
+                                "kind": "block",
+                                "type": "paragraph",
+                                "textContent": "Beautiful hot rod bike"
+                            }
+                        ]
+                    },
+                    "focalPoint": null,
+                    "showcase": [
+                        {
+                            "hotspot": {
+                                "x": 0.46,
+                                "y": 0.37
+                            },
+                            "meta": null,
+                            "skus": ["speed-curve-midsummer-black"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.53,
+                                "y": 0.12
+                            },
+                            "meta": null,
+                            "skus": ["cognac-leather"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.41,
+                                "y": 0.19
+                            },
+                            "meta": null,
+                            "skus": ["leather-saddle-cognac"]
+                        }
+                    ]
+                }
+            },
+            {
+                "key": "$images.images-tile-classic-png",
+                "input": {
+                    "showcase": [
+                        {
+                            "hotspot": {
+                                "x": 0.39,
+                                "y": 0.44
+                            },
+                            "meta": null,
+                            "skus": ["speed-curve-copper-patina"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.35,
+                                "y": 0.24
+                            },
+                            "meta": null,
+                            "skus": ["leather-saddle-natural"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.44,
+                                "y": 0.24
+                            },
+                            "meta": null,
+                            "skus": ["natural-leather"]
+                        },
+                        {
+                            "hotspot": {
+                                "x": 0.67,
+                                "y": 0.43
+                            },
+                            "meta": null,
+                            "skus": ["front-rack"]
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "publish-folders": {
+        "mutation": "mutation PublishItems($ids: [ID!]!) { publishItems(language: \"en\", ids: $ids, disableComponentValidation: true) { ... on PublishItemsRequest { success { itemId } } } }",
+        "target": "core",
+        "sets": [
+            {
+                "ids": [
+                    "$create-root-folders[0].folder.create.id",
+                    "$create-root-folders[1].folder.create.id",
+                    "$create-root-folders[2].folder.create.id",
+                    "$create-root-folders[3].folder.create.id",
+                    "$create-root-folders[4].folder.create.id",
+                    "$create-options-folders[0].folder.create.id",
+                    "$create-options-folders[1].folder.create.id",
+                    "$create-options-folders[2].folder.create.id"
+                ]
+            }
+        ]
+    },
+    "publish-documents": {
+        "mutation": "mutation PublishItems($ids: [ID!]!) { publishItems(language: \"en\", ids: $ids, disableComponentValidation: true) { ... on PublishItemsRequest { success { itemId } } } }",
+        "target": "core",
+        "sets": [
+            {
+                "ids": [
+                    "$create-brands[0].document.create.id",
+                    "$create-tiles[0].document.create.id",
+                    "$create-tiles[1].document.create.id",
+                    "$create-tiles[2].document.create.id",
+                    "$create-tiles[3].document.create.id",
+                    "$create-tiles[4].document.create.id",
+                    "$create-tiles[5].document.create.id",
+                    "$create-tiles[6].document.create.id"
+                ]
+            }
+        ]
+    },
+    "publish-products": {
+        "mutation": "mutation PublishItems($ids: [ID!]!) { publishItems(language: \"en\", ids: $ids, disableComponentValidation: true) { ... on PublishItemsRequest { success { itemId } } } }",
+        "target": "core",
+        "sets": [
+            {
+                "ids": [
+                    "$create-options-products[0].product.create.id",
+                    "$create-options-products[1].product.create.id",
+                    "$create-options-products[2].product.create.id",
+                    "$create-options-products[3].product.create.id",
+                    "$create-options-products[4].product.create.id",
+                    "$create-main-product[0].product.create.id"
+                ]
+            }
+        ]
+    }
+}
