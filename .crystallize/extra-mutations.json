@@ -1,0 +1,1010 @@
+{
+    "create-root-folders": {
+        "target": "pim",
+        "mutation": "mutation CreateFolder($input: CreateFolderInput!) { folder { create(language: \"en\", input: $input, disableComponentValidation: true) { id } } }",
+        "sets": [
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$root.TENANT_ROOT_ID"
+                    },
+                    "shapeIdentifier": "folder",
+                    "name": "Bicycles",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Bicycles"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$root.TENANT_ROOT_ID"
+                    },
+                    "shapeIdentifier": "folder",
+                    "name": "Options",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Options"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$root.TENANT_ROOT_ID"
+                    },
+                    "shapeIdentifier": "folder",
+                    "name": "Paints",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Paints"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$root.TENANT_ROOT_ID"
+                    },
+                    "shapeIdentifier": "folder",
+                    "name": "Brands",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Brands"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$root.TENANT_ROOT_ID"
+                    },
+                    "shapeIdentifier": "folder",
+                    "name": "Tiles",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Tiles"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "create-options-folders": {
+        "target": "pim",
+        "mutation": "mutation CreateFolder($input: CreateFolderInput!) { folder { create(language: \"en\", input: $input, disableComponentValidation: true) { id } } }",
+        "sets": [
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[1].folder.create.id"
+                    },
+                    "shapeIdentifier": "folder",
+                    "name": "Saddles",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Saddles"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[1].folder.create.id"
+                    },
+                    "shapeIdentifier": "folder",
+                    "name": "Grips",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Grips"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[1].folder.create.id"
+                    },
+                    "shapeIdentifier": "folder",
+                    "name": "Accessories",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Accessories"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "create-brands": {
+        "target": "pim",
+        "mutation": "mutation CreateDocument($input: CreateDocumentInput!) { document { create(language: \"en\", input: $input, disableComponentValidation: true) { id } } }",
+        "sets": [
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[3].folder.create.id"
+                    },
+                    "shapeIdentifier": "brand",
+                    "name": "Skiens Cykkelfabrik",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Skiens Cykkelfabrik"
+                            }
+                        },
+                        {
+                            "componentId": "logo",
+                            "images": [
+                                {
+                                    "key": "$images.images-speed-brand-png"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "create-tiles": {
+        "target": "pim",
+        "mutation": "mutation CreateDocument($input: CreateDocumentInput!) { document { create(language: \"en\", input: $input, disableComponentValidation: true) { id } } }",
+        "sets": [
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[4].folder.create.id"
+                    },
+                    "shapeIdentifier": "tile",
+                    "name": "Karma Yellow",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Karma Yellow"
+                            }
+                        },
+                        {
+                            "componentId": "image",
+                            "images": [
+                                {
+                                    "key": "$images.images-karma-yellow-tile-png"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[4].folder.create.id"
+                    },
+                    "shapeIdentifier": "tile",
+                    "name": "Midsummer Black",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Midsummer Black"
+                            }
+                        },
+                        {
+                            "componentId": "image",
+                            "images": [
+                                {
+                                    "key": "$images.images-midsummer-black-tile-png"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[4].folder.create.id"
+                    },
+                    "shapeIdentifier": "tile",
+                    "name": "Pretty Pink",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Pretty Pink"
+                            }
+                        },
+                        {
+                            "componentId": "image",
+                            "images": [
+                                {
+                                    "key": "$images.images-pretty-pink-tile-png"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[4].folder.create.id"
+                    },
+                    "shapeIdentifier": "tile",
+                    "name": "Classic Rider",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Classic Rider"
+                            }
+                        },
+                        {
+                            "componentId": "image",
+                            "images": [
+                                {
+                                    "key": "$images.images-rider-tile-png"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[4].folder.create.id"
+                    },
+                    "shapeIdentifier": "tile",
+                    "name": "Clean blue",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Clean blue"
+                            }
+                        },
+                        {
+                            "componentId": "image",
+                            "images": [
+                                {
+                                    "key": "$images.images-clean-blue-tile-png"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[4].folder.create.id"
+                    },
+                    "shapeIdentifier": "tile",
+                    "name": "Hot rod",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Hot rod"
+                            }
+                        },
+                        {
+                            "componentId": "image",
+                            "images": [
+                                {
+                                    "key": "$images.images-hot-rod-tile-png"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[4].folder.create.id"
+                    },
+                    "shapeIdentifier": "tile",
+                    "name": "Classic",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Classic Clean"
+                            }
+                        },
+                        {
+                            "componentId": "image",
+                            "images": [
+                                {
+                                    "key": "$images.images-classic-tile-png"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "create-paints": {
+        "target": "pim",
+        "mutation": "mutation CreateProduct($input: CreateProductInput!) { product { create(language: \"en\", input: $input, disableComponentValidation: true) { id } } }",
+        "sets": [
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[2].folder.create.id"
+                    },
+                    "shapeIdentifier": "paint",
+                    "name": "Classic Colors",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Classic Colors"
+                            }
+                        },
+                        {
+                            "componentId": "description",
+                            "richText": {
+                                "json": [
+                                    {
+                                        "kind": "block",
+                                        "type": "paragraph",
+                                        "textContent": "A selection of classic frame colors."
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "vatTypeId": "$root.TENANT_DEFAULT_VATTYPE_ID",
+                    "variants": [
+                        {
+                            "sku": "copper-patina",
+                            "name": "Copper Patina",
+                            "isDefault": true,
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 100
+                                }
+                            ],
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "attributes": [
+                                {
+                                    "attribute": "Color",
+                                    "value": "Copper Patina"
+                                }
+                            ],
+                            "images": [
+                                {
+                                    "key": "$images.images-variant-copper-patina-png"
+                                }
+                            ],
+                            "components": [
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "hex",
+                                                    "singleLine": {
+                                                        "text": "#7ebab5"
+                                                    }
+                                                },
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Light-Green"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "create-options": {
+        "target": "pim",
+        "mutation": "mutation CreateProduct($input: CreateProductInput!) { product { create(language: \"en\", input: $input, disableComponentValidation: true) { id } } }",
+        "sets": [
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-options-folders[0].folder.create.id"
+                    },
+                    "shapeIdentifier": "option",
+                    "name": "Leather Saddle",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Leather Saddle"
+                            }
+                        }
+                    ],
+                    "vatTypeId": "$root.TENANT_DEFAULT_VATTYPE_ID",
+                    "variants": [
+                        {
+                            "sku": "leather-saddle-natural",
+                            "name": "Leather Saddle Natural",
+                            "isDefault": true,
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 120
+                                }
+                            ],
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "images": [
+                                {
+                                    "key": "$images.images-saddle-natural-jpeg"
+                                }
+                            ],
+                            "components": [
+                                {
+                                    "componentId": "requires-option",
+                                    "itemRelations": {
+                                        "skus": [
+                                            "natural-leather"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Natural-Leather"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-options-folders[1].folder.create.id"
+                    },
+                    "shapeIdentifier": "option",
+                    "name": "Leather Grips",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Leather Grips"
+                            }
+                        }
+                    ],
+                    "vatTypeId": "$root.TENANT_DEFAULT_VATTYPE_ID",
+                    "variants": [
+                        {
+                            "sku": "natural-leather",
+                            "name": "Leather Grips Natural",
+                            "isDefault": true,
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 120
+                                }
+                            ],
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "images": [
+                                {
+                                    "key": "$images.images-natural-grip-png"
+                                }
+                            ],
+                            "components": [
+                                {
+                                    "componentId": "requires-option",
+                                    "itemRelations": {
+                                        "skus": [
+                                            "leather-saddle-natural"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "Natural-Leather"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-options-folders[2].folder.create.id"
+                    },
+                    "shapeIdentifier": "option",
+                    "name": "Front Rack",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Front Rack"
+                            }
+                        },
+                        {
+                            "componentId": "description",
+                            "richText": {
+                                "json": [
+                                    {
+                                        "kind": "block",
+                                        "type": "paragraph",
+                                        "textContent": "Front aluminium rack."
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "vatTypeId": "$root.TENANT_DEFAULT_VATTYPE_ID",
+                    "variants": [
+                        {
+                            "sku": "front-rack",
+                            "name": "Front Rack",
+                            "isDefault": true,
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 190
+                                }
+                            ],
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 11
+                                }
+                            ],
+                            "images": [
+                                {
+                                    "key": "$images.images-speed-curve-front-rack-jpg"
+                                }
+                            ],
+                            "components": [
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "frontRack"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-options-folders[2].folder.create.id"
+                    },
+                    "shapeIdentifier": "option",
+                    "name": "Rear Rack",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Rear Rack"
+                            }
+                        },
+                        {
+                            "componentId": "description",
+                            "richText": {
+                                "json": [
+                                    {
+                                        "kind": "block",
+                                        "type": "paragraph",
+                                        "textContent": "Rear luggage rack in aluminium."
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "vatTypeId": "$root.TENANT_DEFAULT_VATTYPE_ID",
+                    "variants": [
+                        {
+                            "sku": "Rear Rack",
+                            "name": "rear-rack",
+                            "isDefault": true,
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 250
+                                }
+                            ],
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 12
+                                }
+                            ],
+                            "images": [
+                                {
+                                    "key": "$images.images-speed-curve-back-rack-jpg"
+                                }
+                            ],
+                            "components": [
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "rearRack"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-options-folders[2].folder.create.id"
+                    },
+                    "shapeIdentifier": "option",
+                    "name": "Leather Bag",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Leather Bag"
+                            }
+                        },
+                        {
+                            "componentId": "requires-option",
+                            "itemRelations": {
+                                "skus": [
+                                    "rear-rack",
+                                    "natural-leather"
+                                ]
+                            }
+                        }
+                    ],
+                    "vatTypeId": "$root.TENANT_DEFAULT_VATTYPE_ID",
+                    "variants": [
+                        {
+                            "sku": "leather-bag",
+                            "name": "Leather Bag",
+                            "isDefault": true,
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 290
+                                }
+                            ],
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 11
+                                }
+                            ],
+                            "images": [
+                                {
+                                    "key": "$images.images-leather-bag-jpeg"
+                                }
+                            ],
+                            "components": [
+                                {
+                                    "componentId": "requires-option",
+                                    "itemRelations": {
+                                        "skus": [
+                                            "rear-rack",
+                                            "natural-leather",
+                                            "leather-saddle-natural"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "componentId": "config",
+                                    "contentChunk": {
+                                        "chunks": [
+                                            [
+                                                {
+                                                    "componentId": "3d-variant-attribute",
+                                                    "singleLine": {
+                                                        "text": "leatherBag"
+                                                    }
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "create-bikes": {
+        "target": "pim",
+        "mutation": "mutation CreateProduct($input: CreateProductInput!) { product { create(language: \"en\", input: $input, disableComponentValidation: true) { id } } }",
+        "sets": [
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[0].folder.create.id"
+                    },
+                    "shapeIdentifier": "bicycle",
+                    "name": "Speed Curve",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Speed Curve"
+                            }
+                        },
+                        {
+                            "componentId": "description",
+                            "richText": {
+                                "json": [
+                                    {
+                                        "kind": "block",
+                                        "type": "paragraph",
+                                        "textContent": "A classic curved bicycle re-imageined and engineered in modern materials. No plastic."
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "componentId": "story",
+                            "paragraphCollection": {
+                                "paragraphs": [
+                                    {
+                                        "title": {
+                                            "text": "A Heritage Bicycle"
+                                        },
+                                        "body": {
+                                            "json": [
+                                                {
+                                                    "kind": "block",
+                                                    "type": "paragraph",
+                                                    "textContent": "Speed Curve is a heritage bicycle designed with modern materials and vintage lines."
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "componentId": "options",
+                            "itemRelations": {
+                                "itemIds": [
+                                    "$create-options[2].product.create.id",
+                                    "$create-options[3].product.create.id",
+                                    "$create-options[4].product.create.id"
+                                ]
+                            }
+                        },
+                        {
+                            "componentId": "brand",
+                            "itemRelations": {
+                                "itemIds": [
+                                    "$create-brands[0].document.create.id"
+                                ]
+                            }
+                        }
+                    ],
+                    "vatTypeId": "$root.TENANT_DEFAULT_VATTYPE_ID",
+                    "variants": [
+                        {
+                            "sku": "speed-curve-copper-patina",
+                            "name": "Copper Patina",
+                            "isDefault": true,
+                            "priceVariants": [
+                                {
+                                    "identifier": "default",
+                                    "price": 2890
+                                }
+                            ],
+                            "attributes": [
+                                {
+                                    "attribute": "Frame Color",
+                                    "value": "Copper Patina"
+                                }
+                            ],
+                            "stockLocations": [
+                                {
+                                    "identifier": "default",
+                                    "stock": 100
+                                }
+                            ],
+                            "images": [
+                                {
+                                    "key": "$images.images-copper-patina-webp"
+                                }
+                            ],
+                            "components": [
+                                {
+                                    "componentId": "description",
+                                    "richText": {
+                                        "json": [
+                                            {
+                                                "kind": "block",
+                                                "type": "paragraph",
+                                                "textContent": "A beautiful and classic bike."
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "componentId": "frame-color",
+                                    "itemRelations": {
+                                        "skus": [
+                                            "copper-patina"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "componentId": "grip-options",
+                                    "itemRelations": {
+                                        "skus": [
+                                            "natural-leather"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "componentId": "saddle-options",
+                                    "itemRelations": {
+                                        "skus": [
+                                            "leather-saddle-natural"
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "publish-everything": {
+        "mutation": "mutation PublishItems($ids: [ID!]!) { publishItems(language: \"en\", ids: $ids, disableComponentValidation: true) { ... on BasicError { message errorName } ... on PublishItemsRequest { success { itemId } } } }",
+        "target": "core",
+        "sets": [
+            {
+                "ids": [
+                    "$create-root-folders[0].folder.create.id",
+                    "$create-root-folders[1].folder.create.id",
+                    "$create-root-folders[2].folder.create.id",
+                    "$create-root-folders[3].folder.create.id",
+                    "$create-root-folders[4].folder.create.id",
+                    "$create-options-folders[0].folder.create.id",
+                    "$create-options-folders[1].folder.create.id",
+                    "$create-options-folders[2].folder.create.id",  
+                    "$create-brands[0].document.create.id",
+                    "$create-tiles[0].document.create.id",
+                    "$create-tiles[1].document.create.id",
+                    "$create-tiles[2].document.create.id",
+                    "$create-tiles[3].document.create.id",
+                    "$create-tiles[4].document.create.id",
+                    "$create-tiles[5].document.create.id",
+                    "$create-tiles[6].document.create.id",
+                    "$create-paints[0].product.create.id",
+                    "$create-options[0].product.create.id",
+                    "$create-options[1].product.create.id",
+                    "$create-options[2].product.create.id",
+                    "$create-options[3].product.create.id",
+                    "$create-options[4].product.create.id",
+                    "$create-bikes[0].product.create.id"
+                ]
+            }
+        ]
+    }
+}

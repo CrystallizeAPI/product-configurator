@@ -1,0 +1,373 @@
+{
+  "version": "0.0.1",
+  "operations": [
+    {
+      "identifier": "option",
+      "name": "Option",
+      "components": [],
+      "type": "product",
+      "intent": "shape/create"
+    },
+    {
+      "identifier": "option",
+      "name": "Option",
+      "components": [],
+      "type": "product",
+      "intent": "shape/create"
+    },
+    {
+      "identifier": "option",
+      "name": "Option",
+      "components": [
+        {
+          "id": "name",
+          "type": "singleLine",
+          "name": "Name",
+          "config": {}
+        },
+        {
+          "id": "description",
+          "type": "richText",
+          "name": "Description",
+          "config": {}
+        },
+        {
+          "id": "requires-options",
+          "type": "itemRelations",
+          "name": "Requires Options",
+          "config": {
+            "itemRelations": {
+              "minItems": 0,
+              "maxItems": 0,
+              "minSkus": 0,
+              "acceptedShapeIdentifiers": [
+                "option"
+              ],
+              "quickSelect": {
+                "folders": []
+              }
+            }
+          }
+        }
+      ],
+      "variantComponents": [
+        {
+          "id": "requires-option",
+          "type": "itemRelations",
+          "name": "Requires Option",
+          "config": {
+            "itemRelations": {
+              "minItems": 0,
+              "maxItems": 0,
+              "minSkus": 0,
+              "acceptedShapeIdentifiers": [
+                "option"
+              ],
+              "quickSelect": {
+                "folders": []
+              }
+            }
+          }
+        },
+        {
+          "id": "config",
+          "type": "contentChunk",
+          "name": "config",
+          "config": {
+            "contentChunk": {
+              "components": [
+                {
+                  "id": "hex",
+                  "type": "singleLine",
+                  "name": "hex",
+                  "config": {}
+                },
+                {
+                  "id": "3d-variant-attribute",
+                  "type": "singleLine",
+                  "name": "3d variant attribute",
+                  "config": {}
+                }
+              ],
+              "repeatable": false
+            }
+          }
+        }
+      ],
+      "type": "product",
+      "intent": "shape/upsert"
+    },
+    {
+      "identifier": "brand",
+      "name": "Brand",
+      "components": [
+        {
+          "id": "name",
+          "type": "singleLine",
+          "name": "Name",
+          "config": {}
+        },
+        {
+          "id": "description",
+          "type": "richText",
+          "name": "Description",
+          "config": {}
+        },
+        {
+          "id": "logo",
+          "type": "images",
+          "name": "Logo",
+          "config": {}
+        }
+      ],
+      "type": "document",
+      "intent": "shape/upsert"
+    },
+    {
+      "identifier": "paint",
+      "name": "Paint",
+      "components": [
+        {
+          "id": "name",
+          "type": "singleLine",
+          "name": "Name",
+          "config": {}
+        },
+        {
+          "id": "description",
+          "type": "richText",
+          "name": "Description",
+          "config": {}
+        }
+      ],
+      "variantComponents": [
+        {
+          "id": "config",
+          "type": "contentChunk",
+          "name": "Config",
+          "config": {
+            "contentChunk": {
+              "components": [
+                {
+                  "id": "hex",
+                  "type": "singleLine",
+                  "name": "Hex",
+                  "config": {}
+                },
+                {
+                  "id": "3d-variant-attribute",
+                  "type": "singleLine",
+                  "name": "3D Variant Attribute",
+                  "config": {}
+                }
+              ],
+              "repeatable": false
+            }
+          }
+        }
+      ],
+      "type": "product",
+      "intent": "shape/upsert"
+    },
+    {
+      "identifier": "bicycle",
+      "name": "Bicycle",
+      "components": [
+        {
+          "id": "name",
+          "type": "singleLine",
+          "name": "Name",
+          "config": {
+            "singleLine": {}
+          }
+        },
+        {
+          "id": "description",
+          "type": "richText",
+          "name": "Description",
+          "config": {
+            "richText": {}
+          }
+        },
+        {
+          "id": "story",
+          "type": "paragraphCollection",
+          "name": "Story",
+          "config": {}
+        },
+        {
+          "id": "options",
+          "type": "itemRelations",
+          "name": "Options",
+          "config": {
+            "itemRelations": {
+              "minItems": 0,
+              "minSkus": 0,
+              "maxSkus": 0,
+              "acceptedShapeIdentifiers": [
+                "option"
+              ],
+              "quickSelect": {
+                "folders": []
+              }
+            }
+          }
+        },
+        {
+          "id": "brand",
+          "type": "itemRelations",
+          "name": "Brand",
+          "config": {
+            "itemRelations": {
+              "minItems": 1,
+              "maxItems": 1,
+              "minSkus": 0,
+              "maxSkus": 0,
+              "acceptedShapeIdentifiers": [
+                "brand"
+              ],
+              "quickSelect": {
+                "folders": []
+              }
+            }
+          }
+        },
+        {
+          "id": "3d-viewer",
+          "type": "contentChunk",
+          "name": "3D Viewer",
+          "config": {
+            "contentChunk": {
+              "components": [
+                {
+                  "id": "model",
+                  "type": "files",
+                  "name": "Model",
+                  "config": {
+                    "files": {
+                      "min": 1,
+                      "max": 1,
+                      "acceptedContentTypes": [],
+                      "maxFileSize": {
+                        "size": 50,
+                        "unit": "MiB"
+                      }
+                    }
+                  }
+                }
+              ],
+              "repeatable": false
+            }
+          }
+        }
+      ],
+      "variantComponents": [
+        {
+          "id": "description",
+          "type": "richText",
+          "name": "Description",
+          "config": {
+            "richText": {}
+          }
+        },
+        {
+          "id": "frame-color",
+          "type": "itemRelations",
+          "name": "Frame Color",
+          "config": {
+            "itemRelations": {
+              "minItems": 0,
+              "maxItems": 0,
+              "minSkus": 1,
+              "maxSkus": 1,
+              "acceptedShapeIdentifiers": [
+                "paint"
+              ],
+              "quickSelect": {
+                "folders": []
+              }
+            }
+          }
+        },
+        {
+          "id": "grip-options",
+          "type": "itemRelations",
+          "name": "Grip Options",
+          "config": {
+            "itemRelations": {
+              "minItems": 0,
+              "maxItems": 0,
+              "minSkus": 1,
+              "acceptedShapeIdentifiers": [
+                "option"
+              ],
+              "quickSelect": {
+                "folders": []
+              }
+            }
+          }
+        },
+        {
+          "id": "saddle-options",
+          "type": "itemRelations",
+          "name": "Saddle Options",
+          "config": {
+            "itemRelations": {
+              "minItems": 0,
+              "maxItems": 0,
+              "minSkus": 1,
+              "acceptedShapeIdentifiers": [
+                "option"
+              ],
+              "quickSelect": {
+                "folders": []
+              }
+            }
+          }
+        }
+      ],
+      "type": "product",
+      "intent": "shape/upsert"
+    },
+    {
+      "identifier": "folder",
+      "name": "Folder",
+      "components": [
+        {
+          "id": "name",
+          "type": "singleLine",
+          "name": "Name",
+          "config": {}
+        },
+        {
+          "id": "description",
+          "type": "richText",
+          "name": "Description",
+          "config": {}
+        }
+      ],
+      "type": "folder",
+      "intent": "shape/upsert"
+    },
+    {
+      "identifier": "tile",
+      "name": "Tile",
+      "components": [
+        {
+          "id": "name",
+          "type": "singleLine",
+          "name": "Name",
+          "config": {}
+        },
+        {
+          "id": "image",
+          "type": "images",
+          "name": "Image",
+          "config": {}
+        }
+      ],
+      "type": "document",
+      "intent": "shape/upsert"
+    }
+  ]
+}

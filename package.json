@@ -7,11 +7,11 @@
         "build": "pnpm codegen && next build",
         "start": "next start",
         "lint": "next lint",
-        "codegen": "graphql-codegen --config codegen.ts"
+        "codegen": "graphql-codegen --require dotenv/config  --config codegen.ts"
     },
     "dependencies": {
-        "@crystallize/js-api-client": "^1.12.2",
-        "@crystallize/reactjs-components": "^2.0.1",
+        "@crystallize/js-api-client": "^5",
+        "@crystallize/reactjs-components": "^5",
         "next": "14.0.3",
         "react": "^18",
         "react-dom": "^18"
