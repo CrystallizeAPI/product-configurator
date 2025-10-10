@@ -9,10 +9,7 @@ export const PriceBar = (props: PriceBarProps) => {
                 <span className="text-sm font-medium text-gray-600">Total</span>
                 <span className="text-3xl font-medium">{price}</span>
             </h3>
-            <button
-                onClick={onSaveCartClick}
-                className="px-8 py-4 rounded-xl w-full bg-gray-800 font-medium text-white"
-            >
+            <button onClick={onSaveCartClick} className="px-8 py-4 rounded-xl w-full bg-gray-800 font-medium text-white">
                 Add to cart
             </button>
         </div>

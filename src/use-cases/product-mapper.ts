@@ -1,10 +1,4 @@
-"use server";
-
-import type {
-    ApiProduct,
-    UiProduct,
-    Attribute,
-} from "@/use-cases/contracts/product";
+import type { ApiProduct, UiProduct, Attribute } from "@/use-cases/contracts/product";
 import type {
     ContentChunkContent,
     ItemRelationsContent,
@@ -13,22 +7,17 @@ import type {
     SingleLineContent,
     ProductPriceVariant,
     Component,
-} from "../__generated__/types";
+} from "./__generated__/types";
 
 const getConfig = (components?: Component[] | null) => {
     const config = components?.find((component) => component.id === "config");
     const configChunk = config?.content as ContentChunkContent;
-    const attributeComponent = configChunk?.chunks[0].find(
-        (component) => component.id === "3d-variant-attribute"
-    );
-    const hexComponent = configChunk?.chunks[0].find(
-        (component) => component.id === "hex"
-    );
+    const attributeComponent = configChunk?.chunks[0].find((component) => component.id === "3d-variant-attribute");
+    const hexComponent = configChunk?.chunks[0].find((component) => component.id === "hex");
 
     return {
         hex: (hexComponent?.content as SingleLineContent)?.text ?? "",
-        modelAttribute:
-            (attributeComponent?.content as SingleLineContent)?.text ?? "",
+        modelAttribute: (attributeComponent?.content as SingleLineContent)?.text ?? "",
     };
 };
 
@@ -39,42 +28,31 @@ const getOptions = (components: ApiProduct["components"]) => {
     }
 
     const content = options.content as ItemRelationsContent;
-    return content.items?.reduce<NonNullable<UiProduct["options"]>>(
-        (acc, item) => {
-            const variant = (item as Product)
-                .defaultVariant as ProductVariant & {
-                defaultPrice?: ProductPriceVariant | null;
-            };
+    return content.items?.reduce<NonNullable<UiProduct["options"]>>((acc, item) => {
+        const variant = (item as Product).defaultVariant as ProductVariant & {
+            defaultPrice?: ProductPriceVariant | null;
+        };
 
-            const { modelAttribute } = getConfig(
-                (item as Product).defaultVariant?.components
-            );
+        const { modelAttribute } = getConfig((item as Product).defaultVariant?.components);
 
-            if (!!variant) {
-                acc.push({
-                    id: modelAttribute,
-                    name: variant.name ?? "",
-                    sku: variant.sku,
-                    imageUrl: variant.firstImage?.url ?? "",
-                    price: {
-                        value: variant.defaultPrice?.price ?? undefined,
-                    },
-                });
-            }
+        if (!!variant) {
+            acc.push({
+                id: modelAttribute,
+                name: variant.name ?? "",
+                sku: variant.sku,
+                imageUrl: variant.firstImage?.url ?? "",
+                price: {
+                    value: variant.defaultPrice?.price ?? undefined,
+                },
+            });
+        }
 
-            return acc;
-        },
-        []
-    );
+        return acc;
+    }, []);
 };
 
-const getAttribute = (
-    componentId: string,
-    components: ApiProduct["components"]
-) => {
-    const options = components?.find(
-        (component) => component.id === componentId
-    );
+const getAttribute = (componentId: string, components: ApiProduct["components"]) => {
+    const options = components?.find((component) => component.id === componentId);
     if (!options?.content) {
         return undefined;
     }
@@ -111,10 +89,7 @@ export const productMapper = (product: ApiProduct) => {
                 name: variant.name ?? "",
                 sku: variant.sku,
                 imageUrl: variant.firstImage?.url ?? "",
-                frameColor: getAttribute(
-                    "frame-color",
-                    variant.components
-                )?.[0],
+                frameColor: getAttribute("frame-color", variant.components)?.[0],
                 grips: getAttribute("grip-options", variant.components),
                 saddles: getAttribute("saddle-options", variant.components),
                 price: {

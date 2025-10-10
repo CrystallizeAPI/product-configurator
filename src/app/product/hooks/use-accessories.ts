@@ -1,5 +1,7 @@
-import type { Option } from "@/use-cases/contracts/product";
 import { useCallback } from "react";
+
+import type { Option } from "@/use-cases/contracts/product";
+
 import type { Skus } from "../types";
 
 type UseAccessoriesProps = {
@@ -8,17 +10,10 @@ type UseAccessoriesProps = {
     options?: Option[];
 };
 
-export const useAccessories = ({
-    skus,
-    options,
-    onChange,
-}: UseAccessoriesProps) => {
+export const useAccessories = ({ skus, options, onChange }: UseAccessoriesProps) => {
     const isBagDisabled = skus.grip && skus.grip !== "natural-leather";
 
-    const getIsSelected = useCallback(
-        (sku: string) => skus.options?.includes(sku) ?? false,
-        [skus.options]
-    );
+    const getIsSelected = useCallback((sku: string) => skus.options?.includes(sku) ?? false, [skus.options]);
 
     const onOptionChange = useCallback(
         (selectedOption: Option) => {
@@ -31,21 +26,12 @@ export const useAccessories = ({
             // Handle dependencies here
             if (!isPresent) {
                 nextOptionSkus = [...optionSkus, selectedOption.sku];
-                const shouldAddRearRack =
-                    selectedOption.id === "leatherBag" &&
-                    !!rearRack?.sku &&
-                    !optionSkus.includes(rearRack.sku);
+                const shouldAddRearRack = selectedOption.id === "leatherBag" && !!rearRack?.sku && !optionSkus.includes(rearRack.sku);
 
                 shouldAddRearRack && nextOptionSkus.push(rearRack.sku);
             } else {
                 nextOptionSkus = optionSkus.filter((sku) => {
-                    return (
-                        sku !== selectedOption.sku &&
-                        !(
-                            selectedOption.id === "rearRack" &&
-                            sku === leatherBag?.sku
-                        )
-                    );
+                    return sku !== selectedOption.sku && !(selectedOption.id === "rearRack" && sku === leatherBag?.sku);
                 });
             }
 

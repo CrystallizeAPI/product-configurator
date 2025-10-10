@@ -1,10 +1,9 @@
-"use server";
+import { crystallizeClient } from "@/core/crystallize-client.server";
+import type { ApiGrid } from "@/use-cases/contracts/grid";
+import { gridMapper } from "./grid-mapper";
+import { language } from "./variables";
 
-import type { ClientInterface } from "@crystallize/js-api-client";
-import { gridMapper } from "../mapper/grid-mapper";
-
-export async function getGrid(apiClient: ClientInterface, id: string) {
-    const query = `#graphql
+const query = `#graphql
     query GET_GRID($id: ID!, $language: String!) {
       grid(id: $id, language: $language) {
         id
@@ -68,8 +67,7 @@ export async function getGrid(apiClient: ClientInterface, id: string) {
     }
   `;
 
-    const options = { id, language: "en" };
-
-    const { grid } = await apiClient.catalogueApi(query, options);
+export async function getGrid(id: string) {
+    const { grid } = await crystallizeClient.catalogueApi<{ grid: ApiGrid }>(query, { id, language });
     return gridMapper(grid);
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { forwardRef } from "react";
 import type { ModelViewerNode } from "../types";
 
@@ -18,3 +20,5 @@ export const ModelViewer = forwardRef<ModelViewerNode>((_, ref) => {
 });
 
 ModelViewer.displayName = "ModelViewer";
+
+export default ModelViewer;

@@ -1,10 +1,8 @@
-"use server";
-
-import { apiClient } from "@/core";
-import { createOrder } from "@/use-cases/crystallize";
+import { crystallizeClient } from "@/core/crystallize-client.server";
+import { createOrderManager } from "@crystallize/js-api-client";
 import { CartItem } from "@/app/product/types";
 
-export async function placeOrder(cartItem: CartItem, formData: FormData) {
+export async function createOrder(cartItem: CartItem, formData: FormData) {
     const fullName = formData.get("name") as string;
     const [firstName, lastName] = fullName.split(" ");
     const email = formData.get("email");
@@ -27,6 +25,7 @@ export async function placeOrder(cartItem: CartItem, formData: FormData) {
             },
         ],
     };
+
     const parts = cartItem.childrenItems.flatMap((item) => ({
         name: item.name,
         sku: item.sku,
@@ -39,7 +38,7 @@ export async function placeOrder(cartItem: CartItem, formData: FormData) {
         },
     }));
 
-    const orderCart = [
+    const cart = [
         {
             name: cartItem.name,
             sku: cartItem.sku,
@@ -60,8 +59,9 @@ export async function placeOrder(cartItem: CartItem, formData: FormData) {
         ...(parts ?? []),
     ];
 
-    const client = await apiClient();
-    const { id } = await createOrder(client, { customer, cart: orderCart });
-    console.log(id);
-    return id;
+    const orderManger = createOrderManager(crystallizeClient);
+    const orderIntent = { cart, customer } as any;
+    const confirmation = await orderManger.register(orderIntent);
+
+    return confirmation.id;
 }

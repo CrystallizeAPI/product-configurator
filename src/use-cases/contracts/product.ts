@@ -1,16 +1,10 @@
-import {
-    Component,
-    ProductPriceVariant,
-    ProductVariant,
-} from "../crystallize/__generated__/types";
+import { Component, ProductPriceVariant, ProductVariant } from "../__generated__/types";
 
 export type ApiProduct = {
     id: string;
     name: string;
     components?: Component[] | null;
-    variants?: Array<
-        ProductVariant & { defaultPrice: ProductPriceVariant }
-    > | null;
+    variants?: Array<ProductVariant & { defaultPrice: ProductPriceVariant }> | null;
 };
 
 type BaseItem = {

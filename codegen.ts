@@ -8,7 +8,7 @@ const config: CodegenConfig = {
         },
     ],
     generates: {
-        "./src/use-cases/crystallize/__generated__/types.ts": {
+        "./src/use-cases/__generated__/types.ts": {
             plugins: ["typescript"],
             config: {
                 preResolveTypes: false,

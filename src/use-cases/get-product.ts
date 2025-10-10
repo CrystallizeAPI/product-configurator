@@ -1,10 +1,9 @@
-"use server";
+import { crystallizeClient } from "@/core/crystallize-client.server";
+import type { ApiProduct } from "@/use-cases/contracts/product";
+import { productMapper } from "./product-mapper";
+import { language } from "./variables";
 
-import type { ClientInterface } from "@crystallize/js-api-client";
-import { productMapper } from "../mapper/product-mapper";
-
-export async function getProduct(apiClient: ClientInterface, path: string) {
-    const query = `#graphql
+const query = `#graphql
   query($path: String!) {
     product: catalogue(path: $path, language: "en") {
     id
@@ -115,8 +114,7 @@ export async function getProduct(apiClient: ClientInterface, path: string) {
   }
   `;
 
-    const options = { path, language: "en" };
-
-    const { product } = await apiClient.catalogueApi(query, options);
+export async function getProduct(path: string) {
+    const { product } = await crystallizeClient.catalogueApi<{ product: ApiProduct }>(query, { path, language });
     return productMapper(product);
 }

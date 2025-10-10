@@ -1,7 +1,7 @@
 import type { CartItem } from "../../app/product/types";
 import { useEffect, useState } from "react";
 import { CART_ID } from "../../utils/const";
-import { getCart } from "@/actions/get-cart";
+import { getCart } from "@/use-cases/get-cart";
 
 type Cart = { cartItem: CartItem; price: string };
 

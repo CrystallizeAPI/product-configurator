@@ -1,15 +1,8 @@
-import {
-    FocalPoint,
-    Grid,
-    ProductVariant,
-} from "../crystallize/__generated__/types";
+import { FocalPoint, Grid, ProductVariant } from "../__generated__/types";
 
 export type ApiGrid = Grid;
 
-export type UiProductVariant = Pick<
-    ProductVariant,
-    "name" | "sku" | "images" | "priceVariant"
-> & {
+export type UiProductVariant = Pick<ProductVariant, "name" | "sku" | "images" | "priceVariant"> & {
     product?: { paths?: { canonical?: string | null } | null } | null;
 };
 

@@ -1,8 +1,10 @@
 import Configurator from "./configurator";
-import { getProduct } from "../../actions/get-product";
+import { getProduct } from "@/use-cases/get-product";
+
+const mainProductPath = process.env.MAIN_PRODUCT_PATH || "/bicycles/speed-curve";
 
 export default async function Page() {
-    const { product } = await getProduct("/bicycles/speed-curve");
+    const { product } = await getProduct(mainProductPath);
 
     return (
         <div className="flex min-h-[100vh] bg-white relative  items-center justify-between min-w-full ">

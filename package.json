@@ -12,16 +12,16 @@
     "dependencies": {
         "@crystallize/js-api-client": "^5",
         "@crystallize/reactjs-components": "^5",
-        "next": "14.0.3",
-        "react": "^18",
-        "react-dom": "^18"
+        "next": "15.5.4",
+        "react": "^19",
+        "react-dom": "^19"
     },
     "devDependencies": {
         "@graphql-codegen/cli": "^5.0.0",
         "@graphql-codegen/typescript": "^4.0.1",
         "@types/node": "^20",
-        "@types/react": "^18",
-        "@types/react-dom": "^18",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
         "autoprefixer": "^10.0.1",
         "eslint": "^8",
         "eslint-config-next": "14.0.3",

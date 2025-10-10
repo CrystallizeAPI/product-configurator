@@ -1,16 +1,16 @@
 import { useState } from "react";
 import Link from "next/link";
-import { priceFormatter } from "../../../utils/format-price";
-import type { Column, UiProductVariant } from "@/use-cases/contracts/grid";
 import { Image } from "@crystallize/reactjs-components";
+
+import type { Column, UiProductVariant } from "@/use-cases/contracts/grid";
+
+import { priceFormatter } from "../../../utils/format-price";
 
 type ImageProps = React.ComponentProps<typeof Image>;
 type CellProps = {
     cell: Column;
 };
-const getQueryParams = (
-    productVariants?: Array<UiProductVariant | undefined>
-) => {
+const getQueryParams = (productVariants?: Array<UiProductVariant | undefined>) => {
     const queryParams = new URLSearchParams();
     const options: string[] = [];
 
@@ -43,23 +43,15 @@ const getQueryParams = (
 
 export function Cell({ cell }: CellProps) {
     const { item } = cell;
-    const [activeIndex, setActiveIndex] = useState<number | undefined>(
-        undefined
-    );
-    const productVariants = item.image.showcase?.map(
-        (showcase) => showcase.productVariant
-    );
+    const [activeIndex, setActiveIndex] = useState<number | undefined>(undefined);
+    const productVariants = item.image.showcase?.map((showcase) => showcase.productVariant);
 
     return (
         <Link href={`/product?${getQueryParams(productVariants)}`}>
             <div className="group/wrapper w-full h-full relative  rounded-xl border border-transparent hover:border-gray-200">
                 <Image
                     {...(item.image as ImageProps)}
-                    sizes={
-                        cell.index === 0
-                            ? "(max-width: 800px) 1200px, 1200px"
-                            : "(max-width: 800px) 260px, 380px"
-                    }
+                    sizes={cell.index === 0 ? "(max-width: 800px) 1200px, 1200px" : "(max-width: 800px) 260px, 380px"}
                     className="w-full h-full rounded-xl  overflow-hidden relative [&_img]:h-full [&_img]:w-full [&_img]:object-cover [&_img]:rounded-md"
                     alt={cell.item.image.alt ?? undefined}
                 />
@@ -69,8 +61,7 @@ export function Cell({ cell }: CellProps) {
                 {item.image.showcase?.map((showcase, index) => {
                     const image = showcase.productVariant?.images?.[0];
                     const price = showcase.productVariant?.priceVariant?.price;
-                    const currency =
-                        showcase.productVariant?.priceVariant?.currency ?? "";
+                    const currency = showcase.productVariant?.priceVariant?.currency ?? "";
 
                     return (
                         <div
@@ -98,9 +89,7 @@ export function Cell({ cell }: CellProps) {
                                         />
                                     </div>
                                     <div className="font-medium text-gray-600 text-sm">
-                                        <h3 className="whitespace-nowrap pr-2">
-                                            {showcase.productVariant?.name}
-                                        </h3>
+                                        <h3 className="whitespace-nowrap pr-2">{showcase.productVariant?.name}</h3>
                                         <p>
                                             {priceFormatter({
                                                 value: price ?? 0,

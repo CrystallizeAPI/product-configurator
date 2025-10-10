@@ -1,7 +1,5 @@
-"use server";
-
 import type { ApiGrid, UiGrid } from "@/use-cases/contracts/grid";
-import type { ImageContent } from "../__generated__/types";
+import type { ImageContent } from "./__generated__/types";
 
 export const gridMapper = (grid: ApiGrid) => {
     const uiGrid: UiGrid = {
@@ -9,8 +7,7 @@ export const gridMapper = (grid: ApiGrid) => {
         rows: grid.rows.map((row) => {
             return {
                 columns: row.columns.map(({ layout, item }, index) => {
-                    const image = (item?.component?.content as ImageContent)
-                        .firstImage;
+                    const image = (item?.component?.content as ImageContent).firstImage;
 
                     const columnItem = {
                         name: item?.name ?? "",
