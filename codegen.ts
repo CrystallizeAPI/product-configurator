@@ -1,4 +1,4 @@
-import type { CodegenConfig } from '@graphql-codegen/cli';
+import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
     overwrite: true,
@@ -8,8 +8,8 @@ const config: CodegenConfig = {
         },
     ],
     generates: {
-        './use-cases/crystallize/__generated__/types.ts': {
-            plugins: ['typescript'],
+        "./use-cases/__generated__/types.ts": {
+            plugins: ["typescript"],
             config: {
                 preResolveTypes: false,
             },

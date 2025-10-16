@@ -2,11 +2,9 @@ import {
     Component,
     ProductPriceVariant,
     ProductVariant,
-} from "../crystallize/__generated__/types";
+} from "../__generated__/types";
 
-type Image = { url: string; width?: number; altText?: string };
-
-export type ServerProduct = {
+export type ApiProduct = {
     id: string;
     name: string;
     components?: Component[] | null;
@@ -15,42 +13,20 @@ export type ServerProduct = {
     > | null;
 };
 
-export type ServerCart = {
-    id: string;
-    total: Price;
-    items?: {
-        images?: Image[];
-        variant: { name: string; sku: string };
-    }[];
-};
-
-export type Price = {
-    gross?: number;
-    currency?: string;
-    net?: number;
-    taxAmount?: number;
-    discounts?: {
-        percent: number;
-        amount: number;
-    }[];
-};
-
-export type BaseItem = {
+type BaseItem = {
     name: string;
     sku: string;
-    quantity?: number;
-    price?: Price;
-    image?: Image;
-    meta?: Array<
-        | { key: "type"; value: "main" | "composable" }
-        | { key: "bom"; value: string }
-    >;
+    imageUrl: string;
+    price: Price;
 };
 
-export type Option = BaseItem & { id: string };
+type OptionModelConfig = { modelAttribute: string; hex?: string }[];
+
+export type Price = { value?: number; currency?: string };
+export type Option = BaseItem & { id: string; model: OptionModelConfig };
 export type Attribute = BaseItem & { modelAttribute: string; hex?: string };
 export type Variant = BaseItem & {
-    price?: Price;
+    price: Price;
     frameColor?: Attribute;
     grips?: Attribute[];
     saddles?: Attribute[];
@@ -59,6 +35,7 @@ export type Variant = BaseItem & {
 export type UiProduct = {
     id: string;
     name: string;
+    glb?: string;
     options?: Option[];
     variants?: Variant[];
 };
@@ -68,10 +45,4 @@ export type Skus = {
     grip?: string;
     saddle?: string;
     options?: string;
-};
-
-export type Cart = {
-    id?: string;
-    total: Price;
-    items?: BaseItem[];
 };

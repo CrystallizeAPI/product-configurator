@@ -1,10 +1,9 @@
-import { FocalPoint, Grid, ProductVariant } from '../crystallize/__generated__/types';
+import { FocalPoint, Grid, ProductVariant } from "../__generated__/types";
 
 export type ApiGrid = Grid;
 
-export type UiProductVariant = Pick<ProductVariant, 'name' | 'sku' | 'priceVariant'> & {
+export type UiProductVariant = Pick<ProductVariant, "name" | "sku" | "images" | "priceVariant"> & {
     product?: { paths?: { canonical?: string | null } | null } | null;
-    images?: { url: string; width?: number | null; altText?: string | null }[] | null;
 };
 
 type Image = {
@@ -22,11 +21,6 @@ type Image = {
         | null;
 };
 
-export type Showcase = {
-    hotspot?: FocalPoint;
-    productVariant?: UiProductVariant;
-};
-
 export type Column = {
     index: number;
     layout: {
@@ -38,7 +32,10 @@ export type Column = {
     item: {
         name: string;
         image: Image & {
-            showcase?: Showcase[];
+            showcase?: {
+                hotspot?: FocalPoint;
+                productVariant?: UiProductVariant;
+            }[];
         };
     };
 };

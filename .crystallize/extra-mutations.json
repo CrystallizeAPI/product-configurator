@@ -6,7 +6,9 @@
             {
                 "input": {
                     "tenantId": "$root.TENANT_ID",
-                    "tree": { "parentId": "$root.TENANT_ROOT_ID" },
+                    "tree": {
+                        "parentId": "$root.TENANT_ROOT_ID"
+                    },
                     "shapeIdentifier": "folder",
                     "name": "Bicycles"
                 }
@@ -14,7 +16,9 @@
             {
                 "input": {
                     "tenantId": "$root.TENANT_ID",
-                    "tree": { "parentId": "$root.TENANT_ROOT_ID" },
+                    "tree": {
+                        "parentId": "$root.TENANT_ROOT_ID"
+                    },
                     "shapeIdentifier": "folder",
                     "name": "Options"
                 }
@@ -22,7 +26,9 @@
             {
                 "input": {
                     "tenantId": "$root.TENANT_ID",
-                    "tree": { "parentId": "$root.TENANT_ROOT_ID" },
+                    "tree": {
+                        "parentId": "$root.TENANT_ROOT_ID"
+                    },
                     "shapeIdentifier": "folder",
                     "name": "Paints"
                 }
@@ -30,7 +36,9 @@
             {
                 "input": {
                     "tenantId": "$root.TENANT_ID",
-                    "tree": { "parentId": "$root.TENANT_ROOT_ID" },
+                    "tree": {
+                        "parentId": "$root.TENANT_ROOT_ID"
+                    },
                     "shapeIdentifier": "folder",
                     "name": "Brands"
                 }
@@ -38,7 +46,9 @@
             {
                 "input": {
                     "tenantId": "$root.TENANT_ID",
-                    "tree": { "parentId": "$root.TENANT_ROOT_ID" },
+                    "tree": {
+                        "parentId": "$root.TENANT_ROOT_ID"
+                    },
                     "shapeIdentifier": "folder",
                     "name": "Tiles"
                 }
@@ -383,7 +393,9 @@
                                     "componentId": "requires-option",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["natural-leather"]
+                                        "skus": [
+                                            "natural-leather"
+                                        ]
                                     }
                                 },
                                 {
@@ -439,7 +451,9 @@
                                     "componentId": "requires-option",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["cognac-leather"]
+                                        "skus": [
+                                            "cognac-leather"
+                                        ]
                                     }
                                 },
                                 {
@@ -495,7 +509,9 @@
                                     "componentId": "requires-option",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["maroon-leather"]
+                                        "skus": [
+                                            "maroon-leather"
+                                        ]
                                     }
                                 },
                                 {
@@ -551,7 +567,9 @@
                                     "componentId": "requires-option",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["black-leather"]
+                                        "skus": [
+                                            "black-leather"
+                                        ]
                                     }
                                 },
                                 {
@@ -607,7 +625,9 @@
                                     "componentId": "requires-option",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["blue-leather"]
+                                        "skus": [
+                                            "blue-leather"
+                                        ]
                                     }
                                 },
                                 {
@@ -882,7 +902,10 @@
                             "componentId": "requires-option",
                             "itemRelations": {
                                 "itemIds": [],
-                                "skus": ["rear-rack", "natural-leather"]
+                                "skus": [
+                                    "rear-rack",
+                                    "natural-leather"
+                                ]
                             }
                         }
                     ]
@@ -905,7 +928,9 @@
                     "components": [
                         {
                             "componentId": "name",
-                            "singleLine": { "text": "Skiens Cykkelfabrik" }
+                            "singleLine": {
+                                "text": "Skiens Cykkelfabrik"
+                            }
                         },
                         {
                             "componentId": "logo",
@@ -936,7 +961,9 @@
                     "components": [
                         {
                             "componentId": "name",
-                            "singleLine": { "text": "Karma Yellow" }
+                            "singleLine": {
+                                "text": "Karma Yellow"
+                            }
                         },
                         {
                             "componentId": "image",
@@ -961,7 +988,9 @@
                     "components": [
                         {
                             "componentId": "name",
-                            "singleLine": { "text": "Midsummer Black" }
+                            "singleLine": {
+                                "text": "Midsummer Black"
+                            }
                         },
                         {
                             "componentId": "image",
@@ -986,7 +1015,9 @@
                     "components": [
                         {
                             "componentId": "name",
-                            "singleLine": { "text": "Pretty Pink" }
+                            "singleLine": {
+                                "text": "Pretty Pink"
+                            }
                         },
                         {
                             "componentId": "image",
@@ -1011,7 +1042,9 @@
                     "components": [
                         {
                             "componentId": "name",
-                            "singleLine": { "text": "Classic Rider" }
+                            "singleLine": {
+                                "text": "Classic Rider"
+                            }
                         },
                         {
                             "componentId": "image",
@@ -1036,7 +1069,9 @@
                     "components": [
                         {
                             "componentId": "name",
-                            "singleLine": { "text": "Clean Blue" }
+                            "singleLine": {
+                                "text": "Clean Blue"
+                            }
                         },
                         {
                             "componentId": "image",
@@ -1061,7 +1096,9 @@
                     "components": [
                         {
                             "componentId": "name",
-                            "singleLine": { "text": "Hot Rod" }
+                            "singleLine": {
+                                "text": "Hot Rod"
+                            }
                         },
                         {
                             "componentId": "image",
@@ -1086,7 +1123,9 @@
                     "components": [
                         {
                             "componentId": "name",
-                            "singleLine": { "text": "Classic Clean" }
+                            "singleLine": {
+                                "text": "Classic Clean"
+                            }
                         },
                         {
                             "componentId": "image",
@@ -1470,21 +1509,27 @@
                                     "componentId": "frame-color",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["copper-patina"]
+                                        "skus": [
+                                            "copper-patina"
+                                        ]
                                     }
                                 },
                                 {
                                     "componentId": "grip-options",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["natural-leather"]
+                                        "skus": [
+                                            "natural-leather"
+                                        ]
                                     }
                                 },
                                 {
                                     "componentId": "saddle-options",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["leather-saddle-natural"]
+                                        "skus": [
+                                            "leather-saddle-natural"
+                                        ]
                                     }
                                 }
                             ]
@@ -1536,7 +1581,9 @@
                                     "componentId": "frame-color",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["petroleum-blue"]
+                                        "skus": [
+                                            "petroleum-blue"
+                                        ]
                                     }
                                 },
                                 {
@@ -1612,7 +1659,9 @@
                                     "componentId": "frame-color",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["midnight-black"]
+                                        "skus": [
+                                            "midnight-black"
+                                        ]
                                     }
                                 },
                                 {
@@ -1690,21 +1739,27 @@
                                     "componentId": "frame-color",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["karma-yellow"]
+                                        "skus": [
+                                            "karma-yellow"
+                                        ]
                                     }
                                 },
                                 {
                                     "componentId": "grip-options",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["black-leather"]
+                                        "skus": [
+                                            "black-leather"
+                                        ]
                                     }
                                 },
                                 {
                                     "componentId": "saddle-options",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["leather-saddle-black"]
+                                        "skus": [
+                                            "leather-saddle-black"
+                                        ]
                                     }
                                 }
                             ]
@@ -1756,21 +1811,27 @@
                                     "componentId": "frame-color",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["pink"]
+                                        "skus": [
+                                            "pink"
+                                        ]
                                     }
                                 },
                                 {
                                     "componentId": "grip-options",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["black-leather"]
+                                        "skus": [
+                                            "black-leather"
+                                        ]
                                     }
                                 },
                                 {
                                     "componentId": "saddle-options",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["leather-saddle-black"]
+                                        "skus": [
+                                            "leather-saddle-black"
+                                        ]
                                     }
                                 }
                             ]
@@ -1837,6 +1898,24 @@
                                 ],
                                 "skus": []
                             }
+                        },
+                        {
+                            "componentId": "3d-viewer",
+                            "contentChunk": {
+                                "chunks": [
+                                    [
+                                        {
+                                            "componentId": "model",
+                                            "files": [
+                                                {
+                                                    "title": "Speed Curve 3D Model",
+                                                    "key": "$files.files-speed-curve-product-glb"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
                         }
                     ]
                 }
@@ -1853,7 +1932,9 @@
                 "input": {
                     "componentId": "requires-option",
                     "itemRelations": {
-                        "skus": ["natural-leather"],
+                        "skus": [
+                            "natural-leather"
+                        ],
                         "itemIds": []
                     }
                 }
@@ -1864,7 +1945,9 @@
                 "input": {
                     "componentId": "requires-option",
                     "itemRelations": {
-                        "skus": ["cognac-leather"],
+                        "skus": [
+                            "cognac-leather"
+                        ],
                         "itemIds": []
                     }
                 }
@@ -1875,7 +1958,9 @@
                 "input": {
                     "componentId": "requires-option",
                     "itemRelations": {
-                        "skus": ["maroon-leather"],
+                        "skus": [
+                            "maroon-leather"
+                        ],
                         "itemIds": []
                     }
                 }
@@ -1886,7 +1971,9 @@
                 "input": {
                     "componentId": "requires-option",
                     "itemRelations": {
-                        "skus": ["black-leather"],
+                        "skus": [
+                            "black-leather"
+                        ],
                         "itemIds": []
                     }
                 }
@@ -1897,7 +1984,9 @@
                 "input": {
                     "componentId": "requires-option",
                     "itemRelations": {
-                        "skus": ["blue-leather"],
+                        "skus": [
+                            "blue-leather"
+                        ],
                         "itemIds": []
                     }
                 }
@@ -1918,7 +2007,9 @@
                                 "y": 0.42
                             },
                             "meta": null,
-                            "skus": ["speed-curve-karma-yellow"]
+                            "skus": [
+                                "speed-curve-karma-yellow"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -1926,7 +2017,9 @@
                                 "y": 0.22
                             },
                             "meta": null,
-                            "skus": ["leather-saddle-black"]
+                            "skus": [
+                                "leather-saddle-black"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -1934,7 +2027,9 @@
                                 "y": 0.23
                             },
                             "meta": null,
-                            "skus": ["black-leather"]
+                            "skus": [
+                                "black-leather"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -1942,7 +2037,9 @@
                                 "y": 0.43
                             },
                             "meta": null,
-                            "skus": ["front-rack"]
+                            "skus": [
+                                "front-rack"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -1950,7 +2047,9 @@
                                 "y": 0.31
                             },
                             "meta": null,
-                            "skus": ["rear-rack"]
+                            "skus": [
+                                "rear-rack"
+                            ]
                         }
                     ]
                 }
@@ -1965,7 +2064,9 @@
                                 "y": 0.4
                             },
                             "meta": null,
-                            "skus": ["speed-curve-midsummer-black"]
+                            "skus": [
+                                "speed-curve-midsummer-black"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -1973,7 +2074,9 @@
                                 "y": 0.19
                             },
                             "meta": null,
-                            "skus": ["leather-saddle-black"]
+                            "skus": [
+                                "leather-saddle-black"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -1981,7 +2084,9 @@
                                 "y": 0.22
                             },
                             "meta": null,
-                            "skus": ["black-leather"]
+                            "skus": [
+                                "black-leather"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -1989,7 +2094,9 @@
                                 "y": 0.62
                             },
                             "meta": null,
-                            "skus": ["front-rack"]
+                            "skus": [
+                                "front-rack"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -1997,7 +2104,9 @@
                                 "y": 0.2
                             },
                             "meta": null,
-                            "skus": ["rear-rack"]
+                            "skus": [
+                                "rear-rack"
+                            ]
                         }
                     ]
                 }
@@ -2016,7 +2125,9 @@
                                 "y": 0.42
                             },
                             "meta": null,
-                            "skus": ["speed-curve-pink"]
+                            "skus": [
+                                "speed-curve-pink"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2024,7 +2135,9 @@
                                 "y": 0.22
                             },
                             "meta": null,
-                            "skus": ["leather-saddle-black"]
+                            "skus": [
+                                "leather-saddle-black"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2032,7 +2145,9 @@
                                 "y": 0.15
                             },
                             "meta": null,
-                            "skus": ["black-leather"]
+                            "skus": [
+                                "black-leather"
+                            ]
                         }
                     ]
                 }
@@ -2047,7 +2162,9 @@
                                 "y": 0.41
                             },
                             "meta": null,
-                            "skus": ["speed-curve-copper-patina"]
+                            "skus": [
+                                "speed-curve-copper-patina"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2055,7 +2172,9 @@
                                 "y": 0.24
                             },
                             "meta": null,
-                            "skus": ["leather-saddle-natural"]
+                            "skus": [
+                                "leather-saddle-natural"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2063,7 +2182,9 @@
                                 "y": 0.2
                             },
                             "meta": null,
-                            "skus": ["natural-leather"]
+                            "skus": [
+                                "natural-leather"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2071,7 +2192,9 @@
                                 "y": 0.4
                             },
                             "meta": null,
-                            "skus": ["front-rack"]
+                            "skus": [
+                                "front-rack"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2079,7 +2202,9 @@
                                 "y": 0.33
                             },
                             "meta": null,
-                            "skus": ["rear-rack"]
+                            "skus": [
+                                "rear-rack"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2087,7 +2212,9 @@
                                 "y": 0.48
                             },
                             "meta": null,
-                            "skus": ["leather-bag"]
+                            "skus": [
+                                "leather-bag"
+                            ]
                         }
                     ]
                 }
@@ -2116,7 +2243,9 @@
                                 "y": 0.45
                             },
                             "meta": null,
-                            "skus": ["speed-curve-petroleum-blue"]
+                            "skus": [
+                                "speed-curve-petroleum-blue"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2124,7 +2253,9 @@
                                 "y": 0.25
                             },
                             "meta": null,
-                            "skus": ["leather-saddle-natural"]
+                            "skus": [
+                                "leather-saddle-natural"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2132,7 +2263,9 @@
                                 "y": 0.15
                             },
                             "meta": null,
-                            "skus": ["natural-leather"]
+                            "skus": [
+                                "natural-leather"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2140,7 +2273,9 @@
                                 "y": 0.32
                             },
                             "meta": null,
-                            "skus": ["front-rack"]
+                            "skus": [
+                                "front-rack"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2148,7 +2283,9 @@
                                 "y": 0.39
                             },
                             "meta": null,
-                            "skus": ["rear-rack"]
+                            "skus": [
+                                "rear-rack"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2156,7 +2293,9 @@
                                 "y": 0.54
                             },
                             "meta": null,
-                            "skus": ["leather-bag"]
+                            "skus": [
+                                "leather-bag"
+                            ]
                         }
                     ]
                 }
@@ -2182,7 +2321,9 @@
                                 "y": 0.37
                             },
                             "meta": null,
-                            "skus": ["speed-curve-midsummer-black"]
+                            "skus": [
+                                "speed-curve-midsummer-black"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2190,7 +2331,9 @@
                                 "y": 0.12
                             },
                             "meta": null,
-                            "skus": ["cognac-leather"]
+                            "skus": [
+                                "cognac-leather"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2198,7 +2341,9 @@
                                 "y": 0.19
                             },
                             "meta": null,
-                            "skus": ["leather-saddle-cognac"]
+                            "skus": [
+                                "leather-saddle-cognac"
+                            ]
                         }
                     ]
                 }
@@ -2213,7 +2358,9 @@
                                 "y": 0.44
                             },
                             "meta": null,
-                            "skus": ["speed-curve-copper-patina"]
+                            "skus": [
+                                "speed-curve-copper-patina"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2221,7 +2368,9 @@
                                 "y": 0.24
                             },
                             "meta": null,
-                            "skus": ["leather-saddle-natural"]
+                            "skus": [
+                                "leather-saddle-natural"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2229,7 +2378,9 @@
                                 "y": 0.24
                             },
                             "meta": null,
-                            "skus": ["natural-leather"]
+                            "skus": [
+                                "natural-leather"
+                            ]
                         },
                         {
                             "hotspot": {
@@ -2237,7 +2388,9 @@
                                 "y": 0.43
                             },
                             "meta": null,
-                            "skus": ["front-rack"]
+                            "skus": [
+                                "front-rack"
+                            ]
                         }
                     ]
                 }

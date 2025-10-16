@@ -1,26 +1,63 @@
-import { storage } from "@/core/storage.server";
 import { crystallizeClient } from "@/core/crystallize-client.server";
-import { FETCH_CART, PRICE_FRAGMENT } from "./fetch-cart";
-import { ServerCart } from "./contracts/product";
+import { createCartManager } from "@crystallize/js-api-client";
+import { config } from "@/core/config";
+import { Cart } from "@crystallize/schema/shop";
 
-export const hydrateCart = async (
-    id: string | undefined,
-    items: { sku: string; quantity: number }[]
-): Promise<ServerCart> => {
-    const input = { items, ...(!!id && { id }) };
-
-    try {
-        const data = await crystallizeClient.shopCartApi(
-            `#graphql
-            mutation HYDRATE_CART($input: CartInput!){ hydrate(input: $input) { ${FETCH_CART} } }
-            ${PRICE_FRAGMENT}
-            `,
-            { input }
-        );
-        await storage.setCartId(data.hydrate.id);
-        return data.hydrate;
-    } catch (exception) {
-        console.error("addSkuItemToCart without cartId", exception);
-        throw exception;
-    }
+type HydrateCartProps = {
+    id?: string;
+    items?: { sku: string; quantity: number }[];
 };
+
+export const cartHydrationQuery = {
+    id: true,
+    items: {
+        name: true,
+        quantity: true,
+        variant: {
+            sku: true,
+        },
+        price: {
+            net: true,
+            gross: true,
+            currency: true,
+        },
+        images: {
+            url: true,
+            width: true,
+            height: true,
+        },
+    },
+    total: {
+        gross: true,
+        currency: true,
+    },
+};
+
+export async function hydrateCart({ id, items }: HydrateCartProps) {
+    const manager = createCartManager(crystallizeClient);
+    try {
+        const cart = await manager.hydrate<Cart>(
+            {
+                ...(!!id && { id }),
+                items,
+                context: {
+                    language: config.language,
+                    ttl: 60 * 60 * 24 * 1,
+                    price: {
+                        currency: config.currency,
+                        decimals: 2,
+                        pricesHaveTaxesIncludedInCrystallize: false,
+                        discountOnNetPrices: false,
+                        selectedVariantIdentifier: "default",
+                        markets: [],
+                    },
+                },
+            },
+            cartHydrationQuery
+        );
+        return cart;
+    } catch (exception) {
+        console.log(exception);
+        return null;
+    }
+}

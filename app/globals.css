@@ -1,45 +1,21 @@
+@tailwind base;
+@tailwind components;
 @tailwind utilities;
-@import "tailwindcss";
 
 :root {
-    --foreground-rgb: 0, 0, 0;
-    --background-rgb: 255, 255, 255;
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --foreground-rgb: 255, 255, 255;
-        --background-start-rgb: 0, 0, 0;
-        --background-end-rgb: 0, 0, 0;
-    }
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
 }
 
 body {
-    color: rgb(var(--foreground-rgb));
-    background: rgb(var(--background-rgb));
-}
-
-.crystallize-image-contain,
-.crystallize-image-cover,
-.crystallize-image-contain img,
-.crystallize-image-cover img {
-    @apply h-full w-full;
-}
-
-.crystallize-image-cover img {
-    @apply object-cover;
-}
-
-.crystallize-image-contain img {
-    @apply object-contain;
-}
-
-@theme {
-    --color-transparent: transparent;
-    --color-dark: #211a1d;
-    --color-light: #ffffff;
-    --color-soft: #f6f4f3;
-    --color-accent: #79745d;
-    --color-muted: #dfdfdf;
-    --color-vivid: #ee7674;
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
 }

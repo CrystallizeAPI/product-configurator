@@ -1,36 +1,29 @@
 "use server";
 
-import { hydrateCart } from "@/use-cases/hydrate-cart";
-import type { BaseItem, Cart } from "@/use-cases/contracts/product";
-
 import { storage } from "@/core/storage.server";
+import { hydrateCart } from "@/use-cases/hydrate-cart";
+import { config } from "@/core/config";
+import { Cart } from "@crystallize/schema/shop";
+import { CartItemSlimInput } from "@/use-cases/contracts/cart-items-input";
 
-export async function handleCart(initialSate: Cart | null, formData: FormData) {
-    const type = formData.get("type") as string;
-
-    if (type === "reset") {
-        return null;
-    }
-
+export const handleCartAction = async (
+    _: Partial<Cart> | null,
+    formData: FormData
+) => {
     try {
-        const items = JSON.parse(formData.get("items") as string) as BaseItem[];
-        const cartId = await storage.getCartId();
-        const cartItems = items.map((item) => ({
-            sku: item.sku,
-            quantity: 1,
-            meta: item.meta,
-        }));
-        const cart = await hydrateCart(cartId, cartItems);
-
-        return {
-            total: cart.total,
-            items: cart.items?.map((item) => ({
-                ...item.variant,
-                image: item.images?.[0],
+        const id = await storage.temp.getCartId();
+        const items = JSON.parse(formData.get("skus") as string) as CartItemSlimInput[];
+        const cart = await hydrateCart({
+            id,
+            items: items.map((item) => ({
+                sku: item.variant.sku,
+                quantity: item.quantity ?? 1,
             })),
-        } as Cart;
-    } catch (error) {
-        console.error("Cart update failed:", error);
-        return null;
+        });
+        !!cart?.id && (await storage.temp.setCartId(cart.id));
+        return cart;
+    } catch (e) {
+        console.log(e);
+        return { total: { gross: 0, net: 0, taxAmount: 0, discounts: [], currency: config.currency } };
     }
-}
+};
