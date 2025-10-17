@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Configurator from "./configurator";
 import { getProduct } from "@/use-cases/get-product";
 
@@ -19,7 +20,9 @@ export default async function Page() {
                 </p>
             </div>
 
-            <Configurator product={product} />
+            <Suspense>
+                <Configurator product={product} />
+            </Suspense>
         </div>
     );
 }

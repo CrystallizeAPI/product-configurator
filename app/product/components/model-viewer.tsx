@@ -6,6 +6,7 @@ import "@google/model-viewer/lib/model-viewer";
 
 import type { Skus, UiProduct, Variant } from "@/use-cases/contracts/product";
 
+
 type ModelViewerProps = {
     skus: Skus;
     product: UiProduct;
@@ -65,6 +66,7 @@ const ModelViewer = ({ skus, product, currentVariant }: ModelViewerProps) => {
     }, [JSON.stringify(skus)]);
 
     return (
+        // @ts-ignore
         <model-viewer
             src={product.glb}
             ref={modelViewerRef}
