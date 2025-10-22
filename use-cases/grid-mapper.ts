@@ -1,39 +1,14 @@
-import type { ApiGrid, UiGrid } from "@/use-cases/contracts/grid";
-import type { ImageContent } from "./__generated__/types";
+import type { ApiGridProducts } from "@/use-cases/contracts/grid-products";
 
-export const gridMapper = (grid: ApiGrid) => {
-    const uiGrid: UiGrid = {
-        id: grid.id,
-        rows: grid.rows.map((row) => {
-            return {
-                columns: row.columns.map(({ layout, item }, index) => {
-                    const image = (item?.component?.content as ImageContent).firstImage;
-
-                    const columnItem = {
-                        name: item?.name ?? "",
-                        image: {
-                            ...image,
-                            showcase: image?.showcase?.map((showcase) => ({
-                                hotspot: showcase.hotspot,
-                                productVariant: showcase.productVariants?.[0],
-                            })),
-                        },
-                    };
-
-                    return {
-                        index,
-                        layout: {
-                            colspan: layout?.colspan ?? 0,
-                            rowspan: layout?.rowspan ?? 0,
-                            colIndex: layout?.colIndex ?? 0,
-                            rowIndex: layout?.rowIndex ?? 0,
-                        },
-                        item: columnItem,
-                    };
-                }),
-            };
-        }),
-    };
-
-    return { grid: uiGrid };
+export const gridMapper = (catalogue?: ApiGridProducts) => {
+    return catalogue?.subtree?.edges?.flatMap((edge) => {
+        const product = edge.node;
+        return !!product
+            ? {
+                  id: product.id,
+                  name: product.name,
+                  image: product.component.content.firstImage,
+              }
+            : [];
+    });
 };
