@@ -2,11 +2,8 @@ import { Suspense } from "react";
 import Configurator from "./configurator";
 import { getProduct } from "@/use-cases/get-product";
 
-const mainProductPath =
-    process.env.MAIN_PRODUCT_PATH || "/bicycles/speed-curve";
-
 export default async function Page() {
-    const { product } = await getProduct(mainProductPath);
+    const { product } = await getProduct("/bicycles/speed-curve");
 
     return (
         <div className="flex-1 bg-white relative overflow-auto px-12">
