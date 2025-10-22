@@ -944,20 +944,20 @@
                         "parentId": "$create-root-folders[4].folder.create.id"
                     },
                     "shapeIdentifier": "tile",
-                    "name": "Karma Yellow",
+                    "name": "Classic Rider",
                     "components": [
                         {
                             "componentId": "name",
                             "singleLine": {
-                                "text": "Karma Yellow"
+                                "text": "Classic Rider"
                             }
                         },
                         {
                             "componentId": "image",
                             "images": [
                                 {
-                                    "key": "$images.images-tile-karma-yellow-png",
-                                    "altText": "Tile Karma Yellow"
+                                    "key": "$images.images-tile-classic-rider-png",
+                                    "altText": "Tile Classic Rider"
                                 }
                             ]
                         }
@@ -998,47 +998,20 @@
                         "parentId": "$create-root-folders[4].folder.create.id"
                     },
                     "shapeIdentifier": "tile",
-                    "name": "Pretty Pink",
+                    "name": "Karma Yellow",
                     "components": [
                         {
                             "componentId": "name",
                             "singleLine": {
-                                "text": "Pretty Pink"
+                                "text": "Karma Yellow"
                             }
                         },
                         {
                             "componentId": "image",
                             "images": [
                                 {
-                                    "key": "$images.images-tile-pink-png",
-                                    "altText": "Tile Pretty Pink"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            },
-            {
-                "input": {
-                    "tenantId": "$root.TENANT_ID",
-                    "tree": {
-                        "parentId": "$create-root-folders[4].folder.create.id"
-                    },
-                    "shapeIdentifier": "tile",
-                    "name": "Classic Rider",
-                    "components": [
-                        {
-                            "componentId": "name",
-                            "singleLine": {
-                                "text": "Classic Rider"
-                            }
-                        },
-                        {
-                            "componentId": "image",
-                            "images": [
-                                {
-                                    "key": "$images.images-tile-classic-rider-png",
-                                    "altText": "Tile Classic Rider"
+                                    "key": "$images.images-tile-karma-yellow-png",
+                                    "altText": "Tile Karma Yellow"
                                 }
                             ]
                         }
@@ -1066,6 +1039,33 @@
                                 {
                                     "key": "$images.images-tile-clean-blue-png",
                                     "altText": "Tile Clean Blue"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "input": {
+                    "tenantId": "$root.TENANT_ID",
+                    "tree": {
+                        "parentId": "$create-root-folders[4].folder.create.id"
+                    },
+                    "shapeIdentifier": "tile",
+                    "name": "Pretty Pink",
+                    "components": [
+                        {
+                            "componentId": "name",
+                            "singleLine": {
+                                "text": "Pretty Pink"
+                            }
+                        },
+                        {
+                            "componentId": "image",
+                            "images": [
+                                {
+                                    "key": "$images.images-tile-pink-png",
+                                    "altText": "Tile Pretty Pink"
                                 }
                             ]
                         }
