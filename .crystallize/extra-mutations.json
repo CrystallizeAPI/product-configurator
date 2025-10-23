@@ -1503,14 +1503,26 @@
                                     "componentId": "grip-options",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["natural-leather"]
+                                        "skus": [
+                                            "natural-leather",
+                                            "cognac-leather",
+                                            "maroon-leather",
+                                            "black-leather",
+                                            "blue-leather"
+                                        ]
                                     }
                                 },
                                 {
                                     "componentId": "saddle-options",
                                     "itemRelations": {
                                         "itemIds": [],
-                                        "skus": ["leather-saddle-natural"]
+                                        "skus": [
+                                            "leather-saddle-natural",
+                                            "leather-saddle-cognac",
+                                            "leather-saddle-maroon",
+                                            "leather-saddle-black",
+                                            "leather-saddle-blue"
+                                        ]
                                     }
                                 }
                             ]
@@ -1571,8 +1583,6 @@
                                         "itemIds": [],
                                         "skus": [
                                             "natural-leather",
-                                            "cognac-leather",
-                                            "maroon-leather",
                                             "black-leather"
                                         ]
                                     }
@@ -1582,10 +1592,8 @@
                                     "itemRelations": {
                                         "itemIds": [],
                                         "skus": [
-                                            "leather-saddle-maroon",
-                                            "leather-saddle-black",
-                                            "leather-saddle-cognac",
-                                            "leather-saddle-natural"
+                                            "leather-saddle-natural",
+                                            "leather-saddle-black"
                                         ]
                                     }
                                 }
@@ -2335,6 +2343,7 @@
                     "$create-options-products[2].product.create.id",
                     "$create-options-products[3].product.create.id",
                     "$create-options-products[4].product.create.id",
+                    "$create-paints[0].product.create.id",
                     "$create-main-product[0].product.create.id"
                 ]
             }
